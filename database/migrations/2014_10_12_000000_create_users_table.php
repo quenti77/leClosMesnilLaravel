@@ -27,7 +27,6 @@ class CreateUsersTable extends Migration
             $table->dateTimeTz('created_at');
             $table->dateTimeTz('update_at',)->nullable();
             $table->string('ip');
-            $table->string('role');
             $table->rememberToken();
             $table->timestamps();
         });

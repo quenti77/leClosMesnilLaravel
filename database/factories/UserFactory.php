@@ -22,11 +22,16 @@ class UserFactory extends Factory
      */
     public function definition()
     {
+        $faker = Factory::create('fr_FR');
         return [
-            'name' => $this->faker->name(),
+            'first_name' => $this->faker->last_name(),
+            'name' => $this->faker->first_name(),
             'email' => $this->faker->unique()->safeEmail(),
             'email_verified_at' => now(),
             'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
+            'phone' => $this->faker->mobileNumber(),
+            'created_at' => $this->faker->dateTime(),
+            'ip' => $this->faker->localIpv4(),
             'remember_token' => Str::random(10),
         ];
     }
