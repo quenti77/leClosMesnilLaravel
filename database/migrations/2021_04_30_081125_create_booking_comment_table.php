@@ -15,7 +15,7 @@ class CreateBookingCommentTable extends Migration
     {
         Schema::create('booking_comment', function (Blueprint $table) {
             $table->uuid()->primary();
-            $table->string('booking_id');
+            $table->uuid('booking_id');
             $table->dateTimetz('created_at');
             $table->int('rating');
             $table->int('cleaness_rating');  

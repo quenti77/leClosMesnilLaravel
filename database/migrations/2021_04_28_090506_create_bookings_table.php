@@ -15,7 +15,7 @@ class CreateBookingsTable extends Migration
     {
         Schema::create('bookings', function (Blueprint $table) {
             $table->uuid('id')->primary();
-            $table->string('id_users');
+            $table->uuid('id_users');
             $table->dateTimeTz('created_at');
             $table->date('date_start');
             $table->date('date_end');

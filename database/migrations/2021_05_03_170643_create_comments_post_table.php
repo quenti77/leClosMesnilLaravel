@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateCountriesTable extends Migration
+class CreateCommentsPostTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,12 @@ class CreateCountriesTable extends Migration
      */
     public function up()
     {
-        Schema::create('countries', function (Blueprint $table) {
-            $table->id();
-            $table->string('name',100);
-            $table->string('english_name',100);
-            $table->string('code',5);
+        Schema::create('comments_post', function (Blueprint $table) {
+            $table->uuid('id')->primary();
+            $table->uuid('post_id');
+            $table->string('author');
+            $table->date('created_at');
+            $table->date('update_at');
             $table->timestamps();
         });
     }
@@ -29,6 +30,6 @@ class CreateCountriesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('countries');
+        Schema::dropIfExists('comments_post');
     }
 }

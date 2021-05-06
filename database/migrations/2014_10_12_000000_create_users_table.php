@@ -15,6 +15,7 @@ class CreateUsersTable extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->uuid('id')->primary();
+            $table->boolean('is_admin')->default(false);
             $table->string('name');
             $table->string('first_name');
             $table->string('last_name');
@@ -26,7 +27,7 @@ class CreateUsersTable extends Migration
             $table->dateTimeTz('created_at');
             $table->dateTimeTz('update_at',)->nullable();
             $table->string('ip');
-            $table->string('url');
+            $table->string('role');
             $table->rememberToken();
             $table->timestamps();
         });
