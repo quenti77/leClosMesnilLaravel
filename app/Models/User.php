@@ -18,8 +18,11 @@ class User extends Authenticatable
      */
     protected $fillable = [
         'name',
+        'lastName',
         'email',
         'password',
+        'countries_id',
+        'phone'
     ];
 
     /**
@@ -30,6 +33,7 @@ class User extends Authenticatable
     protected $hidden = [
         'password',
         'remember_token',
+        'ip'
     ];
 
     /**
@@ -39,5 +43,21 @@ class User extends Authenticatable
      */
     protected $casts = [
         'email_verified_at' => 'datetime',
+        'is_admin' => 'boolean'
     ];
+
+    public function posts()
+    {
+        return $this->hasMany(Posts::class);
+    }
+
+    public function reservations()
+    {
+        return $this->hasMany(Reservations::class);
+    }
+
+    public function countries()
+    {
+        return $this->belongTo(Contries::class);
+    }
 }

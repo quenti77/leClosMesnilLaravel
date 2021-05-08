@@ -24,7 +24,7 @@ class UserFactory extends Factory
     {
         $faker = Factory::create('fr_FR');
         return [
-            'first_name' => $this->faker->last_name(),
+            'last_name' => $this->faker->last_name(),
             'name' => $this->faker->first_name(),
             'email' => $this->faker->unique()->safeEmail(),
             'email_verified_at' => now(),
@@ -34,6 +34,15 @@ class UserFactory extends Factory
             'ip' => $this->faker->localIpv4(),
             'remember_token' => Str::random(10),
         ];
+    }
+
+    public function isAdmin()
+    {
+        return $this->state(function() {
+            return [
+              'is_admin' => true
+            ];
+        });
     }
 
     /**

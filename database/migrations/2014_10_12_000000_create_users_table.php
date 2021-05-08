@@ -17,7 +17,6 @@ class CreateUsersTable extends Migration
             $table->uuid('id')->primary();
             $table->boolean('is_admin')->default(false);
             $table->string('name');
-            $table->string('first_name');
             $table->string('last_name');
             $table->int('countries_id');
             $table->string('email')->unique();
