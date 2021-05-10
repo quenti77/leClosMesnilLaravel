@@ -5,11 +5,17 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class countries extends Model
+class Country extends Model
 {
     use HasFactory;
 
-    /**
+     /**
+     * The primary key associated with the table.
+     *
+     * @var string
+     */
+    protected $table = 'countries';
+
      * The attributes that are mass assignable.
      *
      * @var array
@@ -20,8 +26,8 @@ class countries extends Model
         'code'
     ];
 
-    public function (Type $var = null)
+    public function users()
     {
-        # code...
+        return $this->hasMany(Users::class);
     }
 }
