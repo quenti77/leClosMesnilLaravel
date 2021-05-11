@@ -17,8 +17,6 @@ class CreateCommentsPostTable extends Migration
             $table->uuid('id')->primary();
             $table->uuid('post_id');
             $table->string('author');
-            $table->date('created_at');
-            $table->date('update_at');
             $table->timestamps();
         });
     }
