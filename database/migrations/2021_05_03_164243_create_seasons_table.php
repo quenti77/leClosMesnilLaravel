@@ -17,7 +17,7 @@ class CreateSeasonsTable extends Migration
             $table->id();
             $table->date('date_start');
             $table->date('date_end');
-            $table->int('price');
+            $table->integer('price');
             $table->timestamps();
         });
     }
