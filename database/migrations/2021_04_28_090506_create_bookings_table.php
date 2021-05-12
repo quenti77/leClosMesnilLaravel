@@ -22,7 +22,7 @@ class CreateBookingsTable extends Migration
             $table->integer('nb_night');
             $table->integer('nb_adult');
             $table->integer('nb_children');
-            $table->integer('payment_date')->nullable();
+            $table->dateTime('payment_date')->nullable();
             $table->integer('price');
             $table->timestamps();
         });
