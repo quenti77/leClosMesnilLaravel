@@ -14,7 +14,7 @@ class CreateBookingsTable extends Migration
     public function up()
     {
         Schema::create('bookings', function (Blueprint $table) {
-            $table->uuid('id')->primary();
+            $table->id();
             $table->uuid('id_users');
             $table->date('date_start');
             $table->date('date_end');
@@ -22,7 +22,7 @@ class CreateBookingsTable extends Migration
             $table->integer('nb_night');
             $table->integer('nb_adult');
             $table->integer('nb_children');
-            $table->integer('payment_date')->nullable();
+            $table->dateTime('payment_date')->nullable();
             $table->integer('price');
             $table->timestamps();
         });
