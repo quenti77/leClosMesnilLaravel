@@ -7,6 +7,21 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
+/**
+ * @property int $id
+ * @property bool $is_admin
+ * @property string $name
+ * @property string $last_name
+ * @property int $countries_id
+ * @property string $email
+ * @property DateTime $email_verified_at
+ * @property string $password
+ * @property string $phone
+ * @property string $ip
+ * @property string $remember_token
+ * @property DateTime $created_at
+ * @property DateTime $updated_at
+ */
 class User extends Authenticatable
 {
     use HasFactory, Notifiable;
