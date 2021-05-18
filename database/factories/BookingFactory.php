@@ -23,8 +23,7 @@ class BookingFactory extends Factory
     public function definition()
     {
         return [
-            'id' => $this->faker->uuid,
-            'id_users' => $this->faker->uuid,
+            'id_users' => User::factory(),
             'date_start' => $this->faker->dateTime(),
             'date_end' => $this->faker->dateTime(),
             'type' => $this->faker->name,

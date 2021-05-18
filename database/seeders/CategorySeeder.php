@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\Category;
+use App\Models\Post;
 use Illuminate\Database\Seeder;
 
 class CategorySeeder extends Seeder
@@ -16,6 +17,7 @@ class CategorySeeder extends Seeder
     {
         Category::factory()
             ->count(20)
+            ->has(Post::factory()->count(10), 'posts')
             ->create();
     }
 }

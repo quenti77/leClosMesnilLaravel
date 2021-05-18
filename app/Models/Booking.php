@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 /**
- * @property $id
+ * @property int $id
  * @property uuid $id_users
  * @property DateTime $date_start
  * @property DateTime $date_end

@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
 /**
- * @property $id
+ * @property int $id
  * @property string $name
  * @property string $slug
  * @property DateTime $created_at
@@ -18,5 +18,10 @@ class Category extends Model
     use HasFactory;
 
     protected $table = 'category';
+
+    public function posts()
+    {
+        return $this->hasMany(Post::class);
+    }
 
 }

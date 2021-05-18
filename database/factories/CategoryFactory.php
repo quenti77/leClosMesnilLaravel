@@ -25,7 +25,6 @@ class CategoryFactory extends Factory
         $title = $this->faker->name;
         $slug = Str::slug($title);
         return [
-            'id' => $this->faker->uuid,
             'name' => $title,
             'slug' => $slug
         ];
