@@ -12,7 +12,6 @@ use Illuminate\Notifications\Notifiable;
  * @property bool $is_admin
  * @property string $name
  * @property string $last_name
- * @property int $countries_id
  * @property string $email
  * @property DateTime $email_verified_at
  * @property string $password
@@ -42,7 +41,6 @@ class User extends Authenticatable
         'last_name',
         'email',
         'password',
-        'countries_id',
         'phone'
     ];
 
@@ -74,10 +72,5 @@ class User extends Authenticatable
     public function reservations()
     {
         return $this->hasMany(Reservations::class);
-    }
-
-    public function countries()
-    {
-        return $this->belongTo(Contries::class);
     }
 }

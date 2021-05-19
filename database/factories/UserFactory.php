@@ -30,7 +30,6 @@ class UserFactory extends Factory
             'email_verified_at' => now(),
             'password' => '$2y$10$hb40E4RvtWhUSDr5JG6kjudqSrIrUHCjRkfzAre4rs3w.wLht4QJS', // test
             'phone' => $this->faker->phoneNumber,
-            'countries_id' => $this->faker->randomDigit(),
             'created_at' => $this->faker->dateTime(),
             'remember_token' => Str::random(10),
         ];

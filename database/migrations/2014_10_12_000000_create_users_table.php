@@ -18,7 +18,6 @@ class CreateUsersTable extends Migration
             $table->boolean('is_admin')->default(false);
             $table->string('name');
             $table->string('last_name');
-            $table->integer('countries_id');
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
