@@ -17,7 +17,6 @@ use Illuminate\Notifications\Notifiable;
  * @property DateTime $email_verified_at
  * @property string $password
  * @property string $phone
- * @property string $ip
  * @property string $remember_token
  * @property DateTime $created_at
  * @property DateTime $updated_at
@@ -40,7 +39,7 @@ class User extends Authenticatable
      */
     protected $fillable = [
         'name',
-        'lastName',
+        'last_name',
         'email',
         'password',
         'countries_id',
@@ -54,8 +53,7 @@ class User extends Authenticatable
      */
     protected $hidden = [
         'password',
-        'remember_token',
-        'ip'
+        'remember_token'
     ];
 
     /**

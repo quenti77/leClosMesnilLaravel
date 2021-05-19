@@ -32,7 +32,6 @@ class UserFactory extends Factory
             'phone' => $this->faker->phoneNumber,
             'countries_id' => $this->faker->randomDigit(),
             'created_at' => $this->faker->dateTime(),
-            'ip' => $this->faker->localIpv4(),
             'remember_token' => Str::random(10),
         ];
     }
