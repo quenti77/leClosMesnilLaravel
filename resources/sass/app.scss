@@ -1,8 +1,39 @@
 // Fonts
-@import url('https://fonts.googleapis.com/css?family=Nunito');
+@import url('https://fonts.googleapis.com/css2?family=Anton&family=Lobster&display=swap');
 
 // Variables
 @import 'variables';
 
 // Bootstrap
-@import '~bootstrap/scss/bootstrap';
+@import '../../node_modules/bootstrap/scss/bootstrap.scss';
+
+$font-paragraph: anton, sans-serif;
+$font-title: lobster, cursiv;
+$primary: #3A808A;
+$secondary: #284D5B;
+$danger: #FFA333;
+$sucess: #7bed9f;
+$font-size-title: 2.8em;
+$font-size-paragraph: 1.6px;
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+body{
+    font-family: anton;
+    font-size: 62.5%;
+    height: 100vh;
+    width: 100vw;
+    color: $secondary;  
+}
+
+h1,h2,.navbar-brand{
+    font-family: $font-title;
+    font-size: $font-size-title;
+}
+
+nav {
+    font-family: $font-paragraph;
+}
