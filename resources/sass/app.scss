@@ -7,33 +7,36 @@
 // Bootstrap
 @import '../../node_modules/bootstrap/scss/bootstrap.scss';
 
-$font-paragraph: anton, sans-serif;
-$font-title: lobster, cursiv;
-$primary: #3A808A;
-$secondary: #284D5B;
-$danger: #FFA333;
-$sucess: #7bed9f;
-$font-size-title: 2.8em;
-$font-size-paragraph: 1.6px;
-
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
-body{
-    font-family: anton;
+
+html {
     font-size: 62.5%;
-    height: 100vh;
-    width: 100vw;
-    color: $secondary;  
 }
 
-h1,h2,.navbar-brand{
-    font-family: $font-title;
+arclicle 
+body {
+    font-family: $font-family-sans-serif;
+    color: $primary;
+    letter-spacing: $letter-spacing;
+}
+h1{
+    font-family: $font-family-cursive;
     font-size: $font-size-title;
+    color: $secondary;
 }
 
-nav {
-    font-family: $font-paragraph;
+h2{
+    font-family: $font-family-cursive;
+    font-size: $font-size-title;
+    color: $secondary;
+}
+
+h3{
+    font-family: $font-family-cursive;
+    font-size: $font-size-title;
+    color: $secondary;
 }

@@ -31,7 +31,7 @@ class PostFactory extends Factory
             'category_id' => Category::factory(),
             'title' => $title,
             'slug' => $slug,
-            'content' => $this->faker->sentence(6, true),
+            'content' => $this->faker->sentences(30, true),
             'image_path' => 'https://via.placeholder.com/150',
             'comment_count' => $this->faker->randomDigit(),
         ];

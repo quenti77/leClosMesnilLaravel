@@ -1,10 +1,17 @@
+@import url('https://fonts.googleapis.com/css2?family=Anton&family=Lobster&display=swap');
+
 // Body
 $body-bg: #f8fafc;
 
 // Typography
-$font-family-sans-serif: 'Nunito', sans-serif;
-$font-size-base: 0.9rem;
-$line-height-base: 1.6;
+$font-family-sans-serif: 'anton', sans-serif;
+$font-family-cursive: 'lobser', cursive;
+$font-size-base: 1.6rem;
+$font-size-title: 2.4rem;
+$font-size-logo: 3rem;
+$font-size-nav-link: 2.4rem;
+$line-height-base: 1.8;
+$letter-spacing: 2px;
 
 // Colors
 $blue: #3490dc;
@@ -17,3 +24,5 @@ $yellow: #ffed4a;
 $green: #38c172;
 $teal: #4dc0b5;
 $cyan: #6cb2eb;
+$primary: #284D5B;
+$secondary: #3A808A;
