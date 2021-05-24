@@ -17,7 +17,7 @@ html {
     font-size: 62.5%;
 }
 
-arclicle 
+arclicle
 body {
     font-family: $font-family-sans-serif;
     color: $primary;
@@ -39,4 +39,16 @@ h3{
     font-family: $font-family-cursive;
     font-size: $font-size-title;
     color: $secondary;
+}
+.navbar-brand {
+    font-family: $font-family-cursive;
+    font-size: $font-size-title*1.5;
+}
+.nav-item{
+    margin-left: 25px;
+    margin-top: 15px;
+    font-size: $font-size-title*0.8;
+}
+.nav-menu{
+    text-transform: uppercase;
 }
