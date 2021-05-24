@@ -9,8 +9,6 @@ Route::get('/', function () {
     return view('home');
 });
 
-Auth::routes();
-
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 Route::get('/post', [PostController::class, 'getPost']);
@@ -19,4 +17,5 @@ Route::get('/booking', [BookingController::class, 'getBooking']);
 
 Route::get('/contact', [ContactController::class, 'getContact']);
 
+Auth::routes();
 
