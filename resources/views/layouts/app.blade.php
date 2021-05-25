@@ -29,7 +29,7 @@
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                   </button>
-
+                  {{ Auth::check() ? "logged in" : "logget out"}}
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
                     <ul class="nav-menu navbar-nav mr-auto">
@@ -77,7 +77,9 @@
                                                      document.getElementById('logout-form').submit();">
                                         {{ __('Logout') }}
                                     </a>
-
+                                    {{-- menu --}}
+                                    <a class="dropdown-item" href="{{ route('admin.post.index') }}">Liste des posts</a>
+                                    <a class="dropdown-item" href="{{ route('admin.post.create') }}">creation posts</a>
                                     <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
                                         @csrf
                                     </form>

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AboutController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\BookingController;
@@ -16,6 +17,8 @@ Route::get('/post', [PostController::class, 'getPost']);
 Route::get('/booking', [BookingController::class, 'getBooking']);
 
 Route::get('/contact', [ContactController::class, 'getContact']);
+
+Route::get('/about', [AboutController::class, 'getAbout']);
 
 Auth::routes();
 

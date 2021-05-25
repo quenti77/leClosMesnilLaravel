@@ -7,22 +7,31 @@
         <div class="col-12">
             <table class="table">
                 <thead>
-                  ...
+                    <th>id</th>
+                    <th>category_id</th>
+                    <th>title</th>
+                    <th>slug</th>
+                    <th>content</th>
+                    <th>updated_at</th>
+                    <th></th>
                 </thead>
                 <tbody>
-                  <tr class="table-active">
-                    ...
-                  </tr>
-                  <tr>
-                    ...
-                  </tr>
-                  <tr>
-                    <th scope="row">3</th>
-                    <td colspan="2" class="table-active">Larry the Bird</td>
-                    <td>@twitter</td>
-                  </tr>
+                    @foreach($posts as $post)
+                    <tr>
+                        <th>{{ $post->id }}</th>
+                        <th>{{ $post->category_id }}</th>
+                        <th>{{ $post->title }}</th>
+                        <th>{{ $post->slug }}</th>
+                        <th>{{ $post->content }}</th>
+                        <th>{{ $post->updated_at }}</th>
+                        <th>
+                            <a href="" class="btn btn-outline-primary">View</a>
+                            <a href="" class="btn btn-outline-danger">edit</a></th>
+                        </tr>
+                    @endforeach
                 </tbody>
               </table>
         </div>
     </div>
 </div>
+@endsection
