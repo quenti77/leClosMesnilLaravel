@@ -6,9 +6,10 @@ use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Str;
 
 /**
- * @property int $id
+ * @property string $id
  * @property bool $is_admin
  * @property string $name
  * @property string $last_name
@@ -30,6 +31,20 @@ class User extends Authenticatable
      * @var string
      */
     protected $table = 'users';
+
+    /**
+     * The "type" of the primary key ID.
+     *
+     * @var string
+     */
+    protected $keyType = 'string';
+
+    /**
+     * Indicates if the IDs are auto-incrementing.
+     *
+     * @var bool
+     */
+    public $incrementing = false;
 
     /**
      * The attributes that are mass assignable.
@@ -63,6 +78,13 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'is_admin' => 'boolean'
     ];
+
+    protected static function booted()
+    {
+        static::creating(function($user){
+            $user->id = (string) Str::uuid();
+        });
+    }
 
     public function posts()
     {

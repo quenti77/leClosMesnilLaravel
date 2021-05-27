@@ -7,8 +7,8 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 /**
  * @property int $id
- * @property int $user_id
- * @property string $category_id
+ * @property string $user_id
+ * @property int $category_id
  * @property string $title
  * @property string $slug
  * @property string $content
