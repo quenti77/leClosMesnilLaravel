@@ -21,7 +21,7 @@ class CreatePostsTable extends Migration
             $table->string('slug');
             $table->longtext('content');
             $table->string('image_path');
-            $table->unsignedBigInteger('comment_count');
+            $table->unsignedBigInteger('comment_count')->default(0);
             $table->timestamps();
         });
     }

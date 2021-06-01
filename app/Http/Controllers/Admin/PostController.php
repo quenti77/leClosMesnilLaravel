@@ -4,11 +4,10 @@ namespace App\Http\Controllers\Admin;
 
 use App\Models\Post;
 use Illuminate\Http\Request;
-use Illuminate\Http\Response;
 use App\Http\Controllers\Controller;
-// use Illuminate\Support\Facades\Auth;
-// use Illuminate\Support\Facades\Validator;
-
+use App\Models\Category;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Str;
 class PostController extends Controller
 {
     public function __construct()
@@ -16,40 +15,32 @@ class PostController extends Controller
         $this->middleware('auth');
     }
 
-    //     /**
-    //  * Get a validator for an incoming registration request.
-    //  *
-    //  * @param  array  $data
-    //  * @return \Illuminate\Contracts\Validation\Validator
-    //  */
-    // protected function validator(array $data)
-    // {
-    //     return Validator::make($data, [
-    //         'title' => ['required', 'string', 'max:255'],
-    //         'content' => ['required', 'string'],
-    //         'image-path' => ['required', 'string', 'max:255']
-    //     ]);
-    // }
-
     public function index()
     {
         $posts = Post::all();
-        return view('admin.post.index', compact('posts'));
+        return view('admin.post.index', compact('posts',));
     }
-    /**
-     * Il va chercher la view create pour un post
-     */
+
     public function create()
     {
-        return view('admin.post.create');
+        $post = Post::all();
+        $category = Category::all();
+        return view('admin.post.create' , compact('post','category'));
     }
+
+    public function show($id)
+    {
+        dd($id);
+    }
+
     /**
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
     {
         $post = Post::find($id);
-        return view('admin.post.edit')->with('post', $post);
+        $category = Category::All();
+        return view('admin.post.edit', compact('post','category'));
     }
 
     public function store(Request $request)
@@ -57,14 +48,19 @@ class PostController extends Controller
         $validated = $this->validate($request, [
             'title' => 'required',
             'content' => 'required',
+            'category_id' => 'required',
+            'image_path'=> 'required'
         ]);
 
         $post = new Post();
         $post->title = $validated['title'];
-        $post->descriptions = $validated['descriptions'];
-
-
+        $post->content = $validated['content'];
+        $post->slug = Str::slug($post->title);
+        $post->category_id = $validated['category_id'];
+        $post->image_path = $validated['image_path'];
+        $post->user_id = Auth::user()->id;
         $post->save();
+
         $request->session()->flash('success', 'Enregister');
         return redirect()->route('admin.post.show', $post->id);
     }
@@ -73,7 +69,8 @@ class PostController extends Controller
     {
         $this->validate($request, [
             'title' => 'required',
-            'content' => 'required'
+            'content' => 'required',
+            'image-path' => 'image-path'
         ]);
 
         $post = Post::find($id);
@@ -83,5 +80,7 @@ class PostController extends Controller
         $post->save();
         return redirect()->route('admin.post.show', $post->id);
     }
+
+
 
 }

@@ -5,8 +5,8 @@
     <h1>Show Project {{ $post->id }}</h1>
     <div class="row">
         <div class="col-md-8">
-        <p>{{ $post->title }}</p>
-        <p>{{ $post->content }}</p>
+            <p>{{ $post->title }}</p>
+            <p>{{ $post->content }}</p>
         </div>
         <div class="col-md-4">
             <div class="well">

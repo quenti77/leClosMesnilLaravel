@@ -1,5 +1,4 @@
-@import url(https://fonts.googleapis.com/css2?family=Anton&family=Lobster&display=swap);
-@import url(https://fonts.googleapis.com/css2?family=Anton&family=Lobster&display=swap);
+@import url(https://fonts.googleapis.com/css2?family=Lato&family=Lobster&display=swap);
 @charset "UTF-8";
 /*!
  * Bootstrap v5.0.1 (https://getbootstrap.com/)
@@ -29,7 +28,7 @@
   --bs-danger: #e3342f;
   --bs-light: #f8f9fa;
   --bs-dark: #212529;
-  --bs-font-sans-serif: "anton", sans-serif;
+  --bs-font-sans-serif: "Lato", sans-serif;
   --bs-font-monospace: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
   --bs-gradient: linear-gradient(180deg, rgba(255, 255, 255, 0.15), rgba(255, 255, 255, 0));
 }
@@ -11014,7 +11013,7 @@ html {
 }
 
 arclicle body {
-  font-family: "anton", sans-serif;
+  font-family: "Lato", sans-serif;
   color: #284D5B;
   letter-spacing: 2px;
 }
