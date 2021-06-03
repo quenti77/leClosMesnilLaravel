@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Str;
@@ -86,13 +87,13 @@ class User extends Authenticatable
         });
     }
 
-    public function posts()
+    public function posts(): HasMany
     {
-        return $this->hasMany(Posts::class);
+        return $this->hasMany(Post::class);
     }
 
-    public function reservations()
+    public function booking(): HasMany
     {
-        return $this->hasMany(Reservations::class);
+        return $this->hasMany(Booking::class);
     }
 }
