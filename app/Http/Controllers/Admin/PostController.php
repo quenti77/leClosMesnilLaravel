@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Models\Post;
-use App\Models\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Category;
@@ -11,6 +10,9 @@ use Illuminate\Contracts\View\View;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
+use Illuminate\Routing\Redirector;
+use Illuminate\Http\RedirectResponse;
+
 class PostController extends Controller
 {
     public function __construct()
@@ -21,7 +23,7 @@ class PostController extends Controller
     public function index(): View|Factory
     {
         $posts = Post::all();
-        return view('admin.post.index', compact('posts',));
+        return view('admin.post.index', compact('posts'));
     }
 
     public function create(): View|Factory
@@ -31,9 +33,10 @@ class PostController extends Controller
         return view('admin.post.create' , compact('post','category'));
     }
 
-    public function show($id)
+    public function show(Post $post): View|Factory
     {
-        dd($id);
+        // dd($id);
+        return view('admin.post.show')->with('post', $post);
     }
 
     public function edit(int $id): View|Factory
@@ -43,7 +46,7 @@ class PostController extends Controller
         return view('admin.post.edit', compact('post','category'));
     }
 
-    public function store(Request $request): String|Int|Bool|Array
+    public function store(Request $request): Redirector|RedirectResponse
     {
         $validated = $this->validate($request, [
             'title' => 'required',
@@ -66,7 +69,7 @@ class PostController extends Controller
         return redirect()->route('admin.post.show', $post->id);
     }
 
-    public function update(Request $request,int $id): String|Int|Bool|Array
+    public function update(Request $request): Redirector|RedirectResponse
     {
         $validated = $this->validate($request, [
             'title' => 'required',
