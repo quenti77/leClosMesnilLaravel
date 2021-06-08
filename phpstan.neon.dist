@@ -2,7 +2,7 @@ includes:
     - ./vendor/nunomaduro/larastan/extension.neon
 
 parameters:
-    paths:
+    paths: 
         - app
     level: 8
     # ignoreErrors:
