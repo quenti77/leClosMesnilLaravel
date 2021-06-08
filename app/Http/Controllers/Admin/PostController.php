@@ -66,7 +66,7 @@ class PostController extends Controller
         return redirect()->route('admin.post.show', $post->id);
     }
 
-    public function update(Request $request,int $id): String|Int|Bool|Array
+    public function update(Request $request,int $id): string|int|bool|array
     {
         $validated = $this->validate($request, [
             'title' => 'required',
