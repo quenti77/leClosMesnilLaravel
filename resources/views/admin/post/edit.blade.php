@@ -4,15 +4,17 @@
         <div class="row justify-content-center">
             <div class="col-md-8">
                 <div class="card">
-                    <div class="card-header">{{ __('Article') }}</div>
+                    <div class="card-header">
+                        {{ __('Article') }}
+                    </div>
                     <div class="card-body">
-                        <form method="POST" action="{{ route('admin.post.update', ['post' => $post->id]) }} ">
+                        <form method="POST" action="{{ route('admin.post.update', ['post' => $posts->id]) }} ">
                             @csrf
                             @method('patch')
                             <div class="form-group row my-5">
-                                <label for="title" class="col-md-4 col-form-label text-md-right">{{ __('Title') }}</label>
+                                <label for="title" class="col-md-4 col-form-label text-md-right">{{ __('Titre') }}</label>
                                 <div class="col-md-6">
-                                    <input id="title" type="text" class="form-control @error('title') is-invalid @enderror" name="title" value="{{ $post->title }}"  autofocus>
+                                    <input id="title" type="text" class="form-control @error('title') is-invalid @enderror" name="title" value="{{ $posts->title }}"  autofocus>
                                     @error('title')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
@@ -24,7 +26,7 @@
                                 <label for="content" class="col-md-4 col-form-label text-md-right">{{ __('Contenu') }}</label>
                                 <div class="col-md-6">
                                     <textarea id="content" type="textarea" class="form-control
-                                                @error('content') is-invalid @enderror" name="content" autofocus>{{ $post->content }}</textarea>
+                                                @error('content') is-invalid @enderror" name="content" autofocus>{{ $posts->content }}</textarea>
                                     @error('content')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
@@ -33,13 +35,13 @@
                                 </div>
                             </div>
                             <div class="form-group row my-5">
-                                <label for="category_id" class="col-md-4 col-form-label text-md-right">{{ __('Contenu') }}</label>
+                                <label for="category_id" class="col-md-4 col-form-label text-md-right">{{ __('Catégorie') }}</label>
                                 <div class="col-md-6">
                                     <select class="form-control" name="category_id">
                                         <option>Select Item</option>
-                                        @foreach ($category as $category)
+                                        @foreach ($categories as $category)
                                             <option value="{{ $category->id }}"
-                                                {{ $category->id === $post->category_id ? 'selected' : '' }}>
+                                                {{ $category->id === $posts->category_id ? 'selected' : '' }}>
                                                 {{ $category->name }}
                                             </option>
                                         @endforeach

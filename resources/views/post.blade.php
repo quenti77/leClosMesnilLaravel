@@ -8,9 +8,8 @@
             <h2>{{ $post->category->name }}</h2>
             <hr>
             <h3>{{ $post->title }}</h3>
-
             <img src="{{ $post->image_path }}">
-            <p class="mt-100">{{ $post->content }}</p>
+            <p class="mt-100">{!! nl2br($post->content) !!}</p>
         </article>
     @endforeach
 </section>

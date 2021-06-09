@@ -12,7 +12,7 @@ class PostController extends Controller
 {
     public function getPost(): View|Factory
     {
-        $posts = Post::OrderByDesc('created_at')->limit(10)->get();
+        $posts = Post::query()->orderByDesc('created_at')->get();
         return view('post', compact('posts'));
     }
 

@@ -18,16 +18,17 @@
                     <tbody>
                         @foreach($posts as $post)
                         <tr>
-                            <th>{{ $post->id }}</th>
-                            <th>{{ $post->category_id }}</th>
-                            <th>{{ $post->title }}</th>
-                            <th>{{ $post->slug }}</th>
-                            <th>{{ $post->content }}</th>
-                            <th>{{ $post->updated_at }}</th>
-                            <th>
-                                <a href="" class="btn btn-outline-primary">View</a>
-                                <a href="{{ route('admin.post.edit', $post->id) }}" class="btn btn-outline-danger">edit</a></th>
-                            </tr>
+                            <td>{{ $post->id }}</td>
+                            <td>{{ $post->category_id }}</td>
+                            <td>{{ $post->title }}</td>
+                            <td>{{ $post->slug }}</td>
+                            <td>{{ \Illuminate\Support\Str::words(strip_tags($post->content), 10, ' ...') }}</td>
+                            <td>{{ $post->updated_at }}</td>
+                            <td>
+                                <a href="{{ route('admin.post.show', $post->id) }}" class="btn btn-outline-primary">View</a>
+                                <a href="{{ route('admin.post.edit', $post->id) }}" class="btn btn-outline-danger">edit</a>
+                            </td>
+                        </tr>
                         @endforeach
                     </tbody>
                 </table>
