@@ -80,4 +80,12 @@ class PostController extends Controller
 
         return $post;
     }
+
+    public function destroy(Post $post): RedirectResponse
+    {
+        $post->delete();
+        return redirect()
+            ->route('admin.post.index')
+            ->with(['success' => 'L\'article est bien supprimé']);
+    }
 }

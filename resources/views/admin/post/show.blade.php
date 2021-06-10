@@ -22,10 +22,14 @@
                 <hr>
                 <div class="row">
                     <div class="col-sm-6">
-                       <a href="{{ route('admin.post.edit', $post->id) }}" class="btn btn-outline-success">edit</a></th>
+                       <a href="{{ route('admin.post.edit', $post->id) }}" class="btn btn-outline-success">edit</a>
                     </div>
                      <div class="col-sm-6">
-
+                         <form method="POST" action="{{ route('admin.post.destroy', ['post' => $post->id]) }}">
+                             @csrf
+                             @method('DELETE')
+                             <button type="submit" class="btn btn-outline-danger">delete</button>
+                         </form>
                     </div>
                 </div>
             </div>

@@ -10,7 +10,7 @@
                     <div class="card-body">
                         <form method="POST" action="{{ route('admin.post.update', ['post' => $posts->id]) }} ">
                             @csrf
-                            @method('patch')
+                            @method('PATCH')
                             <div class="form-group row my-5">
                                 <label for="title" class="col-md-4 col-form-label text-md-right">{{ __('Titre') }}</label>
                                 <div class="col-md-6">
