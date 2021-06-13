@@ -4,7 +4,7 @@ namespace Database\Factories;
 
 use App\Models\CommentPost;
 use App\Models\Post;
-
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 class CommentPostFactory extends Factory
@@ -25,7 +25,8 @@ class CommentPostFactory extends Factory
     {
         return [
             'post_id' => Post::factory(),
-            'author' => $this->faker->name,
+            'author' => User::factory(),
+            'content' => $this->faker->paragraph(3)
         ];
     }
 }

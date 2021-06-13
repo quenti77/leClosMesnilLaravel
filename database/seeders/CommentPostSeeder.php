@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Post;
 use App\Models\CommentPost;
 use Illuminate\Database\Seeder;
 
@@ -15,7 +16,7 @@ class CommentPostSeeder extends Seeder
     public function run()
     {
         CommentPost::factory()
-            ->count(20)
+            ->count(5)
             ->create();
     }
 }

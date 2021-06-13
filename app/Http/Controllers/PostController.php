@@ -21,5 +21,4 @@ class PostController extends Controller
         $comments = CommentPost::all();
         return view('post', compact('comments'));
     }
-
 }

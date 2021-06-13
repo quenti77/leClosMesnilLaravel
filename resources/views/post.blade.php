@@ -10,6 +10,8 @@
             <h3>{{ $post->title }}</h3>
             <img src="{{ $post->image_path }}">
             <p class="mt-100">{!! nl2br($post->content) !!}</p>
+            <br>
+            <span>{{ $post->comment_count }} commentaire(s)</span>
         </article>
     @endforeach
 </section>
