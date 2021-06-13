@@ -19,7 +19,6 @@ class PostSeeder extends Seeder
         Post::factory()
             ->count(5)
             ->has(CommentPost::factory()->count(5), 'commentPost')
-            // ->has(CategoryProject::factory()->count(5), 'categoryproject')
             ->create();
 
         Artisan::call('lcm:sync_comment_count');
