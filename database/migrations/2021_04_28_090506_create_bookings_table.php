@@ -16,13 +16,13 @@ class CreateBookingsTable extends Migration
         Schema::create('bookings', function (Blueprint $table) {
             $table->id();
             $table->uuid('id_users');
-            $table->date('date_start');
-            $table->date('date_end');
+            $table->date('started_at');
+            $table->date('finished_at');
             $table->string('type');
             $table->integer('nb_night');
             $table->integer('nb_adult');
             $table->integer('nb_children');
-            $table->dateTime('payment_date')->nullable();
+            $table->dateTime('payment_at')->nullable();
             $table->integer('price');
             $table->timestamps();
         });

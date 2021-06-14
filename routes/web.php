@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AboutController;
+use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\BookingController;
@@ -10,11 +11,11 @@ Route::get('/', function () {
     return view('home');
 });
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/home', [HomeController::class, 'index'])->name('home');
 
-Route::get('/post', [PostController::class, 'getPost']);
+Route::get('/post', [PostController::class, 'getPost'])->name('Post');
 
-Route::get('/booking', [BookingController::class, 'getBooking']);
+Route::resource('/booking', BookingController::class);
 
 Route::get('/contact', [ContactController::class, 'getContact']);
 

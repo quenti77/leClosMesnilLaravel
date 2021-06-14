@@ -24,13 +24,12 @@ class BookingFactory extends Factory
     {
         return [
             'id_users' => User::factory(),
-            'date_start' => $this->faker->dateTime(),
-            'date_end' => $this->faker->dateTime(),
-            'type' => $this->faker->name,
+            'started_at' => $this->faker->dateTime(),
+            'finished_at' => $this->faker->dateTime(),
             'nb_night' => $this->faker->numberBetween(1, 20),
             'nb_adult' => $this->faker->numberBetween(1, 4),
             'nb_children' =>  $this->faker->numberBetween(1, 4),
-            'payment_date' => $this->faker->dateTime,
+            'payment_at' => $this->faker->dateTime,
             'price' => $this->faker->numberBetween(20, 500),
         ];
     }
