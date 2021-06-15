@@ -27,7 +27,7 @@ class PostStoreFormRequest extends FormRequest
             'title' => 'required',
             'content' => 'required',
             'category_id' => 'required',
-            'image_path'=> 'required'
+            'image_path' => 'required'
         ];
     }
 }

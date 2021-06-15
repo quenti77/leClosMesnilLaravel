@@ -77,6 +77,7 @@
                                     {{-- menu --}}
                                     <a class="dropdown-item" href="{{ route('admin.post.index') }}">Liste des posts</a>
                                     <a class="dropdown-item" href="{{ route('admin.post.create') }}">creation posts</a>
+                                    <a class="dropdown-item" href="{{ route('admin.commentPost.index') }}">listes commentPost</a>
                                     <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
                                         @csrf
                                     </form>
@@ -88,6 +89,7 @@
             </div>
         </nav>
         <main class="py-4">
+            @include('partials.flashMessage')
             @yield('content')
         </main>
     </div>
