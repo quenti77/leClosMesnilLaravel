@@ -14,5 +14,8 @@
             <span>{{ $post->comment_count }} commentaire(s)</span>
         </article>
     @endforeach
+    <div class="text-center">
+        {!! $posts->links('pagination::bootstrap-4'); !!}
+     </div>
 </section>
 @endsection
