@@ -17,8 +17,8 @@ class PostSeeder extends Seeder
     public function run()
     {
         Post::factory()
-            ->count(5)
-            ->has(CommentPost::factory()->count(5), 'commentPost')
+            ->count(50)
+            ->has(CommentPost::factory()->count(5), 'comments')
             ->create();
 
         Artisan::call('lcm:sync_comment_count');

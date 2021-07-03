@@ -12,6 +12,8 @@
             <p class="mt-100">{!! nl2br($post->content) !!}</p>
             <br>
             <span>{{ $post->comment_count }} commentaire(s)</span>
+            <br>
+            <a href="{{ url('post/' . $post->slug) }}" class="btn btn-primary">Read more</a>
         </article>
     @endforeach
     <div class="text-center">

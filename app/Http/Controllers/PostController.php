@@ -21,4 +21,11 @@ class PostController extends Controller
         $comments = CommentPost::all();
         return view('post', compact('comments'));
     }
+
+    public function showPost(string $slug, Post $post): View|Factory
+    {
+        $post = Post::with('comments.user')->where('slug', $slug)->first();
+        $comments = $post->comments;
+        return view('single', compact('post', 'comments'));
+    }
 }

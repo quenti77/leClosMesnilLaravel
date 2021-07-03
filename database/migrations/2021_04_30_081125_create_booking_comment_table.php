@@ -17,12 +17,13 @@ class CreateBookingCommentTable extends Migration
             $table->id();
             $table->integer('booking_id');
             $table->integer('rating');
-            $table->integer('cleaness_rating');  
-            $table->integer('accurency_rating');  
-            $table->integer('communication_rating');  
-            $table->integer('location_rating');  
-            $table->integer('check-in_rating');  
-            $table->integer('value_rating');      
+            $table->integer('cleaness_rating');
+            $table->integer('accurency_rating');
+            $table->longtext('content');
+            $table->integer('communication_rating');
+            $table->integer('location_rating');
+            $table->integer('check-in_rating');
+            $table->integer('value_rating');
             $table->timestamps();
         });
     }

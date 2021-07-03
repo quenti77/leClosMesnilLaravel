@@ -23,8 +23,8 @@ class SeasonFactory extends Factory
     public function definition()
     {
         return [
-            'date_start' => $this->faker->dateTime(),
-            'date_end' => $this->faker->dateTime(),
+            'started_at' => $this->faker->dateTime(),
+            'finished_at' => $this->faker->dateTime(),
             'price' => $this->faker->randomDigit,
         ];
     }

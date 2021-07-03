@@ -26,8 +26,8 @@ class CommentPostFactory extends Factory
     {
         return [
             'post_id' => Post::factory(),
-            'author' => User::all()->random()->name,
-            'content' => $this->faker->paragraph(3)
+            'author' => User::factory(),
+            'content' => $this->faker->paragraph(1)
         ];
     }
 }

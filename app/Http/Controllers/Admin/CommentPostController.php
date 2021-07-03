@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Controllers\Controller;
-use App\Models\CommentPost;
 use Carbon\Factory;
 use Illuminate\View\View;
+use App\Models\CommentPost;
+use App\Http\Controllers\Controller;
+use App\Models\Post;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Support\Facades\Request;
 
 class CommentPostController extends Controller
 {
@@ -15,10 +17,14 @@ class CommentPostController extends Controller
         $this->middleware('auth');
     }
 
-    public function index(): View|Factory
+    // public function index(): View|Factory
+    // {
+    //     // $commentPosts = CommentPost::all();
+    //     // return view('admin.comment.index', compact('commentPosts'));
+    // }
+
+    public function store(Post $post)
     {
-        $commentPosts = CommentPost::all();
-        return view('admin.comment.index', compact('commentPosts'));
     }
 
     public function destroy(CommentPost $commentPost): RedirectResponse
