@@ -17,16 +17,6 @@ class CommentPostController extends Controller
         $this->middleware('auth');
     }
 
-    // public function index(): View|Factory
-    // {
-    //     // $commentPosts = CommentPost::all();
-    //     // return view('admin.comment.index', compact('commentPosts'));
-    // }
-
-    public function store(Post $post)
-    {
-    }
-
     public function destroy(CommentPost $commentPost): RedirectResponse
     {
         $commentPost->delete();
