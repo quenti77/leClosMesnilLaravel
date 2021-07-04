@@ -6,9 +6,6 @@ use App\Models\CommentPost;
 use App\Models\Post;
 use Illuminate\Console\Command;
 
-/**
- * Synchronise les commentaires des posts
- */
 class SyncCommentCountPost extends Command
 {
     /**
