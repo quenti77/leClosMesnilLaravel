@@ -39,10 +39,10 @@ class SyncCommentCountPost extends Command
      */
     public function handle()
     {
-        $posts = Post::query()->with('commentPost')->get();
+        $posts = Post::query()->with('comments')->get();
 
         foreach ($posts as $post) {
-            $post->comment_count = $post->commentPost->count();
+            $post->comment_count = $post->comments->count();
             $post->save();
         }
 
