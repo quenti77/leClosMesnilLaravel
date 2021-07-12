@@ -11,26 +11,16 @@
                         <form method="POST" action="{{ route('booking.store') }} ">
                             @csrf
                             <div class="form-group row my-5">
-                                <label for="started_at" class="col-md-4 col-form-label text-md-right">{{ __('Arrivée') }}</label>
-                                <div class="col-md-6">
-                                    <input id="started_at" type="date" class="form-control @error('started_at') is-invalid @enderror" name="started_at" value="{{ old('started_at') }}"  autofocus>
-                                    @error('started_at')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                    @enderror
-                                </div>
-                            </div>
-                            <div class="form-group row my-5">
-                                <label for="finishedAt" class="col-md-4 col-form-label text-md-right">
-                                    {{ __('Départ') }}
-                                </label>
+                                <label
+                                    for="started_at"
+                                    class="col-md-4 col-form-label text-md-right">{{ __('Arrivée') }}</label>
                                 <div class="col-md-6">
                                     <input
-                                        id="finishedAt"
+                                        id="started_at"
                                         type="date"
-                                        class="form-control @error('finishedAt') is-invalid @enderror"
-                                        name="finishedAt" value="{{ old('finishedAt') }}"
+                                        class="form-control @error('started_at') is-invalid @enderror"
+                                        name="started_at"
+                                        value="{{ old('started_at') }}"
                                         autofocus>
                                     @error('started_at')
                                     <span class="invalid-feedback" role="alert">
@@ -40,17 +30,18 @@
                                 </div>
                             </div>
                             <div class="form-group row my-5">
-                                <label for="nbNight" class="col-md-4 col-form-label text-md-right">
-                                    {{ __('Nombres de nuits') }}
+                                <label for="finished_at" class="col-md-4 col-form-label text-md-right">
+                                    {{ __('Départ') }}
                                 </label>
                                 <div class="col-md-6">
-                                <input
-                                    id="nbNight"
-                                    type="text"
-                                    class="form-control @error('nbNight') is-invalid @enderror"
-                                    name="nbNight"
-                                    autofocus>
-                                    @error('nbNight')
+                                    <input
+                                        id="finished_at"
+                                        type="date"
+                                        class="form-control @error('finished_at') is-invalid @enderror"
+                                        name="finished_at"
+                                        value="{{ old('finished_at') }}"
+                                        autofocus>
+                                    @error('finished_at')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
@@ -58,15 +49,15 @@
                                 </div>
                             </div>
                             <div class="form-group row my-5">
-                                <label for="nbAdult" class="col-md-4 col-form-label text-md-right">
+                                <label for="nb_adult" class="col-md-4 col-form-label text-md-right">
                                     {{ __('Nombres d\'adult') }}
                                 </label>
                                 <div class="col-md-6">
                                     <input
-                                        id="nbAdult"
+                                        id="nb_adult"
                                         type="text"
                                         class="form-control @error('nbNight') is-invalid @enderror"
-                                        name="nbAdult"
+                                        name="nb_adult"
                                         autofocus>
                                     @error('nbAdult')
                                     <span class="invalid-feedback" role="alert">
@@ -76,17 +67,17 @@
                                 </div>
                             </div>
                             <div class="form-group row my-5">
-                                <label for="nbChildren" class="col-md-4 col-form-label text-md-right">
+                                <label for="nb_children" class="col-md-4 col-form-label text-md-right">
                                     {{ __('Nombres d\'enfant') }}
                                 </label>
                                 <div class="col-md-6">
                                     <input
-                                        id="nbChildren"
+                                        id="nb_children"
                                         type="text"
-                                        class="form-control @error('nbNight') is-invalid @enderror"
-                                        name="nbChildren"
+                                        class="form-control @error('nb_children') is-invalid @enderror"
+                                        name="nb_children"
                                         autofocus>
-                                    @error('nbChildren')
+                                    @error('nb_children')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
@@ -95,7 +86,7 @@
                             </div>
                             <div class="form-group row my-5">
                                 <label for="price" class="col-md-4 col-form-label text-md-right">
-                                    {{ __('Price') }}
+                                    {{ __('Prix') }}
                                 </label>
                                 <span>{{ $price }} €</span>
                                 <div class="col-md-6">
@@ -106,7 +97,7 @@
                                         name="price"
                                         value="{{ $price }}"
                                         autofocus>
-                                    @error('image_path')
+                                    @error('price')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>

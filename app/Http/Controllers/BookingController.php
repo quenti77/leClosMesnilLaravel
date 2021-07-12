@@ -30,19 +30,27 @@ class BookingController extends Controller
 
     public function store(BookingStoreRequest $request): Redirector|RedirectResponse
     {
-        $booking = $this->storeBooking($request->all());
+        $this->storeBooking($request->all());
 
         return redirect()
-            ->route('booking', $booking->id)
-            ->with(['success' => 'Création de l\'article']);
+            ->back()
+            ->with(['success' => 'Merci d\'avoir réserver !']);
     }
 
+    /**
+     * @throws \Exception
+     */
     private function storeBooking(array $bookingData, booking|null $booking = null): booking
     {
+        $started_at = new \DateTime($bookingData['started_at']);
+        $finished_at = new \DateTime($bookingData['finished_at']);
+        $interval = $finished_at->diff($started_at);
         $booking ??= new booking();
+
         $booking->started_at = $bookingData['started_at'];
         $booking->finished_at = $bookingData['finished_at'];
-        $booking->nb_night = $bookingData['nb_night'];
+        $booking->nb_night = $interval->format('%d');
+        $booking->nb_adult = $bookingData['nb_adult'];
         $booking->nb_children = $bookingData['nb_children'];
         $booking->price = 90;
         $booking->user_id = (string) Auth::id();
