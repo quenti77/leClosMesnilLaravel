@@ -1,5 +1,5 @@
 // Fonts
-@import url('https://fonts.googleapis.com/css2?family=Lato&family=Lobster&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Lato:wght@300&family=Lobster&display=swap');
 
 // Variables
 @import 'variables';
@@ -7,48 +7,93 @@
 // Bootstrap
 @import '../../node_modules/bootstrap/scss/bootstrap.scss';
 
-* {
+// Font Awesome
+$fa-font-path:        "../webfonts";
+@import "~@fortawesome/fontawesome-free/scss/fontawesome" ;
+@import "~@fortawesome/fontawesome-free/scss/solid" ;
+@import "~@fortawesome/fontawesome-free/scss/brands" ;
+@import "~@fortawesome/fontawesome-free/scss/regular" ;
+
+*,*:after,*:before{
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
-html {
-    font-size: 62.5%;
-}
-
-arclicle
 body {
-    font-family: $font-family-sans-serif;
-    color: $primary;
-    letter-spacing: $letter-spacing;
-}
-h1{
-    font-family: $font-family-cursive;
-    font-size: $font-size-title;
-    color: $secondary;
+    background-color: $body-bg;
+    color: $body-color;
 }
 
-h2{
-    font-family: $font-family-cursive;
-    font-size: $font-size-title;
-    color: $secondary;
+.navbar {
+    .navbar-brand {
+        font-family: $font-family-cursive;
+        color: $primary;
+        font-size: $font-size-lg;
+    }
 }
 
-h3{
-    font-family: $font-family-cursive;
-    font-size: $font-size-title;
-    color: $secondary;
+.section-blog {
+    padding: 25px 0 16px 0;
+    span {
+        font-size: $font-size-blog-span;
+    }
+    .bg-badge {
+        font-size: $font-size-blog-span;
+        background-color: transparent;
+        border: 1px solid orange;
+    }
+    .created-at {
+        font-size: $font-size-sm;
+    }
+    h2 {
+        font-size: $font-size-blog-title;
+        font-weight: bold;
+    }
+    img {
+        filter: drop-shadow(0px 0px 4px rgba(47, 54, 64, 0.5));
+        border-radius: 10px;
+    }
+    p {
+        font-weight: 300;
+    }
 }
-.navbar-brand {
-    font-family: $font-family-cursive;
-    font-size: $font-size-title*1.5;
-}
-.nav-item{
-    margin-left: 25px;
-    margin-top: 15px;
-    font-size: $font-size-title*0.8;
-}
-.nav-menu{
-    text-transform: uppercase;
-}
+    footer {
+        background-color: $light;
+        i {
+            margin: 25px 8px 16px 0;
+            font-size: 24px;
+            color: $primary;
+        }
+        p {
+            margin: 25px 0 16px 0;
+        }
+        .nav {
+            margin-top: -5px;
+        }
+    }
+
+    .btn-action {
+        border-radius: 5px;
+        border: 0;
+        padding: 8px 0 8px 0;
+        margin: 16px 0 34px 15px;
+    }
+    .btn-primary-action {
+        @extend .btn-action;
+        background-color: #0A505A;
+        color: #F7FEFF;
+    }
+    .btn-secondary-action {
+        @extend .btn-action;
+        background-color: transparent;
+        text-decoration: none;
+        a {
+            color: $dark 50;
+        }
+    }
+
+
+
+
+

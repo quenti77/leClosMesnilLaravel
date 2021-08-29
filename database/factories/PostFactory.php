@@ -33,7 +33,7 @@ class PostFactory extends Factory
             'title' => $title,
             'slug' => $slug,
             'content' => $this->faker->sentences(30, true),
-            'image_path' => 'https://via.placeholder.com/150',
+            'image_path' => 'https://via.placeholder.com/325x217',
             'comment_count' => $this->faker->randomDigit(),
         ];
     }

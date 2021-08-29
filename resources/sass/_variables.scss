@@ -1,26 +1,27 @@
 // Body
-$body-bg: #f8fafc;
+$body-bg: #FFFFF4;
+$body-color: #2F3640;
 
 // Typography
-$font-family-sans-serif: 'Lato', sans-serif;
-$font-family-cursive: 'lobser', cursive;
-$font-size-base: 1.6rem;
-$font-size-title: 2.4rem;
-$font-size-logo: 3rem;
-$font-size-nav-link: 2.4rem;
+$font-family-base: 'Lato', sans-serif;
+$font-family-cursive: 'lobster', cursive;
+$font-size-base: 1rem;
+$font-size-lg: $font-size-base * 1.5;
+$font-size-nav-link: $font-size-base * 1.25;
+$font-size-blog-span: $font-size-base * 0.9;
+$font-size-blog-title: $font-size-base * 2;
 $line-height-base: 1.8;
 $letter-spacing: 2px;
 
 // Colors
-$blue: #3490dc;
-$indigo: #6574cd;
-$purple: #9561e2;
-$pink: #f66d9b;
-$red: #e3342f;
-$orange: #f6993f;
-$yellow: #ffed4a;
-$green: #38c172;
-$teal: #4dc0b5;
-$cyan: #6cb2eb;
-$primary: #284D5B;
-$secondary: #3A808A;
+$dark: #2F3640;
+$warning: #FFA333;
+$primary: #327882;
+$secondary: #FFA333;
+$navbar-light-color: rgba($primary, .55);
+
+// Margin/Padding
+$spacer: 2rem;
+
+//button
+

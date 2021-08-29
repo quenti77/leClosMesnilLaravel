@@ -1,4 +1,5 @@
 window._ = require('lodash');
+import "bootstrap";
 
 /**
  * We'll load jQuery and the Bootstrap jQuery plugin which provides support
@@ -7,9 +8,6 @@ window._ = require('lodash');
  */
 
 try {
-    window.Popper = require('popper.js').default;
-    window.$ = window.jQuery = require('jquery');
-
     require('bootstrap');
 } catch (e) {}
 

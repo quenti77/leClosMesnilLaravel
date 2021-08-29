@@ -17,7 +17,7 @@ Route::get('/', function () {
 Route::get('/post', [PostController::class, 'getPost'])->name('Post');
 Route::get('/post/{slug}', [PostController::class, 'showPost'])->where('slug', '[\w\d\-\_]+')->name('RouteShowPost');
 
-Route::post('/comments/{post}', [CommentController::class, 'store'])->name('commentsstore');
+Route::post('/comments/{post}', [CommentController::class, 'store'])->name('comments.store');
 Route::patch('/comments/{comment}', [CommentController::class, 'update'])->name('comment.update');
 Route::delete('/comments/{comment}', [CommentController::class, 'destroy'])->name('comment.destroy');
 

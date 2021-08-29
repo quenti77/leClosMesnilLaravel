@@ -11,16 +11,12 @@ use Illuminate\Http\Request;
 
 class CommentController extends Controller
 {
-    /**
-     * Faut etre identifier pour commenter
-     * un post
-     */
     public function __construct()
     {
         $this->middleware('auth');
     }
 
-    public function store($post, Request $request)
+    public function store($post, Request $request): \Illuminate\Http\RedirectResponse
     {
         $validated = $this->getValidatedData($request);
 
@@ -36,7 +32,7 @@ class CommentController extends Controller
         return redirect()->route('RouteShowPost', $p->slug);
     }
 
-    public function update(int $id, Request $request)
+    public function update(int $id, Request $request): \Illuminate\Http\RedirectResponse
     {
         $validated = $this->getValidatedData($request);
 
@@ -46,10 +42,7 @@ class CommentController extends Controller
         return redirect()->route('RouteShowPost', $comment->posts->slug);
     }
 
-    /**
-     * The visitor can delete his comment
-     */
-    public function destroy(int $comment)
+    public function destroy(int $comment): \Illuminate\Http\RedirectResponse
     {
         $comment = CommentPost::find($comment);
         if ($comment === null) {

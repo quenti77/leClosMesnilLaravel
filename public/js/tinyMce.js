@@ -1,65 +1,71 @@
+const tinymce = require("tinymce");
+let useDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches;
+
 tinymce.init({
-    selector: 'textarea',
-    height: 600,
-    plugins: [
-        'advlist autolink link image lists charmap print preview hr anchor pagebreak',
-        'searchreplace wordcount visualblocks visualchars code fullscreen insertdatetime media nonbreaking',
-        'table emoticons template paste help'
-    ],
-    toolbar: 'undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | ' +
-        'bullist numlist outdent indent | link image | print preview media fullpage | ' +
-        'forecolor backcolor emoticons | help',
+    selector: 'textarea#full-featured',
+    plugins: 'print preview powerpaste casechange importcss tinydrive searchreplace autolink autosave save directionality advcode visualblocks visualchars fullscreen image link media mediaembed template codesample table charmap hr pagebreak nonbreaking anchor toc insertdatetime advlist lists checklist wordcount tinymcespellchecker a11ychecker imagetools textpattern noneditable help formatpainter permanentpen pageembed charmap tinycomments mentions quickbars linkchecker emoticons advtable export',
+    tinydrive_token_provider: 'URL_TO_YOUR_TOKEN_PROVIDER',
+    tinydrive_dropbox_app_key: 'YOUR_DROPBOX_APP_KEY',
+    tinydrive_google_drive_key: 'YOUR_GOOGLE_DRIVE_KEY',
+    tinydrive_google_drive_client_id: 'YOUR_GOOGLE_DRIVE_CLIENT_ID',
+    mobile: {
+        plugins: 'print preview powerpaste casechange importcss tinydrive searchreplace autolink autosave save directionality advcode visualblocks visualchars fullscreen image link media mediaembed template codesample table charmap hr pagebreak nonbreaking anchor toc insertdatetime advlist lists checklist wordcount tinymcespellchecker a11ychecker textpattern noneditable help formatpainter pageembed charmap mentions quickbars linkchecker emoticons advtable'
+    },
     menu: {
-        favs: {
-            title: 'My Favorites',
-            items: 'code visualaid | searchreplace | emoticons'
+        tc: {
+            title: 'Comments',
+            items: 'addcomment showcomments deleteallconversations'
         }
     },
-    menubar: 'favs file edit view insert format tools table help',
-    content_css: 'css/content.css',
-    image_title: true,
-    /* enable automatic uploads of images represented by blob or data URIs*/
-    automatic_uploads: true,
+    menubar: 'file edit view insert format tools table tc help',
+    toolbar: 'undo redo | bold italic underline strikethrough | fontselect fontsizeselect formatselect | alignleft aligncenter alignright alignjustify | outdent indent |  numlist bullist checklist | forecolor backcolor casechange permanentpen formatpainter removeformat | pagebreak | charmap emoticons | fullscreen  preview save print | insertfile image media pageembed template link anchor codesample | a11ycheck ltr rtl | showcomments addcomment',
+    autosave_ask_before_unload: true,
+    autosave_interval: '30s',
+    autosave_prefix: '{path}{query}-{id}-',
+    autosave_restore_when_empty: false,
+    autosave_retention: '2m',
+    image_advtab: true,
+    link_list: [
+        { title: 'My page 1', value: 'https://www.tiny.cloud' },
+        { title: 'My page 2', value: 'http://www.moxiecode.com' }
+    ],
+    image_list: [
+        { title: 'My page 1', value: 'https://www.tiny.cloud' },
+        { title: 'My page 2', value: 'http://www.moxiecode.com' }
+    ],
+    image_class_list: [
+        { title: 'None', value: '' },
+        { title: 'Some class', value: 'class-name' }
+    ],
+    importcss_append: true,
+    templates: [
+        { title: 'New Table', description: 'creates a new table', content: '<div class="mceTmpl"><table width="98%%"  border="0" cellspacing="0" cellpadding="0"><tr><th scope="col"> </th><th scope="col"> </th></tr><tr><td> </td><td> </td></tr></table></div>' },
+        { title: 'Starting my story', description: 'A cure for writers block', content: 'Once upon a time...' },
+        { title: 'New list with dates', description: 'New List with dates', content: '<div class="mceTmpl"><span class="cdate">cdate</span><br /><span class="mdate">mdate</span><h2>My List</h2><ul><li></li><li></li></ul></div>' }
+    ],
+    template_cdate_format: '[Date Created (CDATE): %m/%d/%Y : %H:%M:%S]',
+    template_mdate_format: '[Date Modified (MDATE): %m/%d/%Y : %H:%M:%S]',
+    height: 600,
+    image_caption: true,
+    quickbars_selection_toolbar: 'bold italic | quicklink h2 h3 blockquote quickimage quicktable',
+    noneditable_noneditable_class: 'mceNonEditable',
+    toolbar_mode: 'sliding',
+    spellchecker_ignore_list: ['Ephox', 'Moxiecode'],
+    tinycomments_mode: 'embedded',
+    content_style: '.mymention{ color: gray; }',
+    contextmenu: 'link image imagetools table configurepermanentpen',
+    a11y_advanced_options: true,
+    skin: useDarkMode ? 'oxide-dark' : 'oxide',
+    content_css: useDarkMode ? 'dark' : 'default',
     /*
-      URL of our upload handler (for more details check: https://www.tiny.cloud/docs/configure/file-image-upload/#images_upload_url)
-      images_upload_url: 'postAcceptor.php',
-      here we add custom filepicker only to Image dialog
+    The following settings require more configuration than shown here.
+    For information on configuring the mentions plugin, see:
+    https://www.tiny.cloud/docs/plugins/premium/mentions/.
     */
-    file_picker_types: 'image',
-    /* and here's our custom image picker*/
-    file_picker_callback: function (cb, value, meta) {
-        var input = document.createElement('input');
-        input.setAttribute('type', 'file');
-        input.setAttribute('accept', 'image/*');
-        /*
-          Note: In modern browsers input[type="file"] is functional without
-          even adding it to the DOM, but that might not be the case in some older
-          or quirky browsers like IE, so you might want to add it to the DOM
-          just in case, and visually hide it. And do not forget do remove it
-          once you do not need it anymore.
-        */
-        input.onchange = function () {
-            var file = this.files[0];
-            var reader = new FileReader();
-            reader.onload = function () {
-                /*
-                  Note: Now we need to register the blob in TinyMCEs image blob
-                  registry. In the next release this part hopefully won't be
-                  necessary, as we are looking to handle it internally.
-                */
-                var id = 'blobid' + (new Date()).getTime();
-                var blobCache = tinymce.activeEditor.editorUpload.blobCache;
-                var base64 = reader.result.split(',')[1];
-                var blobInfo = blobCache.create(id, file, base64);
-                blobCache.add(blobInfo);
-                /* call the callback and populate the Title field with the file name */
-                cb(blobInfo.blobUri(), {
-                    title: file.name
-                });
-            };
-            reader.readAsDataURL(file);
-        };
-        input.click();
-    },
-    content_style: 'body { font-family:Helvetica,Arial,sans-serif; font-size:14px }'
+    mentions_selector: '.mymention',
+    mentions_fetch: mentions_fetch,
+    mentions_menu_hover: mentions_menu_hover,
+    mentions_menu_complete: mentions_menu_complete,
+    mentions_select: mentions_select,
+    mentions_item_type: 'profile'
 });

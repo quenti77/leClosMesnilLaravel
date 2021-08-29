@@ -1,23 +1,24 @@
-
 @extends('layouts.app')
 @section('content')
-<section class='section-blog container'>
-<h1>Suivez l'actualité du Clos Mesnil et de ses alentours</h1>
-    @foreach($posts as $post)
-        <article>
-            <h2>{{ $post->category->name }}</h2>
-            <hr>
-            <h3>{{ $post->title }}</h3>
-            <img src="{{ $post->image_path }}">
-            <p class="mt-100">{!! nl2br($post->content) !!}</p>
-            <br>
-            <span>{{ $post->comment_count }} commentaire(s)</span>
-            <br>
-            <a href="{{ url('post/' . $post->slug) }}" class="btn btn-primary">Read more</a>
-        </article>
-    @endforeach
-    <div class="text-center">
-        {!! $posts->links('pagination::bootstrap-4'); !!}
-     </div>
-</section>
+    <section class='section-blog col-12'>
+        <div class="row">
+        @foreach($posts as $post)
+            <article class="mb-3 col-12 col-md-6 col-xl-4">
+                <div class="article-header">
+                    <div class="row align-items-baseline mb-1">
+                        <div class="col-4"><span class="badge bg-badge text-dark">{{ $post->category->name }}</span>
+                        </div>
+                        <span class="created-at col-8 fst-italic text-end">{{ $post->created_at }}</span>
+                    </div>
+                    <h2 class="pb-1 m-0">{{ $post->title }}</h2>
+                    <img src="{{ $post->image_path }}" class="w-100 h-auto pb-1" alt="">
+                </div>
+                <p class="d-none d-sm-block">{{ mb_substr(nl2br($post->content),0, 500) }} . . .</p>
+                <div class="text-center">
+                    <a href="{{ url('post/' . $post->slug) }}" class="">Voir l'article</a>
+                </div>
+            </article>
+        @endforeach
+        </div>
+    </section>
 @endsection

@@ -13,59 +13,47 @@
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" type="text/css" rel="stylesheet">
-</head>
 
+    <script src="{{ asset('js/tinyMce.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('js/updateEditComment.js') }}" defer></script>
+</head>
 <body>
-    <div id="app" class="container">
-        <nav class="navbar navbar-expand-lg navbar-light bg-light">
-            <div class="container">
-                <a class="navbar-brand" href="{{ url('/') }}">
-                    {{ config('app.name', 'Laravel') }}
-                </a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+<header class="container-fluid">
+    <nav class="navbar navbar-expand-lg navbar-light">
+        <div class="container">
+            <a class="navbar-brand" href="{{ url('/') }}">
+                {{ config('app.name', 'Laravel') }}
+            </a>
+            <button class="navbar-toggler"
+                    type="button" data-bs-toggle="collapse"
                     data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
                     aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <ul class="nav-menu navbar-nav mr-auto">
-                        <li class="nav-item active">
-                            <a class="nav-link" href="/">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="/about">About</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="/post">Blog/Post</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="/booking">Booking</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="/contact">Contact</a>
-                        </li>
-                    </ul>
-                    <ul class="navbar-nav ms-auto">
-                        @guest
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/post">Blog</a>
+                    </li>
+                </ul>
+                <ul class="navbar-nav">
+                    @guest
                         @if (Route::has('login'))
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
-                        </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
+                            </li>
                         @endif
-
                         @if (Route::has('register'))
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
-                        </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
+                            </li>
                         @endif
-                        @else
+                    @else
                         <li class="nav-item dropdown">
                             <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
-                                data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                               data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                 {{ Auth::user()->name }}
                             </a>
-
                             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
                                 <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
@@ -78,20 +66,69 @@
                                 </form>
                             </div>
                         </li>
-                        @endguest
-                    </ul>
-                </div>
+                    @endguest
+                </ul>
             </div>
-        </nav>
-        <main class="py-4">
-            @include('partials.flashMessage')
-            @yield('content')
-        </main>
+        </div>
+    </nav>
+</header>
+<main class="container">
+    @include('partials.flashMessage')
+    @yield('content')
+</main>
+<footer class="bg-primary text-white text-center text-lg-start">
+    <div class="container p-4">
+        <div class="row">
+            <div class="col-lg-6 col-md-12 mb-4 mb-md-0">
+                <h5 class="text-uppercase">Footer Content</h5>
+
+                <p>
+                    Lorem ipsum dolor sit amet consectetur, adipisicing elit. Iste atque ea quis
+                    molestias. Fugiat pariatur maxime quis culpa corporis vitae repudiandae aliquam
+                    voluptatem veniam, est atque cumque eum delectus sint!
+                </p>
+            </div>
+            <div class="col-lg-3 col-md-6 mb-4 mb-md-0">
+                <h5 class="text-uppercase">Links</h5>
+                <ul class="list-unstyled mb-0">
+                    <li>
+                        <a href="#" class="text-white">Link 1</a>
+                    </li>
+                    <li>
+                        <a href="#" class="text-white">Link 2</a>
+                    </li>
+                    <li>
+                        <a href="#" class="text-white">Link 3</a>
+                    </li>
+                    <li>
+                        <a href="#" class="text-white">Link 4</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="col-lg-3 col-md-6 mb-4 mb-md-0">
+                <h5 class="text-uppercase mb-0">Links</h5>
+
+                <ul class="list-unstyled">
+                    <li>
+                        <a href="#" class="text-white">Link 1</a>
+                    </li>
+                    <li>
+                        <a href="#" class="text-white">Link 2</a>
+                    </li>
+                    <li>
+                        <a href="#" class="text-white">Link 3</a>
+                    </li>
+                    <li>
+                        <a href="#" class="text-white">Link 4</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
     </div>
-    @yield('scripts')
-    <script src="https://cdn.tiny.cloud/1/85260khgyt3z8u1tbp3820vnlqz4mcbhcz6xw0e5govencm7/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
-    <script src="{{ asset('js/tinyMce.js')}}"></script>
+    <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
+        © 2020 Copyright:
+        <a class="text-white" href="https://mdbootstrap.com/">MDBootstrap.com</a>
+    </div>
+</footer>
 </body>
 </html>
