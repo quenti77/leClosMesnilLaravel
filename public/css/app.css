@@ -17457,20 +17457,32 @@ body {
   color: #327882;
   font-size: 1.5rem;
 }
+@media (min-width: 576px) {
+  .navbar .navbar-brand {
+    font-size: 2.5rem;
+  }
+}
 
 .section-blog {
   padding: 25px 0 16px 0;
-}
-.section-blog span {
-  font-size: 0.9rem;
 }
 .section-blog .bg-badge {
   font-size: 0.9rem;
   background-color: transparent;
   border: 1px solid orange;
 }
+@media (min-width: 576px) {
+  .section-blog .bg-badge {
+    font-size: 1rem;
+  }
+}
 .section-blog .created-at {
   font-size: 0.875rem;
+}
+@media (min-width: 576px) {
+  .section-blog .created-at {
+    font-size: 1rem;
+  }
 }
 .section-blog h2, .section-blog .h2 {
   font-size: 2rem;
@@ -17482,6 +17494,19 @@ body {
 }
 .section-blog p {
   font-weight: 300;
+}
+@media (min-width: 576px) {
+  .section-blog p {
+    font-size: 1.15rem;
+  }
+}
+.section-blog a {
+  font-size: 1rem;
+}
+@media (min-width: 576px) {
+  .section-blog a {
+    font-size: 1.15rem;
+  }
 }
 
 footer {
@@ -17517,4 +17542,8 @@ footer .nav {
 }
 .btn-secondary-action a {
   color: #2F3640 50;
+}
+
+.cancelUpdate {
+  cursor: pointer;
 }

@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Post;
-use Illuminate\View\View;
+
 
 use App\Models\CommentPost;
 use App\Http\Requests\TemplateForm;

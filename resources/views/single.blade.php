@@ -9,7 +9,8 @@
                     <span class="created-at col-8 fst-italic fw-bold text-end">{{ $post->created_at }}</span>
                 </div>
                 <h2 class="pb-1 m-0">{{ $post->title }}</h2>
-                <img src="{{ $post->image_path }}" class="w-100 h-auto pb-1" alt="">
+                <div class="h-20">
+                <img src="https://images.unsplash.com/photo-1606787620819-8bdf0c44c293?ixid=MnwxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1050&q=80" class="w-100 h-auto pb-2" alt="">
             </div>
             <p class="pb-1">{{ $post->content }}</p>
         </article>
@@ -41,7 +42,7 @@
                         </div>
                         <div class="row">
                             <div class="btn-secondary-action col-4 text-center">
-                                <a href="#"
+                                <a
                                    class="cancelUpdate text-decoration-none"
                                    data-comment="{{ $comment->id }}">Annuler</a>
                             </div>
@@ -70,12 +71,12 @@
             </div>
             </div>
             @auth
-                <form action="{{ route('comments.store', $post) }}" method="POST" class="mt-3">
+                <form action="{{ route('comment.store', $post) }}" method="POST" class="mt-3">
                     @csrf
                     <div class="form-group">
                         <label for="content" class="mb-1">Commentaire(s) ({{ $post->comment_count }})</label>
                         <textarea name="content"
-                                  class="mb-2 form-control @error('content') is-invalid @enderror" id="post"
+                                  class="mb-2 form-control @error('content') is-invalid @enderror" id="textarea"
                                   rows="5">
                         </textarea>
                         @error('content')
@@ -84,16 +85,8 @@
                         </div>
                         @enderror
                     </div>
-                    <form action="{{ route('comment.destroy', $comment) }}" method="POST">
-                        @csrf
-                        @method('DELETE')
-                        <button class="btn-secondary-action col-4" type="submit">
-                            Supprimer
-                        </button>
-                        <button class="btn-primary-action col-4" type="button"
-                                data-comment="{{ $comment->id }}">
-                            Commenter
-                        </button>
+                        <button class="btn-secondary-action col-4" type="reset">Annuler</button>
+                        <button class="btn-primary-action col-4" type="submit">Commenter</button>
                     </form>
                 </form>
             @else

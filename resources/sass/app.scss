@@ -30,21 +30,27 @@ body {
         font-family: $font-family-cursive;
         color: $primary;
         font-size: $font-size-lg;
+        @media (min-width: 576px) {
+            font-size: $font-size-base*2.5;
+        }
     }
 }
 
 .section-blog {
     padding: 25px 0 16px 0;
-    span {
-        font-size: $font-size-blog-span;
-    }
     .bg-badge {
         font-size: $font-size-blog-span;
         background-color: transparent;
         border: 1px solid orange;
+        @media (min-width: 576px) {
+            font-size: $font-size-base;
+        }
     }
     .created-at {
         font-size: $font-size-sm;
+        @media (min-width: 576px) {
+            font-size: $font-size-base;
+        }
     }
     h2 {
         font-size: $font-size-blog-title;
@@ -56,6 +62,15 @@ body {
     }
     p {
         font-weight: 300;
+        @media (min-width: 576px) {
+            font-size: $font-size-base*1.15;
+        }
+    }
+    a {
+        font-size: $font-size-base;
+        @media (min-width: 576px) {
+            font-size: $font-size-base*1.15;
+        }
     }
 }
     footer {
@@ -92,6 +107,10 @@ body {
             color: $dark 50;
         }
     }
+
+.cancelUpdate {
+    cursor: pointer;
+}
 
 
 
