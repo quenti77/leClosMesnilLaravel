@@ -12,7 +12,7 @@ use App\Http\Controllers\ContactController;
 
 Route::get('/', [HomeController::class, 'index'])->name('Home');
 
-Route::get('/post', [PostController::class, 'getPost'])->name('Post');
+Route::get('/post', [PostController::class, 'index'])->name('Post');
 Route::get('/post/{slug}', [PostController::class, 'showPost'])->where('slug', '[\w\d\-\_]+')->name('RouteShowPost');
 
 Route::post('/comments/{post}', [CommentController::class, 'store'])->name('comment.store');

@@ -6,11 +6,11 @@
                 <div class="row align-items-baseline mb-1">
                     <div class="col-4"><span class="badge bg-badge text-dark">{{ $post->category->name }}</span>
                     </div>
-                    <span class="created-at col-8 fst-italic fw-bold text-end">{{ $post->created_at }}</span>
+                    <span class="created-at col-8 fst-italic fw-bold text-end">{{ $post->created_at->format('d-m-Y') }}</span>
                 </div>
                 <h2 class="pb-1 m-0">{{ $post->title }}</h2>
-                <div class="h-20">
-                <img src="https://images.unsplash.com/photo-1606787620819-8bdf0c44c293?ixid=MnwxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1050&q=80" class="w-100 h-auto pb-2" alt="">
+                <div class="image-container row mb-2">
+                <img src="https://images.pexels.com/photos/3965534/pexels-photo-3965534.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940" class="img-fluid" alt="">
             </div>
             <p class="pb-1">{{ $post->content }}</p>
         </article>
@@ -20,7 +20,7 @@
                     <div class="row align-items-baseline mb-1">
                         <div class="col-4"><span class="text-dark fw-bolder">{{ $comment->user->name }}</span>
                         </div>
-                        <span class="created-at col-8 fst-italic fw-bold text-end">{{ $comment->created_at }}</span>
+                        <span class="created-at col-8 fst-italic fw-bold text-end">{{ $comment->created_at->format('d-m-Y') }}</span>
                     </div>
                 </div>
                 <p class="contentInitial">{{ $comment->content }}</p>
@@ -40,28 +40,30 @@
                             </div>
                             @enderror
                         </div>
-                        <div class="row">
-                            <div class="btn-secondary-action col-4 text-center">
+                        <div class="row justify-content-end">
+                            <div class="btn-secondary-action col-4 col-lg-2 text-center">
                                 <a
                                    class="cancelUpdate text-decoration-none"
                                    data-comment="{{ $comment->id }}">Annuler</a>
                             </div>
-                            <button type="submit" class="btn-primary-action col-4">Editer</button>
+                            <button type="submit" class="btn-primary-action col-4 col-lg-2">Editer</button>
                         </div>
                     </form>
                 @endif
                 @if (auth()->user() && auth()->user()->id === $comment->author)
-                    <div class="col-sm-6 action">
+                    <div class="col-12 action">
                         <form action="{{ route('comment.destroy', $comment) }}" method="POST">
+                            <div class="row justify-content-end me-0">
                             @csrf
                             @method('DELETE')
-                            <button class="btn-secondary-action col-4" type="submit">
+                            <button class="btn-secondary-action col-4 col-lg-2" type="submit">
                                 Supprimer
                             </button>
-                            <button class="comment btn-primary-action col-4 update" type="button"
+                            <button class="comment btn-primary-action col-4 col-lg-2 update" type="button"
                                     data-comment="{{ $comment->id }}">
                                 Editer
                             </button>
+                            </div>
                         </form>
                     </div>
                 @endif
@@ -85,8 +87,10 @@
                         </div>
                         @enderror
                     </div>
-                        <button class="btn-secondary-action col-4" type="reset">Annuler</button>
-                        <button class="btn-primary-action col-4" type="submit">Commenter</button>
+                    <div class="row justify-content-end me-0">
+                        <button class="btn-secondary-action col-4 col-lg-2" type="reset">Annuler</button>
+                        <button class="btn-primary-action col-4 col-lg-2" type="submit">Commenter</button>
+                    </div>
                     </form>
                 </form>
             @else
