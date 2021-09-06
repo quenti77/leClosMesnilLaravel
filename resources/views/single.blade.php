@@ -10,7 +10,10 @@
                 </div>
                 <h2 class="pb-1 m-0">{{ $post->title }}</h2>
                 <div class="image-container row mb-2">
-                <img src="https://images.pexels.com/photos/3965534/pexels-photo-3965534.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940" class="img-fluid" alt="">
+                    <img class="img-fluid"
+                         src="https://images.pexels.com/photos/3965534/pexels-photo-3965534.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+                         alt="">
+                </div>
             </div>
             <p class="pb-1">{{ $post->content }}</p>
         </article>
