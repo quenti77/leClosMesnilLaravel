@@ -13,6 +13,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Contracts\View\Factory;
 use App\Http\Requests\PostStoreFormRequest;
+use Illuminate\Support\Facades\Storage;
 
 class PostController extends Controller
 {
@@ -53,6 +54,13 @@ class PostController extends Controller
     {
         $post = $this->storePost($request->all());
 
+        $file = $request->file('image_path');
+        $filename = Str::uuid() . '.' . $file->extension();
+        $file->storeAs('img', $filename ,'public');
+
+        $post->image_path = $filename;
+        $post->save();
+
         return redirect()
             ->route('admin.post.show', $post->id)
             ->with(['success' => 'Création de l\'article']);
@@ -61,6 +69,18 @@ class PostController extends Controller
     public function update(PostStoreFormRequest $request, Post $post): Redirector|RedirectResponse
     {
         $this->storePost($request->all(), $post);
+
+        $filepath = storage_path('app/public/img/' . $post->image_path);
+        if (file_exists($filepath)) {
+            unlink($filepath);
+        }
+
+        $file = $request->file('image_path');
+        $filename = Str::uuid() . '.' . $file->extension();
+        $file->storeAs('img', $filename ,'public');
+
+        $post->image_path = $filename;
+        $post->save();
 
         return redirect()
             ->route('admin.post.show', $post->id)
@@ -74,7 +94,6 @@ class PostController extends Controller
         $post->content = $postData['content'];
         $post->slug = Str::slug($post->title);
         $post->category_id = $postData['category_id'];
-        $post->image_path = $postData['image_path'];
         $post->user_id = (string) Auth::id();
         $post->save();
 

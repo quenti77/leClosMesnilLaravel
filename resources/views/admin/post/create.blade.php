@@ -9,7 +9,7 @@
                     {{ __('Article') }}
                 </div>
                 <div class="card-body">
-                    <form method="POST" action="{{ route('admin.post.store') }} ">
+                    <form method="POST" action="{{ route('admin.post.store') }}" enctype="multipart/form-data">
                         @csrf
                         <div class="form-group row my-5">
                             <label for="title" class="col-md-4 col-form-label text-md-right">{{ __('Titre') }}</label>
@@ -37,19 +37,19 @@
                         <div class="form-group row my-5">
                             <label for="category_id" class="col-md-4 col-form-label text-md-right">{{ __('Catégorie') }}</label>
                             <div class="col-md-6">
-                                <select class="form-control" name="category_id">
-                                    <option>Select Item</option>
+                                <select class="form-control @error('content') is-invalid @enderror" name="category_id">
+                                    <option disabled selected>Please select...</option>
                                     @foreach ($categories as $category)
                                         <option value="{{ $category->id }}">
                                             {{ $category->name }}
                                         </option>
                                     @endforeach
                                 </select>
-                                    @error('category_id')
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                    @enderror
+                                @error('category_id')
+                                <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
                             </div>
                         </div>
                         <div class="form-group row my-5">
