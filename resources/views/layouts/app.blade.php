@@ -17,6 +17,7 @@
     <script type="text/javascript">
         tinymce.init({
             selector: '#content',
+            height: '800px',
             plugins: [
                 'advlist autolink link image lists charmap print preview hr anchor pagebreak',
                 'searchreplace wordcount visualblocks visualchars code fullscreen insertdatetime media nonbreaking',
@@ -47,8 +48,8 @@
                     aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav">
+            <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
+                <ul class="navbar-nav ml-1">
                     <li class="nav-item">
                         <a class="nav-link" href="/post">Blog</a>
                     </li>
@@ -56,13 +57,17 @@
                 <ul class="navbar-nav">
                     @guest
                         @if (Route::has('login'))
-                            <li class="nav-item">
-                                <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
+                            <li class="me-0 mt-2 col-6">
+                                <a type="button"
+                                   class="btn-secondary-action col-12"
+                                   href="{{ route('login') }}">{{ __('Se connecter') }}</a>
                             </li>
                         @endif
                         @if (Route::has('register'))
-                            <li class="nav-item">
-                                <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
+                            <li class="me-0 mt-2 col-8">
+                                <a type="button"
+                                   class="btn-primary-action editLink text-decoration-none text-center col-10"
+                                   href="{{ route('register') }}">S'enregistrer</a>
                             </li>
                         @endif
                     @else
@@ -74,10 +79,12 @@
                             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
                                 <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
-                                    {{ __('Logout') }}
+                                    {{ __('Déconnection') }}
                                 </a>
+                                @if(auth()->user()->is_admin == 1)
                                 <a class="dropdown-item" href="{{ route('admin.post.index') }}">Liste des posts</a>
                                 <a class="dropdown-item" href="{{ route('admin.post.create') }}">creation posts</a>
+                                @endif
                                 <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
                                     @csrf
                                 </form>
@@ -98,7 +105,6 @@
         <div class="row">
             <div class="col-lg-6 col-md-12 mb-4 mb-md-0">
                 <h5 class="text-uppercase">Footer Content</h5>
-
                 <p>
                     Lorem ipsum dolor sit amet consectetur, adipisicing elit. Iste atque ea quis
                     molestias. Fugiat pariatur maxime quis culpa corporis vitae repudiandae aliquam

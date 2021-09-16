@@ -11,42 +11,14 @@
                     <div class="card-body">
                         <form method="POST" action="{{ route('admin.post.store') }}" enctype="multipart/form-data">
                             @csrf
-                            <div class="form-group row my-5">
-                                <label for="title"
-                                       class="col-md-4 col-form-label text-md-right">{{ __('Titre') }}</label>
-                                <div class="col-md-6">
-                                    <input id="title" type="text"
-                                           class="form-control @error('title') is-invalid @enderror" name="title"
-                                           value="{{ old('title') }}" autofocus>
-                                    @error('title')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                    @enderror
-                                </div>
+                            <div class="row mb-4 me-0">
+                                <span class="text-danger">*Tous les champs sont obligatoires</span>
                             </div>
-                            <div class="form-group row my-5">
-                                <label for="content"
-                                       class="col-md-4 col-form-label text-md-right">{{ __('Contenu') }}</label>
-                                <div class="col-md-6">
-                                <textarea id="content" type="textarea"
-                                          class="form-control @error('content') is-invalid @enderror" name="content"
-                                          autofocus>
-                                </textarea>
-                                    @error('content')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                    @enderror
-                                </div>
-                            </div>
-                            <div class="form-group row my-5">
-                                <label for="category_id"
-                                       class="col-md-4 col-form-label text-md-right">{{ __('Catégorie') }}</label>
-                                <div class="col-md-6">
+                            <div class="form-group row mb-4">
+                                <div class="col-md-12">
                                     <select class="form-control @error('content') is-invalid @enderror"
                                             name="category_id">
-                                        <option disabled selected>Please select...</option>
+                                        <option disabled selected>Choisissez la catégorie...</option>
                                         @foreach ($categories as $category)
                                             <option value="{{ $category->id }}">
                                                 {{ $category->name }}
@@ -60,26 +32,49 @@
                                     @enderror
                                 </div>
                             </div>
-                            <div class="form-group row my-5">
-                                <label for="image_path"
-                                       class="col-md-4 col-form-label text-md-right">{{ __('Image') }}</label>
-                                <div class="col-md-6">
+                            <div class="form-group row my-4">
+                                <div class="col-md-12">
+                                    <label class="mb-1">Image de présentation:</label>
                                     <input id="image_path" type="file"
                                            class="form-control @error('image_path') is-invalid @enderror"
-                                           name="image_path" value="{{ old('image_path') }}" autofocus>
+                                           name="image_path"
+                                           value="{{ old('image_path') }}" autofocus>
                                     @error('image_path')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
                                     @enderror
                                 </div>
-                                <div class="form-group row my-5 mb-0">
-                                    <div class="col-md-6 offset-md-9">
-                                        <button type="submit" class="btn btn-success">
-                                            {{ __('Submit') }}
-                                        </button>
-                                    </div>
+                            </div>
+                            <div class="form-group row my-4">
+                                <div class="col-md-12">
+                                    <input id="title" type="text"
+                                           class="form-control @error('title') is-invalid @enderror" name="title"
+                                           placeholder="Titre de l'article"
+                                           value="{{ old('title') }}" autofocus>
+                                    @error('title')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                    @enderror
                                 </div>
+                            </div>
+                            <div class="form-group row my-4">
+                                <div class="col-md-12">
+                                <textarea id="content" type="textarea"
+                                          class="form-control @error('content') is-invalid @enderror" name="content"
+                                          autofocus>
+                                </textarea>
+                                    @error('content')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                    @enderror
+                                </div>
+                            </div>
+                            <div class="row justify-content-end my-4 me-0">
+                                <button class="btn-secondary-action col-4 col-lg-2" type="reset">Annuler</button>
+                                <button class="btn-primary-action col-4 col-lg-2" type="submit">Poster</button>
                             </div>
                         </form>
                     </div>

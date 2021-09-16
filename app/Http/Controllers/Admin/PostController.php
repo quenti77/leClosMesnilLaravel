@@ -24,10 +24,7 @@ class PostController extends Controller
 
     public function index(Request $request): View|Factory
     {
-        $p = (int) $request->get('p', 1);
-
-        $posts = Post::query()->orderByDesc('created_at')
-            ->paginate(10, ['*'], 'page', $p);
+        $posts = Post::OrderByDesc('created_at')->paginate(30);
 
         return view('admin.post.index', compact('posts'));
     }

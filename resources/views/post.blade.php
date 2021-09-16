@@ -22,6 +22,9 @@
                     </div>
                 </article>
             @endforeach
+            <div class="row justify-content-center my-1 mr-0">
+                <div class="col-4">{!! $posts->links() !!}</div>
+            </div>
         </div>
     </section>
 @endsection
