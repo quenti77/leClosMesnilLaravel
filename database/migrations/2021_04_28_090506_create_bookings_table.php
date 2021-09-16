@@ -18,7 +18,6 @@ class CreateBookingsTable extends Migration
             $table->uuid('user_id');
             $table->date('started_at');
             $table->date('finished_at');
-            $table->integer('nb_night');
             $table->integer('nb_adult');
             $table->integer('nb_children');
             $table->dateTime('payment_at')->nullable();

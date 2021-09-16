@@ -11,7 +11,7 @@ class PostController extends Controller
 {
     public function index(): View|Factory
     {
-        $posts = Post::OrderBy('created_at')->paginate(10);
+        $posts = Post::OrderByDesc('created_at')->paginate(10);
 
         return view('post', compact('posts'));
     }

@@ -68,12 +68,13 @@ class PostController extends Controller
 
     public function update(PostStoreFormRequest $request, Post $post): Redirector|RedirectResponse
     {
-        $this->storePost($request->all(), $post);
-
         $filepath = storage_path('app/public/img/' . $post->image_path);
         if (file_exists($filepath)) {
             unlink($filepath);
         }
+
+        $this->storePost($request->all(), $post);
+
 
         $file = $request->file('image_path');
         $filename = Str::uuid() . '.' . $file->extension();
@@ -95,6 +96,7 @@ class PostController extends Controller
         $post->slug = Str::slug($post->title);
         $post->category_id = $postData['category_id'];
         $post->user_id = (string) Auth::id();
+        $post->image_path = $postData['image_path'];
         $post->save();
 
         return $post;
@@ -103,6 +105,8 @@ class PostController extends Controller
     public function destroy(Post $post): RedirectResponse
     {
         $post->delete();
+        $filepath = storage_path('app/public/img/' . $post->image_path);
+        unlink($filepath);
         return redirect()
             ->route('admin.post.index')
             ->with(['success' => 'L\'article est bien supprimé']);

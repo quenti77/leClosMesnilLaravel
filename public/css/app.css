@@ -17494,10 +17494,14 @@ body {
 }
 .section-blog p {
   font-weight: 300;
+  overflow: hidden;
+  max-width: 75ch;
+  display: none;
 }
 @media (min-width: 576px) {
   .section-blog p {
     font-size: 1.15rem;
+    display: block;
   }
 }
 .section-blog a {
@@ -17546,4 +17550,8 @@ footer .nav {
 
 .cancelUpdate {
   cursor: pointer;
+}
+
+.editLink:hover {
+  color: #fff;
 }

@@ -1,10 +1,10 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container mb-4">
+<div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
-            <div class="card">
+            <div class="card my-4">
                 <div class="card-header"><h1 class="fw-bold">{{ __('Créer un compte') }}</h1></div>
                 <div class="card-body">
                     <form method="POST" action="{{ route('register') }}" autocomplete="on">

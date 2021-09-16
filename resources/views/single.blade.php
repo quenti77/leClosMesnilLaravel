@@ -10,12 +10,10 @@
                 </div>
                 <h2 class="pb-1 m-0">{{ $post->title }}</h2>
                 <div class="image-container row mb-2">
-                    <img class="img-fluid"
-                         src="https://images.pexels.com/photos/3965534/pexels-photo-3965534.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
-                         alt="">
+                    <img src="{{ asset('storage/img/'.$post->image_path) }}" class="w-100 h-auto pb-1" alt="">
                 </div>
             </div>
-            <p class="pb-1">{{ $post->content }}</p>
+            <p class="pb-1">{!! nl2br($post->content) !!}</p>
         </article>
         @foreach ($comments as $comment)
             <div class="comment row" data-comment="{{ $comment->id }}">

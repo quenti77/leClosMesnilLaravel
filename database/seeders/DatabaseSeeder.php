@@ -17,7 +17,6 @@ class DatabaseSeeder extends Seeder
             CategorySeeder::class,
             UserSeeder::class,
             PostSeeder::class,
-            CommentPostSeeder::class,
             BookingSeeder::class,
             SeasonsSeeder::class
         ]);

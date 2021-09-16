@@ -62,8 +62,12 @@ body {
     }
     p {
         font-weight: 300;
+        overflow: hidden;
+        max-width: 75ch;
+        display: none;
         @media (min-width: 576px) {
             font-size: $font-size-base*1.15;
+            display: block;
         }
     }
     a {
@@ -112,6 +116,9 @@ body {
     cursor: pointer;
 }
 
+.editLink:hover{
+    color: $white;
+}
 
 
 
