@@ -13,7 +13,6 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Contracts\View\Factory;
 use App\Http\Requests\PostStoreFormRequest;
-use Illuminate\Support\Facades\Storage;
 
 class PostController extends Controller
 {

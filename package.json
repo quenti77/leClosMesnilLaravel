@@ -27,6 +27,7 @@
         "@fortawesome/fontawesome-free": "^5.15.4",
         "ajax": "^0.0.4",
         "jquery": "^3.6.0",
+        "npm-check-updates": "^11.8.5",
         "tinymce": "^5.8.1",
         "vue": "^2.6.14"
     }

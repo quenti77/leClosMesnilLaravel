@@ -13,7 +13,7 @@
                     <img src="{{ asset('storage/img/'.$post->image_path) }}" class="w-100 h-auto pb-1" alt="">
                 </div>
             </div>
-            <p class="pb-1">{!! nl2br($post->content) !!}</p>
+            <p id="visible" class="pb-1">{!! nl2br($post->content) !!}</p>
         </article>
         @foreach ($comments as $comment)
             <div class="comment row" data-comment="{{ $comment->id }}">

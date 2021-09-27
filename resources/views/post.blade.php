@@ -16,14 +16,14 @@
                         <h2 class="pb-1 m-0">{{ $post->title }}</h2>
                         <img src="{{ asset('storage/img/'.$post->image_path) }}" class="w-100 h-auto pb-1" alt="">
                     </div>
-                    <p class="">{!! mb_substr(nl2br($post->content),0, 500) !!} . . .</p>
+                    <p>{!! mb_substr(nl2br($post->content),0, 500) !!} . . .</p>
                     <div class="text-center">
                         <a href="{{ url('post/' . $post->slug) }}" class="">Voir l'article</a>
                     </div>
                 </article>
             @endforeach
             <div class="row justify-content-center my-1 mr-0">
-                <div class="col-4">{!! $posts->links() !!}</div>
+                <div class="col-lg-4">{!! $posts->links() !!}</div>
             </div>
         </div>
     </section>
