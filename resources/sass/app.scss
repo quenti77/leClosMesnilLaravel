@@ -34,6 +34,13 @@ body {
             font-size: $font-size-base*2.5;
         }
     }
+    .nav-link {
+        font-size: $font-size-base;
+        font-weight: bold;
+        @media (min-width: 576px) {
+            font-size: $font-size-base*1.125;
+        }
+    }
 }
 
 .section-blog {

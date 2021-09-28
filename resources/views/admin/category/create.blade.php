@@ -17,7 +17,7 @@
                             <div class="form-group row my-4">
                                 <div class="col-md-12">
                                     <input id="name" type="text"
-                                           class="form-control @error('name') is-invalid @enderror" name="title"
+                                           class="form-control @error('name') is-invalid @enderror" name="name"
                                            placeholder="Nom de la catégorie"
                                            value="{{ old('name') }}" autofocus>
                                     @error('name')

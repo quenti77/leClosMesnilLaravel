@@ -60,14 +60,14 @@
                             <li class="me-0 mt-2 col-6">
                                 <a type="button"
                                    class="btn-secondary-action col-12"
-                                   href="{{ route('login') }}">{{ __('Se connecter') }}</a>
+                                   href="{{ route('login') }}">Se connecter</a>
                             </li>
                         @endif
                         @if (Route::has('register'))
                             <li class="me-0 mt-2 col-8">
                                 <a type="button"
                                    class="btn-primary-action editLink text-decoration-none text-center col-10"
-                                   href="{{ route('register') }}">S'enregistrer</a>
+                                   href="{{ route('register') }}">Nous rejoindre!</a>
                             </li>
                         @endif
                     @else
@@ -83,8 +83,9 @@
                                 </a>
                                 @if(auth()->user()->is_admin == 1)
                                 <a class="dropdown-item" href="{{ route('admin.post.index') }}">Liste des posts</a>
-                                <a class="dropdown-item" href="{{ route('admin.post.create') }}">creation posts</a>
-                                    <a class="dropdown-item" href="{{ route('admin.category.create') }}">creation d'une catégorie</a>
+                                <a class="dropdown-item" href="{{ route('admin.post.create') }}">Ecrire un article </a>
+                                    <a class="dropdown-item" href="{{ route('admin.category.index') }}">Liste des catégories</a>
+                                    <a class="dropdown-item" href="{{ route('admin.category.create') }}">Créer une catégorie</a>
                                 @endif
                                 <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
                                     @csrf

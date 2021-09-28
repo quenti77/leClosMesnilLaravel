@@ -20,8 +20,8 @@
                             <td>{{ $post->id }}</td>
                             <td>{{ $post->category->name }}</td>
                             <td>{{ $post->title }}</td>
-                            <td>{{ $post->created_at }}</td>
-                            <td>{{ $post->updated_at }}</td>
+                            <td>{{ $post->created_at->format('d-m-Y H:m:s') }}</td>
+                            <td>{{ $post->updated_at->format('d-m-Y H:m:s') }}</td>
                             <td>
                                 <a href="{{ route('admin.post.show', $post->id) }}" class="btn btn-outline-primary">View</a>
                             </td>
