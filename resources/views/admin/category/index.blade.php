@@ -3,7 +3,7 @@
 
 @section('content')
     @foreach($categories as $category)
-        <div class="container">
+        <div class="container py-4">
             <h2>{{ $category->name }}:</h2>
             <div class="row">
                 <div class="col-12">
@@ -18,8 +18,12 @@
                             @if($category->id === $post->category_id)
                                 <tr>
                                     <td>{{ $post->title }}</td>
-                                    <td>{{ $post->created_at->format('d-m-Y H:m:s') }}</td>
-                                    <td>{{ $post->update_at->format('d-m-Y H:m:s') }}</td>
+                                    <td>{{ $post->created_at->format("d-m-Y H:m:s") }}</td>
+                                    @if($post->update_at)
+                                    <td>{{ $post->update_at->format("d-m-Y H:m:s") }}</td>
+                                    @else
+                                        <td>Aucune mise à jour</td>
+                                    @endif
                                     <td><a href="{{ route('admin.post.show', $post->id) }}" class="btn btn-outline-primary">View</a></td>
                                 </tr>
                             @endif

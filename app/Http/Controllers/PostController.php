@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
 use App\Models\Post;
 use App\Models\CommentPost;
 use Illuminate\Contracts\View\Factory;
@@ -12,8 +13,9 @@ class PostController extends Controller
     public function index(): View|Factory
     {
         $posts = Post::OrderByDesc('created_at')->paginate(35);
+        $categories = Category::all();
 
-        return view('post', compact('posts'));
+        return view('post', compact('posts','categories'));
     }
 
     public function getComment(): View|Factory
@@ -22,7 +24,7 @@ class PostController extends Controller
         return view('post', compact('comments'));
     }
 
-    public function showPost(string $slug, Post $post): View|Factory
+    public function show(string $slug, Post $post): View|Factory
     {
         $post = Post::with('comments.user')->where('slug', $slug)->first();
         $comments = $post->comments;
