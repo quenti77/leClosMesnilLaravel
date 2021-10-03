@@ -17451,6 +17451,10 @@ readers do not read off random characters that represent icons */
 body {
   background-color: #FFFFF4;
   color: #2F3640;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100vh;
 }
 
 .navbar .navbar-brand {

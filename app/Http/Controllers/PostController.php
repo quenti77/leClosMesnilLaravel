@@ -13,9 +13,10 @@ class PostController extends Controller
     public function index(): View|Factory
     {
         $posts = Post::OrderByDesc('created_at')->paginate(35);
+        $lastPosts = Post::OrderByDesc('created_at')->limit(5)->get();
         $categories = Category::all();
 
-        return view('post', compact('posts','categories'));
+        return view('post', compact('posts','categories','lastPosts'));
     }
 
     public function getComment(): View|Factory
@@ -24,7 +25,7 @@ class PostController extends Controller
         return view('post', compact('comments'));
     }
 
-    public function show(string $slug, Post $post): View|Factory
+    public function show(string $slug): View|Factory
     {
         $post = Post::with('comments.user')->where('slug', $slug)->first();
         $comments = $post->comments;

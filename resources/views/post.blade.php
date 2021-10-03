@@ -7,7 +7,7 @@
                     @isset($category)
                         <h2>{{ $category->name }}</h2>
                     @endisset
-                    @foreach($posts as $post)
+                    @forelse($posts as $post)
                         <article class="mb-3 col-12 col-md-6 col-xl-4">
                             <div class="article-header">
                                 <div class="row align-items-baseline mb-1">
@@ -24,10 +24,13 @@
                             </div>
                             <p>{!! mb_substr(nl2br($post->content),0, 500) !!} . . .</p>
                             <div class="text-center">
-                                <a href="{{ url('post/' . $post->slug) }}" class="">Voir l'article</a>
+                                <a href="{{ route("post.show", [$post->slug]) }}" class="">Voir l'article</a>
                             </div>
                         </article>
-                    @endforeach
+                        @empty
+                        <p>Aucun article</p>
+                    @endforelse
+
                     <div class="row justify-content-center my-1 mr-0">
                         <div class="col-lg-4">{!! $posts->links() !!}</div>
                     </div>
@@ -35,12 +38,33 @@
             </div>
             <aside class="col-sm-2 d-none d-sm-block">
                 <div>
-                    @isset($category)
-                        <a href="{{ route("post.index") }}">Tous les posts</a>
-                    @endisset
-                    @foreach ($categories as $c)
-                        <a href="{{ route('category.show', [$c->slug]) }}">{{ $c->name }}</a>
-                    @endforeach
+                    <h3>Articles récents</h3>
+                    <ul class="navbar-nav">
+                        @forelse($lastPosts as $p)
+                            <li class="nav-item">
+                                <a class="nav-link"
+                                   href="{{ route("post.show", [$p->slug]) }}">
+                                    {{ $p->title }}
+                                </a>
+                            </li>
+                            @empty
+                            <p>Aucun article publié récemment</p>
+                        @endforelse
+                    </ul>
+                    <h3>Catégories</h3>
+                    <ul class="navbar-nav">
+                        @isset($category)
+                            <li class="nav-item"><a class="nav-link" href="{{ route("post.index") }}">Tous les posts</a>
+                            </li>
+                        @endisset
+                        @forelse ($categories as $c)
+                            <li class="nav-item"><a class="nav-link"
+                                                    href="{{ route('category.show', [$c->slug]) }}">{{ $c->name }}</a>
+                            </li>
+                            @empty
+                            Aucune catégorie
+                        @endforelse
+                    </ul>
                 </div>
             </aside>
         </div>

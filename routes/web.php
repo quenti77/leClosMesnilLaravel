@@ -14,7 +14,7 @@ use App\Http\Controllers\ContactController;
 Route::get('/', [HomeController::class, 'index'])->name('index');
 
 Route::get('/post', [PostController::class, 'index'])->name('post.index');
-Route::get('/post/{slug}', [PostController::class, 'show'])->where('slug', '[\w\d\-\_]+')->name('RouteShowPost');
+Route::get('/post/{slug}', [PostController::class, 'show'])->where('slug', '[\w\d\-\_]+')->name('post.show');
 
 Route::post('/comments/{post}', [CommentController::class, 'store'])->name('comment.store');
 Route::patch('/comments/{comment}', [CommentController::class, 'update'])->name('comment.update');

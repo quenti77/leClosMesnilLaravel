@@ -80,8 +80,7 @@
                         <label for="content" class="mb-1">Commentaire(s) ({{ $post->comment_count }})</label>
                         <textarea name="content"
                                   class="mb-2 form-control @error('content') is-invalid @enderror" id="textarea"
-                                  rows="5">
-                        </textarea>
+                                  rows="5"></textarea>
                         @error('content')
                         <div class="invalid-feedback">
                             {{ $errors->first('content') }}
