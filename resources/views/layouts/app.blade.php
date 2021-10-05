@@ -49,11 +49,6 @@
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
-                <ul class="navbar-nav ml-1">
-                    <li class="nav-item">
-                        <a class="nav-link" href="/post">Blog</a>
-                    </li>
-                </ul>
                 <ul class="navbar-nav">
                     @guest
                         @if (Route::has('login'))
@@ -84,8 +79,10 @@
                                 @if(auth()->user()->is_admin == 1)
                                 <a class="dropdown-item" href="{{ route('admin.post.index') }}">Liste des posts</a>
                                 <a class="dropdown-item" href="{{ route('admin.post.create') }}">Ecrire un article </a>
-                                    <a class="dropdown-item" href="{{ route('admin.category.index') }}">Liste des catégories</a>
-                                    <a class="dropdown-item" href="{{ route('admin.category.create') }}">Créer une catégorie</a>
+                                    <a class="dropdown-item"
+                                       href="{{ route('admin.category.index') }}">Liste des catégories</a>
+                                    <a class="dropdown-item"
+                                       href="{{ route('admin.category.create') }}">Créer une catégorie</a>
                                 @endif
                                 <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
                                     @csrf
@@ -98,11 +95,9 @@
         </div>
     </nav>
 </header>
-<main>
-    <div class="container">
+<main class="container">
         @include('partials.flashMessage')
         @yield('content')
-    </div>
 </main>
 <footer class="mt-auto bg-primary text-white text-center text-lg-start">
     <div class="container p-4">

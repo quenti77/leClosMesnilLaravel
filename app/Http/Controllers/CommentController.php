@@ -29,7 +29,7 @@ class CommentController extends Controller
         $p->comment_count += 1;
         $p->save();
 
-        return redirect()->route('RouteShowPost', $p->slug);
+        return redirect()->route('post.show', $p->slug);
     }
 
     public function update(int $id, Request $request): \Illuminate\Http\RedirectResponse

@@ -91,7 +91,6 @@
                         <button class="btn-secondary-action col-4 col-lg-2" type="reset">Annuler</button>
                         <button class="btn-primary-action col-4 col-lg-2" type="submit">Commenter</button>
                     </div>
-                    </form>
                 </form>
             @else
                 <div class="alert alert-info">

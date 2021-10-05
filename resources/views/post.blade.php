@@ -22,18 +22,35 @@
                                 <img src="{{ asset('storage/img/'.$post->image_path) }}" class="w-100 h-auto pb-1"
                                      alt="">
                             </div>
-                            <p>{!! mb_substr(nl2br($post->content),0, 500) !!} . . .</p>
+                            <p>{!! mb_substr(nl2br($post->content),0, 300) !!} . . .</p>
                             <div class="text-center">
                                 <a href="{{ route("post.show", [$post->slug]) }}" class="">Voir l'article</a>
                             </div>
                         </article>
-                        @empty
+                    @empty
                         <p>Aucun article</p>
                     @endforelse
-
-                    <div class="row justify-content-center my-1 mr-0">
-                        <div class="col-lg-4">{!! $posts->links() !!}</div>
-                    </div>
+                    <nav aria-label="Page navigation example">
+                        <ul class="pagination">
+                            <li class="page-item {{ 1 === $posts->currentPage() ? 'disable' : '' }}">
+                                <a class="page-link" href="{{ url("/") }}?page={{ $posts->currentPage() - 1 }}" aria-label="Previous">
+                                    <span aria-hidden="true">&laquo;</span>
+                                </a>
+                            </li>
+                            @for($i = 1; $i<=$posts->lastPage(); $i++)
+                                <li class="page-item {{ $i === $posts->currentPage() ? 'active' : '' }}">
+                                    <a class="page-link" aria-current="page" href="{{ url("/") }}?page={{ $i }}">
+                                        {{ $i }}
+                                    </a>
+                                </li>
+                            @endfor
+                            <li class="page-item {{ $posts->lastPage() === $posts->currentPage() ? 'disable' : '' }}">
+                                <a class="page-link" href="{{ url("/") }}?page={{ $posts->currentPage() + 1 }}" aria-label="Next">
+                                    <span aria-hidden="true">&raquo;</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </nav>
                 </div>
             </div>
             <aside class="col-sm-2 d-none d-sm-block">
@@ -47,7 +64,7 @@
                                     {{ $p->title }}
                                 </a>
                             </li>
-                            @empty
+                        @empty
                             <p>Aucun article publié récemment</p>
                         @endforelse
                     </ul>
@@ -61,7 +78,7 @@
                             <li class="nav-item"><a class="nav-link"
                                                     href="{{ route('category.show', [$c->slug]) }}">{{ $c->name }}</a>
                             </li>
-                            @empty
+                        @empty
                             Aucune catégorie
                         @endforelse
                     </ul>

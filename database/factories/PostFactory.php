@@ -25,11 +25,13 @@ class PostFactory extends Factory
      */
     public function definition()
     {
-        $title = $this->faker->name;
+        $users = User::all("id");
+        $categories = Category::all("id");
+        $title = $this->faker->sentences(1, true);
         $slug = Str::slug($title);
         return [
-            'user_id' => User::factory(),
-            'category_id' => Category::factory(),
+            'user_id' => "ea3989fe-1f10-4a55-8b94-c4823daa91dc",
+            'category_id' => 2,
             'title' => $title,
             'slug' => $slug,
             'content' => $this->faker->sentences(30, true),

@@ -12,11 +12,12 @@ class PostController extends Controller
 {
     public function index(): View|Factory
     {
-        $posts = Post::OrderByDesc('created_at')->paginate(35);
+        $posts = Post::OrderByDesc('created_at')->paginate(12);
+        $resPagination = Post::OrderByDesc('created_at')->paginate(6);
         $lastPosts = Post::OrderByDesc('created_at')->limit(5)->get();
         $categories = Category::all();
 
-        return view('post', compact('posts','categories','lastPosts'));
+        return view('post', compact('posts','categories','lastPosts', 'resPagination'));
     }
 
     public function getComment(): View|Factory
