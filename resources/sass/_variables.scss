@@ -18,10 +18,12 @@ $dark: #2F3640;
 $warning: #FFA333;
 $primary: #327882;
 $secondary: #FFA333;
+$gray: #a4b0be;
 $navbar-light-color: rgba($primary, .55);
+
 
 // Margin/Padding
 $spacer: 2rem;
 
-//button
-
+//Progress bar
+$progress-bar-bg: $gray;

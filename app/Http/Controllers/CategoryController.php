@@ -14,7 +14,7 @@ class CategoryController extends Controller
     {
         $categories = Category::all();
         $category = Category::where('slug', '=', $slug)->first();
-        $posts = Post::OrderByDesc('created_at')->where('category_id', '=', $category->id)->paginate(35);
+        $posts = Post::OrderByDesc('created_at')->where('category_id', '=', $category->id)->paginate(12);
         $lastPosts = Post::OrderByDesc('created_at')->limit(5)->get();
         return view('post', compact('posts', 'categories', 'category','lastPosts'));
     }

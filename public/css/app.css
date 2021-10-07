@@ -5069,7 +5069,7 @@ textarea.form-control-lg {
   color: #fff;
   text-align: center;
   white-space: nowrap;
-  background-color: #327882;
+  background-color: #a4b0be;
   transition: width 0.6s ease;
 }
 @media (prefers-reduced-motion: reduce) {
@@ -17498,8 +17498,11 @@ body {
     font-size: 1rem;
   }
 }
+.section-blog p {
+  font-size: 1.15rem;
+}
 .section-blog h2, .section-blog .h2 {
-  font-size: 2rem;
+  font-size: 1.5rem;
   font-weight: bold;
 }
 .section-blog img {
@@ -17545,8 +17548,15 @@ footer .nav {
 .btn-action, .btn-secondary-action, .btn-primary-action {
   border-radius: 5px;
   border: 0;
-  padding: 8px 0 8px 0;
-  margin: 16px 0 34px 15px;
+  padding: 4px 0 4px 0;
+  margin: 8px 0 16px 8px;
+}
+@media (min-width: 576px) {
+  .btn-action, .btn-secondary-action, .btn-primary-action {
+    padding: 8px 0 8px 0;
+    margin: 16px 0 32px 16px;
+    background-color: red;
+  }
 }
 
 .btn-primary-action {
@@ -17568,4 +17578,43 @@ footer .nav {
 
 .editLink:hover {
   color: #fff;
+}
+
+aside .nav-link {
+  font-size: 0.875rem;
+  font-weight: bold;
+}
+
+#categoryNav .nav-link {
+  font-size: 1rem;
+  font-weight: bold;
+}
+@media (min-width: 576px) {
+  #categoryNav .nav-link {
+    font-size: 1.25rem;
+  }
+}
+
+.input-block {
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+.input-password {
+  position: relative;
+}
+
+.password-show-button {
+  position: absolute;
+  right: 10px;
+  top: 5px;
+  width: 32px;
+  height: 32px;
+  color: #7f8c8d;
+  cursor: pointer;
+}
+
+.password-info {
+  display: block;
+  padding: 10px 0 5px;
 }

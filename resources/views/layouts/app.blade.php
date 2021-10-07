@@ -34,6 +34,7 @@
         });
     </script>
     <script type="text/javascript" src="{{ asset('js/updateEditComment.js') }}" defer></script>
+    <script type="text/javascript" src="{{ asset('js/passwordChecker.js') }}" defer></script>
 </head>
 <body>
 <header class="container-fluid">
@@ -52,14 +53,14 @@
                 <ul class="navbar-nav">
                     @guest
                         @if (Route::has('login'))
-                            <li class="me-0 mt-2 col-6">
+                            <li class="me-0 mt-2 col-4 col-lg-6">
                                 <a type="button"
                                    class="btn-secondary-action col-12"
                                    href="{{ route('login') }}">Se connecter</a>
                             </li>
                         @endif
                         @if (Route::has('register'))
-                            <li class="me-0 mt-2 col-8">
+                            <li class="me-0 mt-2 col-6 col-lg-8">
                                 <a type="button"
                                    class="btn-primary-action editLink text-decoration-none text-center col-10"
                                    href="{{ route('register') }}">Nous rejoindre!</a>

@@ -30,7 +30,7 @@
                                 <label for="content"
                                        class="col-md-4 col-form-label text-md-right">{{ __('Contenu') }}</label>
                                 <div class="col-md-6">
-                                    <textarea id="content" type="textarea" class="form-control
+                                    <textarea id="content" class="form-control
                                                 @error('content') is-invalid @enderror" name="content"
                                               autofocus>{{ $posts->content }}</textarea>
                                     @error('content')

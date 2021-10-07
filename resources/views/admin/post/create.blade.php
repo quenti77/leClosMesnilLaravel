@@ -61,7 +61,7 @@
                             </div>
                             <div class="form-group row my-4">
                                 <div class="col-md-12">
-                                <textarea id="content" type="textarea"
+                                <textarea id="content"
                                           class="form-control @error('content') is-invalid @enderror" name="content"
                                           autofocus>
                                 </textarea>

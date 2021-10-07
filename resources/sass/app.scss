@@ -63,8 +63,11 @@ body {
             font-size: $font-size-base;
         }
     }
+    p{
+        font-size: $font-size-base*1.15;
+    }
     h2 {
-        font-size: $font-size-blog-title;
+        font-size: $font-size-base*1.5;
         font-weight: bold;
     }
     img {
@@ -106,8 +109,13 @@ body {
     .btn-action {
         border-radius: 5px;
         border: 0;
-        padding: 8px 0 8px 0;
-        margin: 16px 0 34px 15px;
+        padding: 4px 0 4px 0;
+        margin: 8px 0 16px 8px;
+        @media (min-width: 576px) {
+            padding: 8px 0 8px 0;
+            margin: 16px 0 32px 16px;
+            background-color: red;
+        }
     }
     .btn-primary-action {
         @extend .btn-action;
@@ -131,6 +139,48 @@ body {
     color: $white;
 }
 
+aside {
+    .nav-link {
+        font-size: $font-size-base*0.875;
+        font-weight: bold;
+    }
+}
+
+#categoryNav {
+    .nav-link {
+        font-size: $font-size-base;
+        font-weight: bold;
+        @media (min-width: 576px) {
+            font-size: $font-size-base*1.25;
+        }
+    }
+}
+
+    .input-block {
+        width: 100%;
+        margin-bottom: 20px;
+    }
+
+    .input-password {
+        position: relative;
+    }
+
+    .password-show-button {
+        position: absolute;
+        right: 10px;
+        top: 5px;
+        width: 32px;
+        height: 32px;
+        color: #7f8c8d;
+        cursor: pointer;
+    }
+
+
+
+    .password-info {
+        display: block;
+        padding: 10px 0 5px;
+    }
 
 
 
