@@ -1,6 +1,8 @@
 const password = document.getElementById("password");
-const hidden = document.querySelector(".fa-eye")
+const eye = document.querySelector(".fa-eye")
 const progress = document.querySelector(".progress-bar");
+const msg = document.querySelector(".msg");
+const validated = document.querySelector(".is-invalid .is-invalid")
 
 const parameters = {
     count : false,
@@ -13,14 +15,15 @@ const parameters = {
 function showHidePassword() {
     if (password.type === "password") {
         password.type = "text";
-        hidden.classList.remove("fa-eye")
-        hidden.classList.add("fa-eye-slash")
+        eye.classList.remove("fa-eye")
+        eye.classList.add("fa-eye-slash")
     } else {
         password.type = "password";
-        hidden.classList.remove("fa-eye-slash")
-        hidden.classList.add("fa-eye")
+        eye.classList.remove("fa-eye-slash")
+        eye.classList.add("fa-eye")
     }
 }
+eye.addEventListener("click",showHidePassword);
 
 function passwordCheck() {
     const val = password.value;
@@ -67,3 +70,4 @@ function passwordCheck() {
     console.log(scoring)
 }
 password.addEventListener("input",passwordCheck);
+

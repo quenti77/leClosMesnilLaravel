@@ -104,44 +104,45 @@
     <div class="container p-4">
         <div class="row">
             <div class="col-lg-6 col-md-12 mb-4 mb-md-0">
-                <h5 class="text-uppercase">Footer Content</h5>
+                <h5 class="text-uppercase">Le Clos Mesnil</h5>
                 <p>
-                    Lorem ipsum dolor sit amet consectetur, adipisicing elit. Iste atque ea quis
-                    molestias. Fugiat pariatur maxime quis culpa corporis vitae repudiandae aliquam
-                    voluptatem veniam, est atque cumque eum delectus sint!
+                    Fatigué du stresse de la ville, vous avez besoin d'un endroit calme et clos où vous relaxer,
+                    le Clos Mesnil est l'endroit idéal pour vous détendre, le calme de la campagne vous apaisera et
+                    vous pourrez profiter de la plage du Tréport pour faire une petite baignade ou vous baladez dans la
+                    forêt d'Eu pour respirer l'air frais et écouter le gazouillis des oiseaux. Mais ce n'est pas tout,
+                    l'hiver, vous pourrez trouver le réconfort et la chaleur de la cheminée mise à votre disposition
+                    pour un moment cocooning en famille. Le gîte se trouve à 2h de Paris.
                 </p>
             </div>
             <div class="col-lg-3 col-md-6 mb-4 mb-md-0">
-                <h5 class="text-uppercase">Links</h5>
-                <ul class="list-unstyled mb-0">
-                    <li>
-                        <a href="#" class="text-white">Link 1</a>
-                    </li>
-                    <li>
-                        <a href="#" class="text-white">Link 2</a>
-                    </li>
-                    <li>
-                        <a href="#" class="text-white">Link 3</a>
-                    </li>
-                    <li>
-                        <a href="#" class="text-white">Link 4</a>
-                    </li>
+                <h5 class="text-uppercase">catégories</h5>
+                <ul class="navbar-nav">
+                    @isset($category)
+                        <li class="nav-item"><a class="nav-link text-white" href="{{ route("post.index") }}">Tous les posts</a>
+                        </li>
+                    @endisset
+                    @forelse ($categories as $c)
+                        <li class="nav-item"><a class="nav-link text-white"
+                                                href="{{ route('category.show', [$c->slug]) }}">{{ $c->name }}</a>
+                        </li>
+                    @empty
+                        Aucune catégorie
+                    @endforelse
                 </ul>
             </div>
             <div class="col-lg-3 col-md-6 mb-4 mb-md-0">
-                <h5 class="text-uppercase mb-0">Links</h5>
-                <ul class="list-unstyled">
-                    <li>
-                        <a href="#" class="text-white">Link 1</a>
+                <h5 class="text-uppercase">contact</h5>
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a href="tel:0608009545" class="nav-link text-white">
+                            <i class="fas fa-phone-alt text-white"></i>0608009545</a>
                     </li>
-                    <li>
-                        <a href="#" class="text-white">Link 2</a>
+                    <li class="nav-item">
+                        <a href="mailto:corentinfarcy1@gmail.com" class="nav-link text-white">
+                            <i class="fas fa-envelope text-white"></i>corentinfarcy1@gmail.com</a>
                     </li>
-                    <li>
-                        <a href="#" class="text-white">Link 3</a>
-                    </li>
-                    <li>
-                        <a href="#" class="text-white">Link 4</a>
+                    <li class="nav-item">
+                        <p><i class="fas fa-map-marker-alt text-white"></i>4 Rue des Chasse-Marée, 76260 Le Mesnil-Réaume</p>
                     </li>
                 </ul>
             </div>
@@ -149,7 +150,7 @@
     </div>
     <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
         © 2020 Copyright:
-        <a class="text-white" href="https://mdbootstrap.com/">MDBootstrap.com</a>
+        <a class="text-white" href="https://github.com/Farcy-Corentin">Corentin Farcy</a>
     </div>
 </footer>
 </body>

@@ -88,14 +88,13 @@
                                 <label for="price" class="col-md-4 col-form-label text-md-right">
                                     {{ __('Prix') }}
                                 </label>
-                                <span>{{ $price }} €</span>
                                 <div class="col-md-6">
                                     <input
                                         id="price"
                                         type="hidden"
                                         class="form-control @error('image_path') is-invalid @enderror"
                                         name="price"
-                                        value="{{ $price }}"
+                                        value="{{ old('price') }}"
                                         autofocus>
                                     @error('price')
                                     <span class="invalid-feedback" role="alert">

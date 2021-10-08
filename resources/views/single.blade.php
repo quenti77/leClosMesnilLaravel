@@ -6,7 +6,7 @@
                 <div class="row align-items-baseline mb-1">
                     <div class="col-4"><span class="badge bg-badge text-dark">{{ $post->category->name }}</span>
                     </div>
-                    <span class="created-at col-8 fst-italic fw-bold text-end">{{ $post->created_at->format('d-m-Y') }}</span>
+                    <span class="created-at col-8 fst-italic fw-bold text-end">{{ $post->created_at->format('d/m/Y') }}</span>
                 </div>
                 <h2 class="pb-1 m-0">{{ $post->title }}</h2>
                 <div class="image-container row mb-2">
@@ -21,7 +21,7 @@
                     <div class="row align-items-baseline mb-1">
                         <div class="col-4"><span class="text-dark fw-bolder">{{ $comment->user->name }}</span>
                         </div>
-                        <span class="created-at col-8 fst-italic fw-bold text-end">{{ $comment->created_at->format('d-m-Y') }}</span>
+                        <span class="created-at col-8 fst-italic fw-bold text-end">{{ $comment->created_at->format('d/m/Y') }}</span>
                     </div>
                 </div>
                 <p class="contentInitial">{{ $comment->content }}</p>
