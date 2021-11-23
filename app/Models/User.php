@@ -4,10 +4,25 @@ namespace App\Models;
 
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Str;
 
-class User extends Authenticatable
+/**
+ * @property string $id
+ * @property bool $is_admin
+ * @property string $name
+ * @property string $last_name
+ * @property string $email
+ * @property DateTime $email_verified_at
+ * @property string $password
+ * @property string $phone
+ * @property string $remember_token
+ * @property DateTime $created_at
+ * @property DateTime $updated_at
+ */
+class User extends Authenticatable implements MustVerifyEmail
 {
     use HasFactory, Notifiable;
 
@@ -19,16 +34,29 @@ class User extends Authenticatable
     protected $table = 'users';
 
     /**
+     * The "type" of the primary key ID.
+     *
+     * @var string
+     */
+    protected $keyType = 'string';
+
+    /**
+     * Indicates if the IDs are auto-incrementing.
+     *
+     * @var bool
+     */
+    public $incrementing = false;
+
+    /**
      * The attributes that are mass assignable.
      *
      * @var array
      */
     protected $fillable = [
         'name',
-        'lastName',
+        'last_name',
         'email',
         'password',
-        'countries_id',
         'phone'
     ];
 
@@ -39,8 +67,7 @@ class User extends Authenticatable
      */
     protected $hidden = [
         'password',
-        'remember_token',
-        'ip'
+        'remember_token'
     ];
 
     /**
@@ -53,18 +80,25 @@ class User extends Authenticatable
         'is_admin' => 'boolean'
     ];
 
-    public function posts()
+    protected static function booted()
     {
-        return $this->hasMany(Posts::class);
+        static::creating(function ($user) {
+            $user->id = (string) Str::uuid();
+        });
     }
 
-    public function reservations()
+    public function posts(): HasMany
     {
-        return $this->hasMany(Reservations::class);
+        return $this->hasMany(Post::class, 'post_id');
     }
 
-    public function countries()
+    public function comments(): HasMany
     {
-        return $this->belongTo(Contries::class);
+        return $this->hasMany(CommentPost::class, 'author_id');
+    }
+
+    public function booking(): HasMany
+    {
+        return $this->hasMany(Booking::class);
     }
 }

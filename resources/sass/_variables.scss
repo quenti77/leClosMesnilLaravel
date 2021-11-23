@@ -1,19 +1,36 @@
 // Body
-$body-bg: #f8fafc;
+$body-bg: #F9F9F9;
+$body-color: #2F3640;
 
 // Typography
-$font-family-sans-serif: 'Nunito', sans-serif;
-$font-size-base: 0.9rem;
-$line-height-base: 1.6;
+$font-family-base: 'Lato', sans-serif;
+$font-family-cursive: 'lobster', cursive;
+$font-size-base: 1rem;
+$font-size-lg: $font-size-base * 1.5;
+$font-size-nav-link: $font-size-base * 1.25;
+$font-size-blog-span: $font-size-base * 0.9;
+$font-size-blog-title: $font-size-base * 2;
+$line-height-base: 1.8;
+$letter-spacing: 2px;
 
 // Colors
-$blue: #3490dc;
-$indigo: #6574cd;
-$purple: #9561e2;
-$pink: #f66d9b;
-$red: #e3342f;
-$orange: #f6993f;
-$yellow: #ffed4a;
-$green: #38c172;
-$teal: #4dc0b5;
-$cyan: #6cb2eb;
+$dark: #2F3640;
+$warning: #FFA333;
+$primary: #327882;
+$secondary: #FFA333;
+$gray: #a4b0be;
+$white: #F9F9F9;
+$navbar-light-color: rgba($primary, .55);
+
+
+// Margin/Padding
+$spacer: 2rem;
+
+//Progress bar
+$progress-bar-bg: $gray;
+
+// Form validation
+$enable-validation-icons: false;
+
+// Z-Index
+$zindex-dropdown: 1100;

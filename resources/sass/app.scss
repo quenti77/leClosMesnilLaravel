@@ -1,8 +1,266 @@
 // Fonts
-@import url('https://fonts.googleapis.com/css?family=Nunito');
+@import url('https://fonts.googleapis.com/css2?family=Lato:wght@300&family=Lobster&display=swap');
 
 // Variables
 @import 'variables';
 
 // Bootstrap
-@import '~bootstrap/scss/bootstrap';
+@import '../../node_modules/bootstrap/scss/bootstrap.scss';
+
+// Intl-tel-input
+$flagsImagePath: "/img/";
+@import "../../node_modules/intl-tel-input/src/css/intlTelInput.scss";
+
+// Font Awesome
+$fa-font-path: "../webfonts";
+@import "~@fortawesome/fontawesome-free/scss/fontawesome";
+@import "~@fortawesome/fontawesome-free/scss/solid";
+@import "~@fortawesome/fontawesome-free/scss/brands";
+@import "~@fortawesome/fontawesome-free/scss/regular";
+
+*, *:after, *:before {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: $body-bg;
+    color: $body-color;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100vh;
+}
+
+.navbar {
+    .navbar-brand {
+        font-family: $font-family-cursive;
+        color: $primary;
+        font-size: $font-size-lg;
+        @media (min-width: 576px) {
+            font-size: $font-size-base*2.5;
+        }
+    }
+
+    .nav-link {
+        font-size: $font-size-base;
+        font-weight: bold;
+        @media (min-width: 576px) {
+            font-size: $font-size-base*1.125;
+        }
+    }
+}
+
+.section-blog {
+    padding: 25px 0 16px 0;
+
+    .bg-badge {
+        font-size: $font-size-blog-span;
+        background-color: transparent;
+        border: 1px solid orange;
+        @media (min-width: 576px) {
+            font-size: $font-size-base;
+        }
+    }
+
+    .created-at {
+        font-size: $font-size-sm;
+        @media (min-width: 576px) {
+            font-size: $font-size-base;
+        }
+    }
+
+    p {
+        font-size: $font-size-base*1.15;
+    }
+
+    h2 {
+        font-size: $font-size-base*1.5;
+        font-weight: bold;
+    }
+
+    .postList {
+        border-radius: 8px 8px 0 0;
+        margin-bottom: 8px;
+        width: 100%;
+        height: 250px;
+        object-fit: cover;
+        @media (min-width: 576px) {
+            height: 300px;
+        }
+    }
+
+    .singlePost {
+        border-radius: 8px 8px 0 0;
+        margin-bottom: 8px;
+        width: 100%;
+        height: 300px;
+        object-fit: cover;
+        @media (min-width: 576px) {
+            height: 550px;
+        }
+    }
+
+    #visible {
+        font-weight: 300;
+        overflow: hidden;
+        max-width: 75ch;
+        display: none;
+        @media (min-width: 576px) {
+            font-size: $font-size-base*1.15;
+            display: block;
+        }
+    }
+
+    a {
+        font-size: $font-size-base;
+        @media (min-width: 576px) {
+            font-size: $font-size-base*1.15;
+        }
+    }
+}
+
+footer {
+    background-color: $light;
+
+    i {
+        margin: 25px 8px 16px 0;
+        font-size: 24px;
+        color: $primary;
+    }
+
+    p {
+        margin: 25px 0 16px 0;
+    }
+
+    .nav {
+        margin-top: -5px;
+    }
+}
+
+.btn-action {
+    border-radius: 5px;
+    border: 0;
+    padding: 4px 0 4px 0;
+    margin: 8px 0 16px 8px;
+    @media (min-width: 576px) {
+        padding: 8px 0 8px 0;
+        font-size: $font-size-base*1.15;
+        margin: 16px 0 32px 16px;
+    }
+}
+
+.btn-primary-action {
+    @extend .btn-action;
+    background-color: #0A505A;
+    color: #F7FEFF;
+    &:hover {
+        background-color: #177482;
+    }
+}
+
+.btn-secondary-action {
+    @extend .btn-action;
+    background-color: transparent;
+    text-decoration: none;
+
+    a {
+        color: $dark 50;
+    }
+}
+
+.cancelUpdate {
+    cursor: pointer;
+}
+
+.editLink:hover {
+    color: $white;
+}
+
+aside {
+    .nav-link {
+        font-size: $font-size-base*0.875;
+        font-weight: bold;
+    }
+}
+
+#categoryNav {
+    .nav-link {
+        font-size: $font-size-base;
+        font-weight: bold;
+        @media (min-width: 576px) {
+            font-size: $font-size-base*1.25;
+        }
+    }
+}
+
+.input-block {
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+.input-password {
+    position: relative;
+}
+
+.password-show-button {
+    position: absolute;
+    right: 10px;
+    top: 5px;
+    width: 32px;
+    height: 32px;
+    color: #7f8c8d;
+    cursor: pointer;
+}
+
+
+.password-info {
+    display: block;
+    padding: 10px 0 5px;
+}
+
+.is-valid {
+    border-color: $success;
+}
+
+.is-invalid {
+    border-color: $warning;
+}
+
+.was-validated .form-control:invalid, .form-control.is-invalid {
+    border-color: #dc3545;
+    padding-right: calc(1.5em + 0.75rem);
+    background-repeat: no-repeat;
+    background-position: right calc(0.375em + 0.1875rem) center;
+    background-size: calc(0.75em + 0.375rem) calc(0.75em + 0.375rem);
+}
+
+.hoverTrash {
+    color: $dark;
+
+    &:hover {
+        transition: 0.25s;
+        color: $danger;
+        cursor: pointer;
+    }
+}
+
+.hoverEdit {
+    color: $dark;
+
+    &:hover {
+        transition: 0.25s;
+        color: $warning;
+        cursor: pointer;
+    }
+}
+
+.iti__flag {background-image: url("../../node_modules/intl-tel-input/build/img/flags.png");}
+
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+    .iti__flag {background-image: url("../../node_modules/intl-tel-input/build/img/flags@2x.png");}
+}
+
+
+

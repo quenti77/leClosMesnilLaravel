@@ -14,15 +14,16 @@ class CreateBookingCommentTable extends Migration
     public function up()
     {
         Schema::create('booking_comment', function (Blueprint $table) {
-            $table->uuid('id')->primary();
-            $table->uuid('booking_id');
+            $table->id();
+            $table->integer('booking_id');
             $table->integer('rating');
-            $table->integer('cleaness_rating');  
-            $table->integer('accurency_rating');  
-            $table->integer('communication_rating');  
-            $table->integer('location_rating');  
-            $table->integer('check-in_rating');  
-            $table->integer('value_rating');      
+            $table->integer('cleaness_rating');
+            $table->integer('accurency_rating');
+            $table->longtext('content');
+            $table->integer('communication_rating');
+            $table->integer('location_rating');
+            $table->integer('check-in_rating');
+            $table->integer('value_rating');
             $table->timestamps();
         });
     }
