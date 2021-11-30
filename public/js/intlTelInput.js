@@ -1381,7 +1381,7 @@ module.exports = __webpack_require__(/*! ./build/js/intlTelInput */ "./node_modu
 /************************************************************************/
 /******/ 	// The module cache
 /******/ 	var __webpack_module_cache__ = {};
-/******/
+/******/ 	
 /******/ 	// The require function
 /******/ 	function __webpack_require__(moduleId) {
 /******/ 		// Check if module is in cache
@@ -1395,14 +1395,14 @@ module.exports = __webpack_require__(/*! ./build/js/intlTelInput */ "./node_modu
 /******/ 			// no module.loaded needed
 /******/ 			exports: {}
 /******/ 		};
-/******/
+/******/ 	
 /******/ 		// Execute the module function
 /******/ 		__webpack_modules__[moduleId](module, module.exports, __webpack_require__);
-/******/
+/******/ 	
 /******/ 		// Return the exports of the module
 /******/ 		return module.exports;
 /******/ 	}
-/******/
+/******/ 	
 /************************************************************************/
 /******/ 	/* webpack/runtime/compat get default export */
 /******/ 	(() => {
@@ -1415,7 +1415,7 @@ module.exports = __webpack_require__(/*! ./build/js/intlTelInput */ "./node_modu
 /******/ 			return getter;
 /******/ 		};
 /******/ 	})();
-/******/
+/******/ 	
 /******/ 	/* webpack/runtime/define property getters */
 /******/ 	(() => {
 /******/ 		// define getter functions for harmony exports
@@ -1427,12 +1427,12 @@ module.exports = __webpack_require__(/*! ./build/js/intlTelInput */ "./node_modu
 /******/ 			}
 /******/ 		};
 /******/ 	})();
-/******/
+/******/ 	
 /******/ 	/* webpack/runtime/hasOwnProperty shorthand */
 /******/ 	(() => {
 /******/ 		__webpack_require__.o = (obj, prop) => (Object.prototype.hasOwnProperty.call(obj, prop))
 /******/ 	})();
-/******/
+/******/ 	
 /******/ 	/* webpack/runtime/make namespace object */
 /******/ 	(() => {
 /******/ 		// define __esModule on exports
@@ -1443,7 +1443,7 @@ module.exports = __webpack_require__(/*! ./build/js/intlTelInput */ "./node_modu
 /******/ 			Object.defineProperty(exports, '__esModule', { value: true });
 /******/ 		};
 /******/ 	})();
-/******/
+/******/ 	
 /************************************************************************/
 var __webpack_exports__ = {};
 // This entry need to be wrapped in an IIFE because it need to be in strict mode.
@@ -1489,7 +1489,8 @@ var TelInputOptions = {
   numberType: "MOBILE",
   preferredCountries: ['fr', 'gb', 'es'],
   separateDialCode: true,
-  utilsScript: "/js/intl-tel-input-utils.js"
+  hiddenInput: "full_phone",
+  utilsScript: "/js/intlTelInputUtils.js"
 };
 var PhoneNumberUtils = /*#__PURE__*/function () {
   function PhoneNumberUtils() {
@@ -1587,32 +1588,7 @@ window.addEventListener('load', function () {
   var instanceITI = new PhoneNumberInput(input, function (instance) {
     intlTelinputLoaded(input, instance);
   });
-}); //
-// const countryData = window.intlTelInputGlobals.getCountryData(),
-// input = document.querySelector('#phone'),
-// addressDropdown = document.querySelector('#country')
-//
-// const iti = window.intlTelInput(input, {
-//     utilsScript: "/node_modules/intl-tel-input/build/js/utils.js?1613236686837"
-// })
-//
-// for(let i = 0; i < countryData.length; i++) {
-//     let country = countryData[i];
-//     optionNode.value = country.iso2;
-//     let textNode = document.createTextNode(country.name);
-//     optionNode.appendChild(textNode);
-//     addressDropdown.appendChild(optionNode);
-// }
-//
-// addressDropdown.value = window.intlTelInput.getSelectedCountryData().iso
-//
-// input.addEventListener('countrychange', function (e) {
-//     addressDropdown.value = iti.getSelectedCountryData().iso2;
-// });
-//
-// addressDropdown.addEventListener('change', function () {
-//     iti.setCountry(this.value);
-// });
+});
 })();
 
 /******/ })()

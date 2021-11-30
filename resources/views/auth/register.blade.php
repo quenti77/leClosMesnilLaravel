@@ -54,11 +54,6 @@
                                                name="phone"
                                                placeholder="Numéro de téléphone"
                                                value="{{ old('phone') }}" autocomplete="name" autofocus>
-                                        @error('phone')
-                                        <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                        </span>
-                                        @enderror
                                     </label>
                                 </div>
                             </div>
