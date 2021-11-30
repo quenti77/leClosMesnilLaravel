@@ -53,8 +53,10 @@
                                                class="form-control @error('phone') is-invalid @enderror"
                                                name="phone"
                                                placeholder="Numéro de téléphone"
-                                               value="{{ old('phone') }}" autocomplete="name" autofocus>
+                                               value="" autocomplete="phone" autofocus>
                                     </label>
+                                    <span id="valid-msg" class="iti__hide">✓ Valid</span>
+                                    <span id="error-msg" class="iti__hide"></span>
                                 </div>
                             </div>
                             <div class="row justify-content-center">

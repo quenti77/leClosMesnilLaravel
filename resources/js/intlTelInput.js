@@ -22,7 +22,8 @@ export const TelInputOptions = {
     preferredCountries: [ 'fr', 'gb', 'es' ],
     separateDialCode: true,
     hiddenInput: "full_phone",
-    utilsScript: "/js/intlTelInputUtils.js"
+    utilsScript: "/js/intlTelInputUtils.js",
+    formatOnDisplay: true
 }
 
 export class PhoneNumberUtils {
@@ -79,6 +80,10 @@ export class PhoneNumberInput {
         return this.instanceITI.isValidNumber()
     }
 
+    getError() {
+        return this.instanceITI.getValidationError()
+    }
+
     isMobile () {
         PhoneNumberUtils.assertUtilsLoaded()
 
@@ -109,6 +114,39 @@ window.addEventListener('load', () => {
     const input = document.querySelector('#phone')
     const instanceITI = new PhoneNumberInput(input, (instance) => {
         intlTelinputLoaded(input, instance)
+    })
+    const errorMsg = document.querySelector("#error-msg");
+    const validMsg = document.querySelector("#valid-msg");
+
+    const reset = function() {
+        input.classList.remove("invalid-feedback");
+        errorMsg.innerHTML = "";
+        errorMsg.classList.add("iti__hide");
+        validMsg.classList.add("iti__hide");
+    };
+    input.addEventListener('blur', function() {
+        reset();
+        if (input.value.trim()) {
+            console.log(input.value.trim())
+            if (instanceITI.isMobile()) {
+                input.value = instanceITI.getNational()
+                input.classList.remove("is-invalid");
+            } else {
+                input.classList.add("is-invalid");
+                errorMsg.innerHTML = "Le format du champ Téléphone mobile est invalide";
+                errorMsg.classList.remove("iti__hide");
+            }
+        }
+    })
+    input.addEventListener('input', function() {
+        reset();
+        if (input.value.trim()) {
+            console.log(input.value.trim())
+            if (instanceITI.isMobile()) {
+                input.value = instanceITI.getNational()
+                input.classList.remove("is-invalid");
+            }
+        }
     })
 })
 

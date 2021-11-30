@@ -1490,7 +1490,8 @@ var TelInputOptions = {
   preferredCountries: ['fr', 'gb', 'es'],
   separateDialCode: true,
   hiddenInput: "full_phone",
-  utilsScript: "/js/intlTelInputUtils.js"
+  utilsScript: "/js/intlTelInputUtils.js",
+  formatOnDisplay: true
 };
 var PhoneNumberUtils = /*#__PURE__*/function () {
   function PhoneNumberUtils() {
@@ -1557,6 +1558,11 @@ var PhoneNumberInput = /*#__PURE__*/function () {
       return this.instanceITI.isValidNumber();
     }
   }, {
+    key: "getError",
+    value: function getError() {
+      return this.instanceITI.getValidationError();
+    }
+  }, {
     key: "isMobile",
     value: function isMobile() {
       PhoneNumberUtils.assertUtilsLoaded();
@@ -1587,6 +1593,44 @@ window.addEventListener('load', function () {
   var input = document.querySelector('#phone');
   var instanceITI = new PhoneNumberInput(input, function (instance) {
     intlTelinputLoaded(input, instance);
+  });
+  var errorMsg = document.querySelector("#error-msg");
+  var validMsg = document.querySelector("#valid-msg");
+
+  var reset = function reset() {
+    input.classList.remove("invalid-feedback");
+    errorMsg.innerHTML = "";
+    errorMsg.classList.add("iti__hide");
+    validMsg.classList.add("iti__hide");
+  };
+
+  input.addEventListener('blur', function () {
+    reset();
+
+    if (input.value.trim()) {
+      console.log(input.value.trim());
+
+      if (instanceITI.isMobile()) {
+        input.value = instanceITI.getNational();
+        input.classList.remove("is-invalid");
+      } else {
+        input.classList.add("is-invalid");
+        errorMsg.innerHTML = "Le format du champ Téléphone mobile est invalide";
+        errorMsg.classList.remove("iti__hide");
+      }
+    }
+  });
+  input.addEventListener('input', function () {
+    reset();
+
+    if (input.value.trim()) {
+      console.log(input.value.trim());
+
+      if (instanceITI.isMobile()) {
+        input.value = instanceITI.getNational();
+        input.classList.remove("is-invalid");
+      }
+    }
   });
 });
 })();
