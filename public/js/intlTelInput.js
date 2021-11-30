@@ -1489,6 +1489,7 @@ var TelInputOptions = {
   numberType: "MOBILE",
   preferredCountries: ['fr', 'gb', 'es'],
   separateDialCode: true,
+  hiddenInput: "full_phone",
   utilsScript: "/js/intlTelInputUtils.js"
 };
 var PhoneNumberUtils = /*#__PURE__*/function () {
