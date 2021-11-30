@@ -6,6 +6,8 @@
 
 // Bootstrap
 @import '../../node_modules/bootstrap/scss/bootstrap.scss';
+@import 'node_modules/vanillajs-datepicker/sass/datepicker';
+@import 'node_modules/vanillajs-datepicker/sass/mixins';
 
 // Intl-tel-input
 $flagsImagePath: "/img/";
@@ -155,6 +157,7 @@ footer {
     @extend .btn-action;
     background-color: #0A505A;
     color: #F7FEFF;
+
     &:hover {
         background-color: #177482;
     }
@@ -256,10 +259,201 @@ aside {
     }
 }
 
-.iti__flag {background-image: url("../../node_modules/intl-tel-input/build/img/flags.png");}
+.iti__flag {
+    background-image: url("../../node_modules/intl-tel-input/build/img/flags.png");
+}
 
 @media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
-    .iti__flag {background-image: url("../../node_modules/intl-tel-input/build/img/flags@2x.png");}
+    .iti__flag {
+        background-image: url("../../node_modules/intl-tel-input/build/img/flags@2x.png");
+    }
+}
+
+.bookingBar {
+    height: 66px;
+    width: 848px;
+    border-radius: 32px;
+    background-color: #C4D0E1FF;
+    text-align: left;
+    display: -webkit-box !important;
+    display: -moz-box !important;
+    display: -ms-flexbox !important;
+    display: -webkit-flex !important;
+    display: flex !important;
+    -webkit-flex: 1 1 0% !important;
+    -ms-flex: 1 1 0% !important;
+    flex: 1 1 0% !important;
+    min-width: 0px !important;
+    pointer-events: auto !important;
+
+    div {
+        padding: 10px 24px !important;
+        overflow: hidden !important;
+        position: relative !important;
+        white-space: nowrap !important;
+        width: 100% !important;
+        z-index: 1 !important;
+
+        h4 {
+            font-size: 13px !important;
+            line-height: 16px !important;
+            font-weight: 800 !important;
+            letter-spacing: 0.04em !important;
+            padding-bottom: 2px !important;
+            margin: 0;
+        }
+
+        p {
+            font-size: 16px !important;
+            line-height: 18px !important;
+            color: #717171 !important;
+            font-weight: 400 !important;
+            overflow: hidden !important;
+            text-overflow: ellipsis !important;
+            width: 100% !important;
+        }
+
+        button {
+            width: 146px;
+            height: 48px;
+            border-radius: 50px;
+            background-color: $primary;
+            color: #F7FEFF;
+            font-size: $font-size-base*1.15;
+            border: none;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+        }
+    }
+}
+
+.img-wrapper {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    gap: 16px 16px;
+    margin: 16px 0;
+    width: 100%;
+    height: auto;
+    grid-template-areas:
+    "first-image second-image three-image"
+    "first-image five-image six-image";
+}
+.first-image {
+    grid-area: first-image;
+    border-radius: 15px 0 0 15px;
+    height: 450px;
+    width: 560px;
+}
+
+.second-image {
+    grid-area: second-image;
+    height: 217px;
+    width: 350px;
+}
+.three-image {
+    grid-area: three-image;
+    border-radius: 0 15px 0 0;
+    height: 217px;
+    width: 350px;
+}
+.five-image {
+    grid-area: five-image;
+    height: 217px;
+    width: 350px;
+}
+.six-image {
+    grid-area: six-image;
+    border-radius: 0 0 15px 0;
+    height: 217px;
+    width: 350px;
+}
+
+$dp-background-color: $white !default;
+$dp-border-color: $border-color !default;
+$dp-border-radius: $border-radius !default;
+$dp-border-radius-small: $border-radius-sm !default;
+$dp-line-height-base: 1.5 !default;
+$dp-font-size-normal: $font-size-base !default;
+$dp-font-size-small: $font-size-sm !default;
+$dp-font-weight-semibold: 600 !default;
+$dp-font-weight-bold: $font-weight-bold !default;
+$dp-dropdown-offset: 4px !default;
+$dp-dropdown-shadow: $dropdown-box-shadow !default;
+$dp-dropdown-z: $zindex-dropdown !default;
+
+$dp-title-background-color: $light !default;
+
+$dp-cell-size-base: 2.25rem !default;
+$dp-cell-focus-background-color: darken($dropdown-link-hover-bg, 2.5) !default;
+$dp-cell-prevnext-color: color('gray') !default;
+$dp-cell-disabled-color: $dropdown-link-disabled-color !default;
+$dp-cell-selected-background-color: $dropdown-link-active-bg !default;
+$dp-cell-selected-color: $dropdown-link-active-color !default;
+$dp-cell-selected-font-weight: 600 !default;
+$dp-cell-today-background-color: $teal !default;
+$dp-cell-today-color: $white !default;
+$dp-cell-highlighted-background-color: $gray-100 !default;
+$dp-range-start-end-background-color: $secondary !default;
+$dp-range-start-end-color: $dp-cell-selected-color !default;
+$dp-range-background-color: $gray-200 !default;
+$dp-range-today-background-color: $dp-cell-today-background-color !default;
+$dp-week-color: $gray-300 !default;
+
+$dp-footer-background-color: $light !default;
+
+$dp-input-in-edit-border-color: darken($input-focus-border-color, 5%) !default;
+$dp-input-in-edit-focus-box-shadow-size: 0 0 0.25em 0.25em !default;
+
+@mixin dp-button {
+    .btn {
+        // use custom version of .btn-light
+        $background: $light;
+        $border: $light;
+        $hover-background: darken($background, 7.5%);
+        $hover-border: darken($border, 10%);
+        $active-background: darken($background, 10%);
+        $active-border: darken($border, 12.5%);
+
+        border-color: $border;
+        background-color: $dp-background-color;
+
+        &:hover {
+            border-color: $hover-border;
+            background-color: $hover-background;
+            color: color-contrast($hover-background);
+        }
+
+        &:focus {
+            border-color: $hover-border;
+            box-shadow: 0 0 0 $btn-focus-width rgba(mix(color-contrast($background), $border, 15%), 0.5);
+            background-color: $hover-background;
+            color: color-contrast($hover-background);
+        }
+
+        &:disabled {
+            border-color: $border;
+            background-color: $background;
+            color: color-contrast($background);
+        }
+
+        &:not(:disabled):active {
+            border-color: $active-border;
+            background-color: $active-background;
+            color: color-contrast($active-background);
+
+            &:focus {
+                box-shadow: 0 0 0 $btn-focus-width rgba(mix(color-contrast($background), $border, 15%), 0.5);
+            }
+        }
+
+        .datepicker-header & {
+            @include dp-header-button-common;
+        }
+
+        .datepicker-footer & {
+            @include dp-footer-button-common;
+        }
+    }
 }
 
 

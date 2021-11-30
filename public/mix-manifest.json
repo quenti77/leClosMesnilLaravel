@@ -1,5 +1,6 @@
 {
     "/js/app.js": "/js/app.js",
     "/js/intlTelInput.js": "/js/intlTelInput.js",
+    "/js/datePicker.js": "/js/datePicker.js",
     "/css/app.css": "/css/app.css"
 }

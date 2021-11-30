@@ -25,7 +25,8 @@ class BookingController extends Controller
 
     public function index(): View|Factory
     {
-        return view('booking');
+        $bookings = Booking::all();
+        return view('booking', compact('bookings'));
     }
 
     public function create(): View|Factory

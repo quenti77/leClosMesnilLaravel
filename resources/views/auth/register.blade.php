@@ -53,13 +53,14 @@
                                                class="form-control @error('phone') is-invalid @enderror"
                                                name="phone"
                                                placeholder="Numéro de téléphone"
-                                               value="{{ old('phone') }}" autocomplete="name" autofocus>
+                                               value="" autocomplete="phone" autofocus>
                                         @error('phone')
                                         <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                         </span>
                                         @enderror
                                     </label>
+                                    <input type="hidden" id="hidden" value="">
                                 </div>
                             </div>
                             <div class="row justify-content-center">
