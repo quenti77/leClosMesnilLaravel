@@ -3371,7 +3371,7 @@ var bookingDates = window.bookings.reduce(function (dates, booking) {
   var finishedAt = sqlToDate(booking.finished_at);
   var currentAt = startedAt;
 
-  while (currentAt <= finishedAt) {
+  while (currentAt <= finishedAt - 1) {
     dates.add(currentAt.toLocaleDateString("fr"));
     currentAt.setDate(currentAt.getDate() + 1);
   }
@@ -3381,6 +3381,10 @@ var bookingDates = window.bookings.reduce(function (dates, booking) {
 var elem = document.querySelector("#range");
 new vanillajs_datepicker__WEBPACK_IMPORTED_MODULE_0__.DateRangePicker(elem, {
   language: "fr",
+  clearBtn: "true",
+  orientation: "bottom",
+  nextArrow: '<i class=\"fas fa-chevron-right\"></i>',
+  prevArrow: '<i class=\"fas fa-chevron-left\"></i>',
   datesDisabled: _toConsumableArray(bookingDates)
 });
 })();

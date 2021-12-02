@@ -23,10 +23,9 @@ class BookingStoreRequest extends FormRequest
      */
     public function rules()
     {
-        $dateNow = date('Y-m-d');
         return [
-            'started_at' => 'required|after:'.$dateNow,
-            'finished_at' => 'required|date|after:started_at',
+            'started_at' => 'required|date_format:d/m/Y|after:now',
+            'finished_at' => 'required|date_format:d/m/Y|after:started_at',
             'nb_adult' => 'required|integer',
             'nb_children' => 'required|integer'
         ];

@@ -29,6 +29,7 @@ $fa-font-path: "../webfonts";
 body {
     background-color: $body-bg;
     color: $body-color;
+    letter-spacing: $letter-spacing;
     display: flex;
     flex-direction: column;
     width: 100%;
@@ -104,17 +105,6 @@ body {
         }
     }
 
-    #visible {
-        font-weight: 300;
-        overflow: hidden;
-        max-width: 75ch;
-        display: none;
-        @media (min-width: 576px) {
-            font-size: $font-size-base*1.15;
-            display: block;
-        }
-    }
-
     a {
         font-size: $font-size-base;
         @media (min-width: 576px) {
@@ -157,7 +147,7 @@ footer {
     @extend .btn-action;
     background-color: #0A505A;
     color: #F7FEFF;
-
+    transition: 0.175s ease-in-out;
     &:hover {
         background-color: #177482;
     }
@@ -241,7 +231,6 @@ aside {
 
 .hoverTrash {
     color: $dark;
-
     &:hover {
         transition: 0.25s;
         color: $danger;
@@ -251,7 +240,6 @@ aside {
 
 .hoverEdit {
     color: $dark;
-
     &:hover {
         transition: 0.25s;
         color: $warning;
@@ -269,103 +257,33 @@ aside {
     }
 }
 
-.bookingBar {
-    height: 66px;
-    width: 848px;
-    border-radius: 32px;
-    background-color: #C4D0E1FF;
-    text-align: left;
-    display: -webkit-box !important;
-    display: -moz-box !important;
-    display: -ms-flexbox !important;
-    display: -webkit-flex !important;
-    display: flex !important;
-    -webkit-flex: 1 1 0% !important;
-    -ms-flex: 1 1 0% !important;
-    flex: 1 1 0% !important;
-    min-width: 0px !important;
-    pointer-events: auto !important;
 
-    div {
-        padding: 10px 24px !important;
-        overflow: hidden !important;
-        position: relative !important;
-        white-space: nowrap !important;
-        width: 100% !important;
-        z-index: 1 !important;
-
-        h4 {
-            font-size: 13px !important;
-            line-height: 16px !important;
-            font-weight: 800 !important;
-            letter-spacing: 0.04em !important;
-            padding-bottom: 2px !important;
-            margin: 0;
-        }
-
-        p {
-            font-size: 16px !important;
-            line-height: 18px !important;
-            color: #717171 !important;
-            font-weight: 400 !important;
-            overflow: hidden !important;
-            text-overflow: ellipsis !important;
-            width: 100% !important;
-        }
-
-        button {
-            width: 146px;
-            height: 48px;
-            border-radius: 50px;
-            background-color: $primary;
-            color: #F7FEFF;
-            font-size: $font-size-base*1.15;
-            border: none;
-            box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
-        }
-    }
-}
-
-.img-wrapper {
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    grid-template-rows: 1fr 1fr;
-    gap: 16px 16px;
-    margin: 16px 0;
-    width: 100%;
-    height: auto;
-    grid-template-areas:
-    "first-image second-image three-image"
-    "first-image five-image six-image";
-}
-.first-image {
-    grid-area: first-image;
-    border-radius: 15px 0 0 15px;
+.big-image {
     height: 450px;
-    width: 560px;
+    width: 100%;
 }
 
-.second-image {
-    grid-area: second-image;
+.small-image {
     height: 217px;
-    width: 350px;
+    width: 100%;
 }
-.three-image {
-    grid-area: three-image;
-    border-radius: 0 15px 0 0;
-    height: 217px;
-    width: 350px;
+
+.big-image > img, .small-image > img {
+    object-fit: cover;
+    height: 100%;
+    width: 100%;
 }
-.five-image {
-    grid-area: five-image;
-    height: 217px;
-    width: 350px;
-}
-.six-image {
-    grid-area: six-image;
+
+.imgRoundedBottomRight {
     border-radius: 0 0 15px 0;
-    height: 217px;
-    width: 350px;
+}
+
+.imgRoundedTopBottomRight {
+    border-radius: 15px 0 0 15px;
+}
+
+.imgRoundedTopRight {
+    border-radius: 0 15px 0 0;
 }
 
 .iti {
@@ -457,6 +375,36 @@ $dp-input-in-edit-focus-box-shadow-size: 0 0 0.25em 0.25em !default;
         .datepicker-footer & {
             @include dp-footer-button-common;
         }
+    }
+}
+
+.bookingForm {
+        border: 1px solid rgb(221, 221, 221);
+        border-radius: 12px;
+        padding: 24px;
+        box-shadow: rgba(0, 0, 0, 0.12) 0px 6px 16px;
+    .price {
+        font-size: $font-size-base*1.5;
+        font-weight: bold;
+    }
+    i {
+        font-size: $font-size-base*0.75;
+        color: #ff7675;
+    }
+    .rating {
+        font-weight: bold;
+    }
+    .nbComment {
+        color: $greyText;
+        padding-left: 4px;
+        font-weight: bold;
+        text-decoration: underline;
+        font-size: $font-size-blog-span;
+    }
+    button {
+        font-weight: bold;
+        font-size: $font-size-base;
+        letter-spacing: 0.2px;
     }
 }
 

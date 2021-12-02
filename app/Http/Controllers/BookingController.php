@@ -7,7 +7,7 @@ use App\Models\Booking;
 use App\Models\Season;
 use DateInterval;
 use DatePeriod;
-use DateTime;
+use DateTimeImmutable;
 use Exception;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
@@ -48,8 +48,11 @@ class BookingController extends Controller
      */
     private function storeBooking(array $bookingData, Booking|null $booking = null): Booking
     {
-        $startedAt = $bookingData['started_at'];
-        $finishedAt = $bookingData['finished_at'];
+        $format = 'd/m/Y';
+        $startedAt = DateTimeImmutable::createFromFormat($format, $bookingData['started_at']);
+        $finishedAt = DateTimeImmutable::createFromFormat($format,$bookingData['finished_at']);
+        $startedAt->format('Y-m-d');
+        $finishedAt->format('Y-m-d');
         $nbAdult = $bookingData['nb_adult'];
         $booking ??= new booking();
 
@@ -73,22 +76,22 @@ class BookingController extends Controller
     }
 
     /**
-     * @param string $startedAt
-     * @param string $finishedAt
+     * @param DateTimeImmutable $startedAt
+     * @param DateTimeImmutable $finishedAt
      * @param int $nbAdult
      * @return int
      * @throws Exception
      */
-    public function makeWithData(string $startedAt, string $finishedAt, int $nbAdult): int
+    public function makeWithData(\DateTimeImmutable $startedAt, \DateTimeImmutable $finishedAt, int $nbAdult): int
     {
         $baseSeason = [
             'price' => 80_00
         ];
 
         $period = new DatePeriod(
-            new DateTime($startedAt),
+            $startedAt,
             new DateInterval('P1D'),
-            new DateTime($finishedAt)
+            $finishedAt
         );
 
         $finalPrice = 5_00 * ($nbAdult - 1);

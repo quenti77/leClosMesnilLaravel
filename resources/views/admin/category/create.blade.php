@@ -12,7 +12,7 @@
                         <form method="POST" action="{{ route('admin.category.store') }}" enctype="multipart/form-data">
                             @csrf
                             <div class="row mb-4 me-0">
-                                <span class="text-danger">*Tous les champs sont obligatoires</span>
+                                <span class="text-danger fw-bold">*Tous les champs sont obligatoires</span>
                             </div>
                             <div class="form-group row my-4">
                                 <div class="col-md-12">
