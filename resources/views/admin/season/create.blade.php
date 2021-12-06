@@ -1,5 +1,12 @@
 @extends('layouts.app')
+@section('scripts')
+<script>
+    window.seasons = {!! json_encode($seasons->toArray()) !!};
+</script>
+<script type="text/javascript" src="{{ asset('js/datePicker.js') }}" defer></script>
+@endsection
 @section('title', '| Create Season')
+
 @section('content')
     <div class="container">
         <div class="row justify-content-center">
@@ -11,18 +18,21 @@
                     <div class="card-body">
                         <form method="POST" action="{{ route('admin.season.store') }} ">
                             @csrf
+                            <div id="range" class="my-1">
+
                             <div class="form-group row my-5">
                                 <label
-                                    for="stated_at"
+                                    for="started_at"
                                     class="col-md-4 col-form-label text-md-right">{{ __('Début de la saison') }}</label>
                                 <div class="col-md-6">
                                     <input
-                                        id="started_at"
-                                        type="date"
+                                        id="start"
+                                        type="text"
                                         class="form-control @error('started_at') is-invalid @enderror"
                                         name="started_at"
+                                        placeholder="Début de la saison ?"
                                         value="{{ old('started_at') }}"
-                                        autofocus>
+                                        autofocus autocomplete="off">
                                     @error('started_at')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -30,17 +40,17 @@
                                     @enderror
                                 </div>
                             </div>
+                        
                             <div class="form-group row my-5">
                                 <label
                                     for="finished_at"
                                     class="col-md-4 col-form-label text-md-right">{{ __('Fin de la saison') }}</label>
                                 <div class="col-md-6">
-                                <input
-                                    id="finished_at"
-                                    type="date"
-                                    class="form-control @error('finished_at') is-invalid @enderror"
-                                    name="finished_at"
-                                    autofocus>
+                                    <input id="end" type="text"
+                                           class="form-control @error('finished_at') is-invalid @enderror"
+                                           name="finished_at"
+                                           placeholder="Arrivée?"
+                                           value="{{ old('finished_at') }}" autofocus autocomplete="off">
                                     @error('finished_at')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -48,40 +58,29 @@
                                     @enderror
                                 </div>
                             </div>
+                        </div>
                             <div class="form-group row my-5">
-                                <label for="price" class="col-md-4 col-form-label text-md-right">{{ __('Catégorie') }}</label>
+                                <label
+                                    for="price"
+                                    class="col-md-4 col-form-label text-md-right">{{ __('Prix Saison') }}</label>
                                 <div class="col-md-6">
-                                    <select class="form-control" name="category_id">
-                                        <option>Select Item</option>
-                                        @foreach ($categories as $category)
-                                            <option value="{{ $category->id }}">
-                                                {{ $category->name }}
-                                            </option>
-                                        @endforeach
-                                    </select>
-                                    @error('category_id')
-                                    <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                    @enderror
-                                </div>
-                            </div>
-                            <div class="form-group row my-5">
-                                <label for="image_path" class="col-md-4 col-form-label text-md-right">{{ __('Image') }}</label>
-                                <div class="col-md-6">
-                                    <input id="image_path" type="file" class="form-control @error('image_path') is-invalid @enderror" name="image_path" value="{{ old('image_path') }}"  autofocus>
-                                    @error('image_path')
+                                    <input
+                                        id="price"
+                                        type="text"
+                                        class="form-control @error('price') is-invalid @enderror"
+                                        name="price"
+                                        value="{{ old('price') }}"
+                                        autofocus>
+                                    @error('price')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
                                     @enderror
                                 </div>
-                                <div class="form-group row my-5 mb-0">
-                                    <div class="col-md-6 offset-md-9">
-                                        <button type="submit" class="btn btn-success">
-                                            {{ __('Submit') }}
-                                        </button>
-                                    </div>
+                            </div>
+                            <div class="row g-0">
+                                <div class="col-12 pe-0">
+                                    <button class="btn-primary-action col-12 m-0" type="submit">Valider</button>
                                 </div>
                             </div>
                         </form>
@@ -92,4 +91,3 @@
     </div>
 @endsection
 
-@endsection

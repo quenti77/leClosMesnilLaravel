@@ -1,8 +1,8 @@
 @extends('layouts.app')
 @section('scripts')
-    <script>
-        window.bookings = {!! json_encode($bookings->toArray()) !!};
-    </script>
+<script>
+    window.bookings = {!! json_encode($bookings->toArray()) !!};
+</script>
     <script type="text/javascript" src="{{ asset('js/datePicker.js') }}" defer></script>
 @endsection
 @section('content')
@@ -84,8 +84,8 @@
                                            value="{{ old('finished_at') }}" autofocus autocomplete="off">
                                     @error('finished_at')
                                     <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
+                                        <strong>{{ $message }}</strong>
+                                    </span>
                                     @enderror
                                 </div>
                             </div>
