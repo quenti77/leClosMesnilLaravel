@@ -37,20 +37,20 @@ class SeasonController extends Controller
             ->with(['success' => 'Création de la Saison']);
     }
 
-    public function show($id)
+    public function show()
     {
     }
 
-    public function edit($id)
+    public function edit()
     {
     }
 
 
-    public function update(Request $request, $id)
+    public function update()
     {
     }
 
-    public function destroy($id)
+    public function destroy()
     {
     }
 
