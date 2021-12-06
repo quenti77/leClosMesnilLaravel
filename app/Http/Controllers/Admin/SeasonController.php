@@ -1,84 +1,71 @@
 <?php
 
 namespace App\Http\Controllers\Admin;
-
+use App\Http\Controllers\Controller;
+use App\Models\Season;
 use Illuminate\Http\Request;
-
+use Illuminate\Contracts\View\View;
+use Illuminate\Contracts\View\Factory;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\Routing\Redirector;
+use DateTimeImmutable;
 class SeasonController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
+    public function __construct()
     {
-        //
+        $this->middleware('auth');
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    public function index(Request $request): View|Factory
+    {
+        $seasons = Season::OrderByDesc('created_at')->paginate(30);
+        return view('admin.season.index', compact('seasons'));
+    }
+
     public function create()
     {
-        //
+        $seasons = Season::all();
+        return view('admin.season.create', compact('seasons'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
+    public function store(Request $request): Redirector|RedirectResponse
     {
-        //
+        $season = $this->storeSeason($request->all());
+        $season->save();
+        return redirect()
+            ->route('admin.season.create')
+            ->with(['success' => 'Création de la Saison']);
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
+    public function show()
     {
-        //
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
+    public function edit()
     {
-        //
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
+
+    public function update()
     {
-        //
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
+    public function destroy()
     {
-        //
+    }
+
+    private function storeSeason(array $seasonData, Season|null $season = null): Season
+    {
+        $format = 'd/m/Y';
+        $startedAt = DateTimeImmutable::createFromFormat($format, $seasonData['started_at']);
+        $finishedAt = DateTimeImmutable::createFromFormat($format,$seasonData['finished_at']);
+        $startedAt->format('Y-m-d');
+        $finishedAt->format('Y-m-d');
+        $season ??= new Season();
+        $season->started_at = $startedAt;
+        $season->finished_at = $finishedAt;
+        $season->price = (int) $seasonData['price'] * 100;
+        $season->save();
+        return $season;
     }
 }

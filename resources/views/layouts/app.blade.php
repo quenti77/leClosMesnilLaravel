@@ -88,6 +88,13 @@
                                        href="{{ route('admin.category.index') }}">Liste des catégories</a>
                                     <a class="dropdown-item"
                                        href="{{ route('admin.category.create') }}">Créer une catégorie</a>
+
+                                    <a class="dropdown-item" href="{{ route('admin.season.index') }}">
+                                        Liste des saisons
+                                    </a>
+                                    <a class="dropdown-item" href="{{ route('admin.season.create') }}">
+                                        Creation saison
+                                    </a>
                                 @endif
                                 <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
                                     @csrf

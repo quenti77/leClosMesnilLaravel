@@ -3366,27 +3366,55 @@ function sqlToDate(sql) {
   return new Date(split[0], split[1] - 1, split[2], 12, 0, 0);
 }
 
-var bookingDates = window.bookings.reduce(function (dates, booking) {
-  var startedAt = sqlToDate(booking.started_at);
-  var finishedAt = sqlToDate(booking.finished_at);
-  var currentAt = startedAt;
+if (window.bookings) {
+  var bookingDates = window.bookings.reduce(function (dates, booking) {
+    var startedAt = sqlToDate(booking.started_at);
+    var finishedAt = sqlToDate(booking.finished_at);
+    var currentAt = startedAt;
 
-  while (currentAt <= finishedAt - 1) {
-    dates.add(currentAt.toLocaleDateString("fr"));
-    currentAt.setDate(currentAt.getDate() + 1);
+    while (currentAt <= finishedAt - 1) {
+      dates.add(currentAt.toLocaleDateString("fr"));
+      currentAt.setDate(currentAt.getDate() + 1);
+    }
+
+    return dates;
+  }, new Set());
+  var elem = document.querySelector("#range");
+  new vanillajs_datepicker__WEBPACK_IMPORTED_MODULE_0__.DateRangePicker(elem, {
+    language: "fr",
+    clearBtn: "true",
+    orientation: "bottom",
+    nextArrow: '<i class=\"fas fa-chevron-right\"></i>',
+    prevArrow: '<i class=\"fas fa-chevron-left\"></i>',
+    datesDisabled: _toConsumableArray(bookingDates)
+  });
+} else {
+  if (window.seasons) {
+    var seasonsDates = window.seasons.reduce(function (dates, season) {
+      var startedAt = sqlToDate(season.started_at);
+      var finishedAt = sqlToDate(season.finished_at);
+      var currentAt = startedAt;
+
+      while (currentAt <= finishedAt) {
+        dates.add(currentAt.toLocaleDateString("fr"));
+        currentAt.setDate(currentAt.getDate() + 1);
+      }
+
+      return dates;
+    }, new Set());
+
+    var _elem = document.querySelector("#range");
+
+    new vanillajs_datepicker__WEBPACK_IMPORTED_MODULE_0__.DateRangePicker(_elem, {
+      language: "fr",
+      clearBtn: "true",
+      orientation: "bottom",
+      nextArrow: '<i class=\"fas fa-chevron-right\"></i>',
+      prevArrow: '<i class=\"fas fa-chevron-left\"></i>',
+      datesDisabled: _toConsumableArray(seasonsDates)
+    });
   }
-
-  return dates;
-}, new Set());
-var elem = document.querySelector("#range");
-new vanillajs_datepicker__WEBPACK_IMPORTED_MODULE_0__.DateRangePicker(elem, {
-  language: "fr",
-  clearBtn: "true",
-  orientation: "bottom",
-  nextArrow: '<i class=\"fas fa-chevron-right\"></i>',
-  prevArrow: '<i class=\"fas fa-chevron-left\"></i>',
-  datesDisabled: _toConsumableArray(bookingDates)
-});
+}
 })();
 
 /******/ })()
