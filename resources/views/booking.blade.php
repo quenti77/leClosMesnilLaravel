@@ -6,7 +6,7 @@
     <script type="text/javascript" src="{{ asset('js/datePicker.js') }}" defer></script>
 @endsection
 @section('content')
-    <div class="container mb-3">
+    <div class="container mb-5">
         <div class="row imageGrid gridImgRounded mb-4">
             <div class="col-6 pe-0">
                 <div class="big-image">
@@ -98,8 +98,8 @@
                                        value="{{ old('nb_adult') }}" autofocus>
                                 @error('nb_adult')
                                 <span class="invalid-feedback" role="alert">
-                                <strong>{{ $message }}</strong>
-                            </span>
+                                    <strong>{{ $message }}</strong>
+                                </span>
                                 @enderror
                             </div>
                             <div class="col-6">
@@ -117,7 +117,9 @@
                         </div>
                         <div class="row g-0">
                             <div class="col-12 pe-0">
-                                <button class="btn-primary-action col-12 m-0 mb-4" type="submit">Vérifier la disponibilité</button>
+                                <button class="btn-primary-action col-12 m-0 mb-4" type="submit">
+                                    Vérifier la disponibilité
+                                </button>
                             </div>
                         </div>
                     </form>

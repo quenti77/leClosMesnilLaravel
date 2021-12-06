@@ -15,6 +15,7 @@ use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Routing\Redirector;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Validation\ValidationException;
 
 class BookingController extends Controller
 {
@@ -54,6 +55,7 @@ class BookingController extends Controller
         $startedAt->format('Y-m-d');
         $finishedAt->format('Y-m-d');
         $nbAdult = $bookingData['nb_adult'];
+
         $booking ??= new booking();
 
         $booking->started_at = $startedAt;
@@ -93,6 +95,12 @@ class BookingController extends Controller
             new DateInterval('P1D'),
             $finishedAt
         );
+
+        $hasBooking = Booking::query()->includePeriod($period)->exists();
+        if($hasBooking) {
+            $message = 'Le créneau demandé est déjà réservé.';
+            throw ValidationException::withMessages(['started_at'=>$message]);
+        }
 
         $finalPrice = 5_00 * ($nbAdult - 1);
 
