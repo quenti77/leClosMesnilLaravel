@@ -9,27 +9,57 @@ function sqlToDate(sql) {
     return new Date(split[0], split[1] - 1, split[2], 12, 0, 0)
 }
 
-const bookingDates = window.bookings.reduce((dates, booking) => {
-    const startedAt = sqlToDate(booking.started_at)
-    const finishedAt = sqlToDate(booking.finished_at)
-    let currentAt = startedAt
+if(window.bookings) {
+    const bookingDates = window.bookings.reduce((dates, booking) => {
+        const startedAt = sqlToDate(booking.started_at)
+        const finishedAt = sqlToDate(booking.finished_at)
+        let currentAt = startedAt
 
-    while (currentAt <= finishedAt - 1) {
-        dates.add(currentAt.toLocaleDateString("fr"))
-        currentAt.setDate(currentAt.getDate() +1)
+        while (currentAt <= finishedAt - 1) {
+            dates.add(currentAt.toLocaleDateString("fr"))
+            currentAt.setDate(currentAt.getDate() +1)
+        }
+
+        return dates
+    }, new Set())
+
+    const elem = document.querySelector("#range");
+
+    new DateRangePicker(elem, {
+        language: "fr",
+        clearBtn: "true",
+        orientation: "bottom",
+        nextArrow: '<i class=\"fas fa-chevron-right\"></i>',
+        prevArrow: '<i class=\"fas fa-chevron-left\"></i>',
+        datesDisabled: [...bookingDates],
+    });
+} else {
+    if(window.seasons) {
+        const seasonsDates = window.seasons.reduce((dates, season) => {
+            const startedAt = sqlToDate(season.started_at)
+            const finishedAt = sqlToDate(season.finished_at)
+            let currentAt = startedAt
+
+            while (currentAt <= finishedAt) {
+                dates.add(currentAt.toLocaleDateString("fr"))
+                currentAt.setDate(currentAt.getDate() +1)
+            }
+
+            return dates
+        }, new Set())
+
+        const elem = document.querySelector("#range");
+
+        new DateRangePicker(elem, {
+            language: "fr",
+            clearBtn: "true",
+            orientation: "bottom",
+            nextArrow: '<i class=\"fas fa-chevron-right\"></i>',
+            prevArrow: '<i class=\"fas fa-chevron-left\"></i>',
+            datesDisabled: [...seasonsDates],
+        });
     }
+}
 
-    return dates
-}, new Set())
 
-const elem = document.querySelector("#range");
-
-new DateRangePicker(elem, {
-    language: "fr",
-    clearBtn: "true",
-    orientation: "bottom",
-    nextArrow: '<i class=\"fas fa-chevron-right\"></i>',
-    prevArrow: '<i class=\"fas fa-chevron-left\"></i>',
-    datesDisabled: [...bookingDates],
-});
 
