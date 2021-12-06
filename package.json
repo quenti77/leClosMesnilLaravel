@@ -27,6 +27,7 @@
     "dependencies": {
         "@fortawesome/fontawesome-free": "^5.15.4",
         "ajax": "^0.0.4",
+        "fullcalendar": "^5.10.1",
         "intl-tel-input": "^17.0.13",
         "jquery": "^3.6.0",
         "npm-check-updates": "^11.8.5",

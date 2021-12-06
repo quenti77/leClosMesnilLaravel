@@ -117,7 +117,7 @@
                         </div>
                         <div class="row g-0">
                             <div class="col-12 pe-0">
-                                <button class="btn-primary-action col-12 m-0" type="submit">Vérifier la disponibilité</button>
+                                <button class="btn-primary-action col-12 m-0 mb-4" type="submit">Vérifier la disponibilité</button>
                             </div>
                         </div>
                     </form>
