@@ -14,6 +14,7 @@
         "laravel/tinker": "^2.5",
         "laravel/ui": "^3.2",
         "laravelcollective/html": "^6.2",
+        "league/fractal": "^0.19.2",
         "pragmarx/countries": "^0.7.2",
         "propaganistas/laravel-phone": "^4.3",
         "spatie/image-optimizer": "^1.5"

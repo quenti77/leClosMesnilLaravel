@@ -59,8 +59,10 @@ class MyLogger implements Psr\Log\LoggerInterface {
 }
 
 Route::get('/', [PostController::class, 'index'])->name('index')->middleware('verified');
+Route::get('/posts', [PostController::class, 'getPost']);
+Route::get('/category', [PostController::class, 'getCategory']);
 
-Route::get('/posts', [PostController::class, 'index'])->name('post.index');
+//Route::get('/posts', [PostController::class, 'index'])->name('post.index');
 Route::get('/post/{slug}', [PostController::class, 'show'])->where('slug', '[\w\d\-\_]+')->name('post.show');
 
 Route::post('/comments/{post}', [CommentController::class, 'store'])->name('comment.store');

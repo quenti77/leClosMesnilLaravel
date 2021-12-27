@@ -30,8 +30,8 @@ class PostFactory extends Factory
         $title = $this->faker->sentences(1, true);
         $slug = Str::slug($title);
         return [
-            'user_id' => "ea3989fe-1f10-4a55-8b94-c4823daa91dc",
-            'category_id' => 2,
+            'user_id' => "a885600b-1e85-4418-b09f-ec947b835ca3",
+            'category_id' => $this->faker->randomElement($categories),
             'title' => $title,
             'slug' => $slug,
             'content' => $this->faker->sentences(30, true),

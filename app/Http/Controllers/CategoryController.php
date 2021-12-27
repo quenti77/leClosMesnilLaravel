@@ -17,7 +17,8 @@ class CategoryController extends Controller
         $category = Category::where('slug', '=', $slug)->first();
         $currentPath = route(Route::currentRouteName(), ['slug'=>$slug]);
         $posts = Post::OrderByDesc('created_at')->where('category_id', '=', $category->id)->paginate(6);
+        $nextAvailable = $posts->nextPageUrl() === null ? 0:1;
         $lastPosts = Post::OrderByDesc('created_at')->limit(5)->get();
-        return view('post', compact('posts', 'categories', 'category','lastPosts','currentPath'));
+        return view('post', compact('posts', 'categories', 'category','lastPosts','currentPath', 'nextAvailable'));
     }
 }

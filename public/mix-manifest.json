@@ -2,5 +2,12 @@
     "/js/app.js": "/js/app.js",
     "/js/intlTelInput.js": "/js/intlTelInput.js",
     "/js/datePicker.js": "/js/datePicker.js",
-    "/css/app.css": "/css/app.css"
+    "/js/fullCalendar.js": "/js/fullCalendar.js",
+    "/js/infiniteScroll.js": "/js/infiniteScroll.js",
+    "/js/counterButton.js": "/js/counterButton.js",
+    "/js/clearTextarea.js": "/js/clearTextarea.js",
+    "/js/passwordChecker.js": "/js/passwordChecker.js",
+    "/js/updateEditComment.js": "/js/updateEditComment.js",
+    "/css/app.css": "/css/app.css",
+    "/css/main.css": "/css/main.css"
 }

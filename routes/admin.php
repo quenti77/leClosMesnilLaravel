@@ -13,5 +13,9 @@ Route::middleware('optimizeImages')->group(function () {
     Route::post('post.store', 'PostController@store');
 });
 
+Route::get('/calendar', function () {
+    return view('admin.calendar.calendar');
+});
+
 Route::resource('category', CategoryController::class);
 Route::get('/category/{slug}', [CategoryController::class, 'show'])->name('admin.category.show');

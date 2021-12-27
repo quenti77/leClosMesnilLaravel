@@ -1,6 +1,7 @@
 @extends('layouts.app')
 @section('scripts')
     <script type="text/javascript" src="{{ asset('js/intlTelInput.js') }}" defer></script>
+    <script type="text/javascript" src="{{ asset('js/passwordChecker.js') }}" defer></script>
 @endsection
 @section('content')
     <div class="container">

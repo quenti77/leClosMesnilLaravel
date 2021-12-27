@@ -1,8 +1,11 @@
 @extends('layouts.app')
+@section('scripts')
+    <script type="text/javascript" src="{{ asset('js/updateEditComment.js') }}" defer></script
+@endsection
 @section('content')
     <section class='section-blog col-12 mb-2 mt-2'>
         <ul id="categoryNav" class="nav sticky-top justify-content-center bg-white mb-3">
-            <li class="nav-item"><a class="nav-link" href="{{ route("post.index") }}">accueil</a>
+            <li class="nav-item"><a class="nav-link" href="{{ route("index") }}">accueil</a>
             </li>
             @forelse ($categories as $c)
                 <li class="nav-item">

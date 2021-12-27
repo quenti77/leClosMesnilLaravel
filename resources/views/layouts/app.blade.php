@@ -13,6 +13,7 @@
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" type="text/css" rel="stylesheet">
+    <link href="{{ asset('css/main.css') }}" type="text/css" rel="stylesheet">
     <script src="https://cdn.tiny.cloud/1/85260khgyt3z8u1tbp3820vnlqz4mcbhcz6xw0e5govencm7/tinymce/5/tinymce.min.js"
             referrerpolicy="origin"></script>
     <script type="text/javascript">
@@ -34,9 +35,6 @@
             content_css: 'css/content.css'
         });
     </script>
-    <script type="text/javascript" src="{{ asset('js/updateEditComment.js') }}" defer></script>
-    <script type="text/javascript" src="{{ asset('js/passwordChecker.js') }}" defer></script>
-    <script type="text/javascript" src="{{ asset('js/counterButton.js') }}" defer></script>
     @yield("scripts")
 </head>
 <body>
@@ -107,7 +105,7 @@
         </div>
     </nav>
 </header>
-<main class="container-fluid min-vh-100 mb-5">
+<main class="container-fluid mb-5">
     @include('partials.flashMessage')
     @yield('content')
 </main>

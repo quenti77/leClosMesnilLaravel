@@ -6,6 +6,8 @@
 
 // Bootstrap
 @import '../../node_modules/bootstrap/scss/bootstrap.scss';
+
+// DatePicker
 @import 'node_modules/vanillajs-datepicker/sass/datepicker';
 @import 'node_modules/vanillajs-datepicker/sass/mixins';
 
@@ -19,6 +21,10 @@ $fa-font-path: "../webfonts";
 @import "~@fortawesome/fontawesome-free/scss/solid";
 @import "~@fortawesome/fontawesome-free/scss/brands";
 @import "~@fortawesome/fontawesome-free/scss/regular";
+
+:root {
+
+}
 
 *, *:after, *:before {
     margin: 0;
