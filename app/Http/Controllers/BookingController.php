@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Http\Requests\BookingStoreRequest;
 use App\Models\Booking;
 use App\Models\Season;
+use App\Transformer\BookingTransformer;
+use App\Transformer\FractalTransformer;
 use DateInterval;
 use DatePeriod;
 use DateTimeImmutable;
@@ -19,6 +21,8 @@ use Illuminate\Validation\ValidationException;
 
 class BookingController extends Controller
 {
+    use FractalTransformer;
+
     public function __construct()
     {
         $this->middleware('auth');
@@ -28,6 +32,13 @@ class BookingController extends Controller
     {
         $bookings = Booking::all();
         return view('booking', compact('bookings'));
+    }
+
+    public function getBooking(): \Illuminate\Http\JsonResponse
+    {
+        $bookings = Booking::with('user')->get();
+
+        return response()->json($this->collection($bookings, new BookingTransformer()));
     }
 
     public function create(): View|Factory
@@ -51,7 +62,7 @@ class BookingController extends Controller
     {
         $format = 'd/m/Y';
         $startedAt = DateTimeImmutable::createFromFormat($format, $bookingData['started_at']);
-        $finishedAt = DateTimeImmutable::createFromFormat($format,$bookingData['finished_at']);
+        $finishedAt = DateTimeImmutable::createFromFormat($format, $bookingData['finished_at']);
         $startedAt->format('Y-m-d');
         $finishedAt->format('Y-m-d');
         $nbAdult = $bookingData['nb_adult'];
@@ -97,9 +108,9 @@ class BookingController extends Controller
         );
 
         $hasBooking = Booking::query()->includePeriod($period)->exists();
-        if($hasBooking) {
+        if ($hasBooking) {
             $message = 'Le créneau demandé est déjà réservé.';
-            throw ValidationException::withMessages(['started_at'=>$message]);
+            throw ValidationException::withMessages(['started_at' => $message]);
         }
 
         $finalPrice = 5_00 * ($nbAdult - 1);
@@ -108,9 +119,9 @@ class BookingController extends Controller
         $seasons = Season::query()->includePeriod($period)->get();
         foreach ($period as $current) {
             $selectedSeason = $seasons
-                ->where('started_at', '<=', $current->format('Y-m-d'))
-                ->where('finished_at', '>=', $current->format('Y-m-d'))
-                ->toArray()[0] ?? $baseSeason;
+                    ->where('started_at', '<=', $current->format('Y-m-d'))
+                    ->where('finished_at', '>=', $current->format('Y-m-d'))
+                    ->toArray()[0] ?? $baseSeason;
             $finalPrice += $selectedSeason['price'];
         }
 

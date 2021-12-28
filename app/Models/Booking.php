@@ -6,6 +6,7 @@ use App\Models\Traits\PeriodableScope;
 use DateTime;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 /**
  * @property int $id
@@ -26,4 +27,8 @@ class Booking extends Model
 
     protected $table = 'bookings';
 
+    public function user(): BelongsTo
+    {
+        return $this->belongsTo(User::class);
+    }
 }

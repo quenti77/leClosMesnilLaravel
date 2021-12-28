@@ -149,12 +149,6 @@ footer {
     }
 }
 
-.disabled {
-    @extend .btn-action;
-    background-color: grey;
-    color: #F7FEFF;
-}
-
 .btn-cta {
     @extend .btn-primary-action;
     padding: 20px;
@@ -162,9 +156,9 @@ footer {
 }
 
 .disabled-btn-cta {
-    @extend .disabled;
-    padding: 20px;
-    border-radius: 50px;
+    @extend .btn-cta;
+    background-color: $grey-light !important;
+    color: $light !important;
 }
 
 .btn-primary-action {
@@ -172,6 +166,7 @@ footer {
     background-color: #0A505A;
     color: #F7FEFF;
     transition: 0.175s ease-in-out;
+
     &:hover {
         background-color: #177482;
     }

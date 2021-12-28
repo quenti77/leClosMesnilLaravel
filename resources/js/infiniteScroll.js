@@ -61,8 +61,6 @@ const getNextPost = async () => {
     buttonLoad.classList.remove('btn-cta')
     buttonLoad.classList.add('disabled-btn-cta')
 
-    //Button load css
-
     const posts = await getPaginatePosts(currentPage, template.categoryId)
     posts.data.forEach(addPost)
 

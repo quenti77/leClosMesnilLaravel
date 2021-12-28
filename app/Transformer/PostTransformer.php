@@ -10,7 +10,7 @@ class PostTransformer extends TransformerAbstract
     protected $availableIncludes = ['category'];
     protected $defaultIncludes = ['category'];
 
-    public function transform(Post $post)
+    public function transform(Post $post): array
     {
         $createdAt = new \DateTime($post->created_at);
 
@@ -26,7 +26,7 @@ class PostTransformer extends TransformerAbstract
         ];
     }
 
-    public function includeCategory(Post $post)
+    public function includeCategory(Post $post): \League\Fractal\Resource\Item
     {
         return $this->item($post->category, new CategoryTransformer());
     }

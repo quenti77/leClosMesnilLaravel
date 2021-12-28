@@ -1,4 +1,4 @@
-import { DateRangePicker, Datepicker } from "vanillajs-datepicker";
+import {DateRangePicker, Datepicker} from "vanillajs-datepicker";
 import fr from "vanillajs-datepicker/locales/fr";
 
 
@@ -9,45 +9,38 @@ function sqlToDate(sql) {
     return new Date(split[0], split[1] - 1, split[2], 12, 0, 0)
 }
 
-if(window.bookings) {
-    const bookingDates = window.bookings.reduce((dates, booking) => {
+const getBookings = async () => {
+    const headers = {
+        'content-type': 'application/json'
+    }
+    const url = '/bookings'
+    const response = await fetch(url, {headers})
+    if (response.status !== 200) {
+        return null
+    }
+
+    return await response.json()
+}
+
+
+const getPeriode = async (bookingDates) => {
+    const bookings = await getBookings();
+    bookingDates = bookings.data.reduce((dates, booking) => {
         const startedAt = sqlToDate(booking.started_at)
         const finishedAt = sqlToDate(booking.finished_at)
         let currentAt = startedAt
 
         while (currentAt <= finishedAt - 1) {
             dates.add(currentAt.toLocaleDateString("fr"))
-            currentAt.setDate(currentAt.getDate() +1)
+            currentAt.setDate(currentAt.getDate() + 1)
         }
 
         return dates
     }, new Set())
+    return bookingDates
+}
 
-    const elem = document.querySelector("#range");
-
-    new DateRangePicker(elem, {
-        language: "fr",
-        clearBtn: "true",
-        orientation: "bottom",
-        nextArrow: '<i class=\"fas fa-chevron-right\"></i>',
-        prevArrow: '<i class=\"fas fa-chevron-left\"></i>',
-        datesDisabled: [...bookingDates],
-    });
-} else {
-    if(window.seasons) {
-        const seasonsDates = window.seasons.reduce((dates, season) => {
-            const startedAt = sqlToDate(season.started_at)
-            const finishedAt = sqlToDate(season.finished_at)
-            let currentAt = startedAt
-
-            while (currentAt <= finishedAt) {
-                dates.add(currentAt.toLocaleDateString("fr"))
-                currentAt.setDate(currentAt.getDate() +1)
-            }
-
-            return dates
-        }, new Set())
-
+getPeriode().then(bookingDates => {
         const elem = document.querySelector("#range");
 
         new DateRangePicker(elem, {
@@ -56,10 +49,13 @@ if(window.bookings) {
             orientation: "bottom",
             nextArrow: '<i class=\"fas fa-chevron-right\"></i>',
             prevArrow: '<i class=\"fas fa-chevron-left\"></i>',
-            datesDisabled: [...seasonsDates],
+            datesDisabled: [...bookingDates],
         });
     }
-}
+)
+
+
+
 
 
 

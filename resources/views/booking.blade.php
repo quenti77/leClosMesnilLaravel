@@ -1,8 +1,5 @@
 @extends('layouts.app')
 @section('scripts')
-<script>
-    window.bookings = {!! json_encode($bookings->toArray()) !!};
-</script>
     <script type="text/javascript" src="{{ asset('js/datePicker.js') }}" defer></script>
 @endsection
 @section('content')
@@ -10,26 +7,36 @@
         <div class="row imageGrid gridImgRounded mb-4">
             <div class="col-6 pe-0">
                 <div class="big-image">
-                    <img src="https://images.pexels.com/photos/4507715/pexels-photo-4507715.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940" class="imgRoundedTopBottomRight" alt="">
+                    <img
+                        src="https://images.pexels.com/photos/4507715/pexels-photo-4507715.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+                        class="imgRoundedTopBottomRight" alt="">
                 </div>
             </div>
             <div class="col-3 pe-0">
                 <div class="row g-0">
                     <div class="small-image mb-2">
-                        <img src="https://images.pexels.com/photos/4507715/pexels-photo-4507715.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940" alt="">
+                        <img
+                            src="https://images.pexels.com/photos/4507715/pexels-photo-4507715.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+                            alt="">
                     </div>
                     <div class="small-image">
-                        <img src="https://images.pexels.com/photos/4507715/pexels-photo-4507715.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940" alt="">
+                        <img
+                            src="https://images.pexels.com/photos/4507715/pexels-photo-4507715.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+                            alt="">
                     </div>
                 </div>
             </div>
             <div class="col-3">
                 <div class="row g-0">
                     <div class="small-image mb-2">
-                        <img src="https://images.pexels.com/photos/4507715/pexels-photo-4507715.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940" class="imgRoundedTopRight" alt="">
+                        <img
+                            src="https://images.pexels.com/photos/4507715/pexels-photo-4507715.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+                            class="imgRoundedTopRight" alt="">
                     </div>
                     <div class="small-image">
-                        <img src="https://images.pexels.com/photos/4507715/pexels-photo-4507715.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940" class="imgRoundedBottomRight" alt="">
+                        <img
+                            src="https://images.pexels.com/photos/4507715/pexels-photo-4507715.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+                            class="imgRoundedBottomRight" alt="">
                     </div>
                 </div>
             </div>
