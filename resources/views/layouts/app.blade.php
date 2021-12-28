@@ -105,7 +105,7 @@
         </div>
     </nav>
 </header>
-<main class="container-fluid mb-5">
+<main class="container-fluid mb-3">
     @include('partials.flashMessage')
     @yield('content')
 </main>

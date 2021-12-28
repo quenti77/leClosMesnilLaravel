@@ -37,8 +37,6 @@ class PostController extends Controller
         $paginator = $postQuery->paginate(6);
         $posts = $paginator->getCollection();
 
-        //sleep(10);
-
         return response()->json($this->collection($posts, new PostTransformer(), $paginator));
     }
 

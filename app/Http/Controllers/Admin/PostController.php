@@ -56,9 +56,9 @@ class PostController extends Controller
         $file = $request->file('image_path');
         $filename = $request->get('image_name') . "." . $file->extension();
         $file->storeAs('img', $filename ,'public');
-        $path = 'C:\\DEV\\leclosmesnil\\storage\\app\\public\\img\\' . $filename;
+        $path = 'C:\\DEV\\leClosMesnilLaravel\\storage\\app\\public\\img\\' . $filename;
         $filenameOpti = $request->get('image_name') . "Opti" . "." . $file->extension();
-        $pathOpti = "C:\\DEV\\leclosmesnil\\storage\\app\\public\\img\\" .$filenameOpti;
+        $pathOpti = "C:\\DEV\\leClosMesnilLaravel\\storage\\app\\public\\img\\" .$filenameOpti;
         $optimizerChain = OptimizerChainFactory::create();
         $optimizerChain->useLogger(new MyLogger());
         $optimizerChain->optimize($path, $pathOpti);

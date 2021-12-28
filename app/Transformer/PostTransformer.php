@@ -21,6 +21,7 @@ class PostTransformer extends TransformerAbstract
             'link' => route('post.show', ['slug' => $post->slug]),
             'content' => $post->content,
             'image_path' => $post->image_path,
+            'comment_count' => $post->comment_count,
             'created_at' => $createdAt->format('d/m/Y')
         ];
     }

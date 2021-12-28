@@ -21,24 +21,6 @@ if(template.el.dataset.nextAvailable !== '1') {
     disableNextPage()
 }
 
-/**
- * @typedef {Object} Post
- * @property {number} id
- * @property {string} user_id
- */
-
-/**
- * @typedef {Object} PaginatePost
- * @property {number} current_page
- * @property {Array<Post>} data
- */
-
-/**
- *
- * @param page
- * @param categoryId
- * @returns {Promise<null|PaginatePost>}
- */
 const getPaginatePosts = async (page, categoryId) => {
     const headers = {
         'Content-type': 'application/json'
@@ -55,9 +37,6 @@ const getPaginatePosts = async (page, categoryId) => {
     return await response.json()
 }
 
-/**
- * @param {Post} post
- */
 const addPost = (post) => {
     const postEl = document.createElement('article')
     postEl.classList.add(...('mb-4 pr-5 col-12 col-md-6 col-xl-4'.split(' ')))
@@ -67,8 +46,9 @@ const addPost = (post) => {
         .replace('[CATEGORY]', post.category.name)
         .replace('[CREATED_AT]', post.created_at)
         .replace('[TITLE]', post.title)
-        .replace('[CONTENT]', post.content)
-        .replace('[SLUG]', post.slug)
+        .replace('[COMMENT_LINK]', post.link + '#comment')
+        .replace('[COMMENT_COUNT]', post.comment_count)
+        .replace('[SLUG]', post.link)
     dataWrapperEl.appendChild(postEl)
 }
 
@@ -77,12 +57,21 @@ const getNextPost = async () => {
         return undefined
     }
     postLoading = true
+    buttonLoad.setAttribute('disabled', 'true')
+    buttonLoad.classList.remove('btn-cta')
+    buttonLoad.classList.add('disabled-btn-cta')
+
+    //Button load css
 
     const posts = await getPaginatePosts(currentPage, template.categoryId)
     posts.data.forEach(addPost)
 
     postLoading = false
-    if (posts.meta.links.next === null) {
+    buttonLoad.removeAttribute('disabled')
+    buttonLoad.classList.add('btn-cta')
+    buttonLoad.classList.remove('disabled-btn-cta')
+
+    if (posts.meta.pagination.links.next === undefined) {
         disableNextPage()
         return undefined
     }

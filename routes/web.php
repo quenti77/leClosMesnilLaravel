@@ -64,6 +64,7 @@ Route::get('/category', [PostController::class, 'getCategory']);
 
 //Route::get('/posts', [PostController::class, 'index'])->name('post.index');
 Route::get('/post/{slug}', [PostController::class, 'show'])->where('slug', '[\w\d\-\_]+')->name('post.show');
+Route::get('/post/{slug}#comment', [PostController::class, 'show'])->where('slug', '[\w\d\-\_]+')->name('post.comment');
 
 Route::post('/comments/{post}', [CommentController::class, 'store'])->name('comment.store');
 Route::patch('/comment/{comment}', [CommentController::class, 'update'])->name('comment.update');

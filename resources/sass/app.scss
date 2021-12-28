@@ -149,6 +149,24 @@ footer {
     }
 }
 
+.disabled {
+    @extend .btn-action;
+    background-color: grey;
+    color: #F7FEFF;
+}
+
+.btn-cta {
+    @extend .btn-primary-action;
+    padding: 20px;
+    border-radius: 50px;
+}
+
+.disabled-btn-cta {
+    @extend .disabled;
+    padding: 20px;
+    border-radius: 50px;
+}
+
 .btn-primary-action {
     @extend .btn-action;
     background-color: #0A505A;
@@ -237,6 +255,7 @@ aside {
 
 .hoverTrash {
     color: $dark;
+
     &:hover {
         transition: 0.25s;
         color: $danger;
@@ -246,6 +265,7 @@ aside {
 
 .hoverEdit {
     color: $dark;
+
     &:hover {
         transition: 0.25s;
         color: $warning;
@@ -385,21 +405,25 @@ $dp-input-in-edit-focus-box-shadow-size: 0 0 0.25em 0.25em !default;
 }
 
 .bookingForm {
-        border: 1px solid rgb(221, 221, 221);
-        border-radius: 12px;
-        padding: 24px;
-        box-shadow: rgba(0, 0, 0, 0.12) 0px 6px 16px;
+    border: 1px solid rgb(221, 221, 221);
+    border-radius: 12px;
+    padding: 24px;
+    box-shadow: rgba(0, 0, 0, 0.12) 0px 6px 16px;
+
     .price {
         font-size: $font-size-base*1.5;
         font-weight: bold;
     }
+
     i {
         font-size: $font-size-base*0.75;
         color: #ff7675;
     }
+
     .rating {
         font-weight: bold;
     }
+
     .nbComment {
         color: $greyText;
         padding-left: 4px;
@@ -407,10 +431,27 @@ $dp-input-in-edit-focus-box-shadow-size: 0 0 0.25em 0.25em !default;
         text-decoration: underline;
         font-size: $font-size-blog-span;
     }
+
     button {
         font-weight: bold;
         font-size: $font-size-base;
         letter-spacing: 0.2px;
+    }
+}
+
+.commentBtn {
+    a {
+        padding: 4px 12px 4px 8px;
+        border-radius: 5px;
+        text-decoration: none;
+        font-size: $font-size-base;
+        font-weight: bold;
+        transition: 0.3s ease-in-out;
+
+        &:hover {
+            --bs-bg-opacity: 0.15;
+            background-color: rgba($primary, var(--bs-bg-opacity));
+        }
     }
 }
 
