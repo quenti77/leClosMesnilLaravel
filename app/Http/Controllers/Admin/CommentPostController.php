@@ -22,6 +22,6 @@ class CommentPostController extends Controller
         $commentPost->delete();
         return redirect()
             ->route('admin.post.index')
-            ->with(['success' => 'Le commentaire est bien supprimé']);
+            ->with(['success' => 'Le commentaire a bien été supprimé']);
     }
 }

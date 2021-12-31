@@ -6,9 +6,11 @@ use App\Models\Traits\PeriodableScope;
 use DateTime;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Support\Str;
 
 /**
- * @property int $id
+ * @property string $id
  * @property string $user_id
  * @property DateTime $started_at
  * @property DateTime $finished_at
@@ -26,4 +28,29 @@ class Booking extends Model
 
     protected $table = 'bookings';
 
+    /**
+     * The "type" of the primary key ID.
+     *
+     * @var string
+     */
+    protected $keyType = 'string';
+
+    /**
+     * Indicates if the IDs are auto-incrementing.
+     *
+     * @var bool
+     */
+    public $incrementing = false;
+
+    protected static function booted()
+    {
+        static::creating(function ($booking) {
+            $booking->id = (string) Str::uuid();
+        });
+    }
+
+    public function user(): BelongsTo
+    {
+        return $this->belongsTo(User::class);
+    }
 }

@@ -5,9 +5,11 @@ namespace App\Http\Controllers;
 use App\Http\Requests\BookingStoreRequest;
 use App\Models\Booking;
 use App\Models\Season;
+use App\Transformer\BookingTransformer;
+use App\Transformer\FractalTransformer;
 use DateInterval;
 use DatePeriod;
-use DateTime;
+use DateTimeImmutable;
 use Exception;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
@@ -15,9 +17,12 @@ use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Routing\Redirector;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Validation\ValidationException;
 
 class BookingController extends Controller
 {
+    use FractalTransformer;
+
     public function __construct()
     {
         $this->middleware('auth');
@@ -25,7 +30,15 @@ class BookingController extends Controller
 
     public function index(): View|Factory
     {
-        return view('booking');
+        $bookings = Booking::all();
+        return view('booking', compact('bookings'));
+    }
+
+    public function getBooking(): \Illuminate\Http\JsonResponse
+    {
+        $bookings = Booking::with('user')->get();
+
+        return response()->json($this->collection($bookings, new BookingTransformer()));
     }
 
     public function create(): View|Factory
@@ -47,9 +60,13 @@ class BookingController extends Controller
      */
     private function storeBooking(array $bookingData, Booking|null $booking = null): Booking
     {
-        $startedAt = $bookingData['started_at'];
-        $finishedAt = $bookingData['finished_at'];
+        $format = 'd/m/Y';
+        $startedAt = DateTimeImmutable::createFromFormat($format, $bookingData['started_at']);
+        $finishedAt = DateTimeImmutable::createFromFormat($format, $bookingData['finished_at']);
+        $startedAt->format('Y-m-d');
+        $finishedAt->format('Y-m-d');
         $nbAdult = $bookingData['nb_adult'];
+
         $booking ??= new booking();
 
         $booking->started_at = $startedAt;
@@ -72,23 +89,29 @@ class BookingController extends Controller
     }
 
     /**
-     * @param string $startedAt
-     * @param string $finishedAt
+     * @param DateTimeImmutable $startedAt
+     * @param DateTimeImmutable $finishedAt
      * @param int $nbAdult
      * @return int
      * @throws Exception
      */
-    public function makeWithData(string $startedAt, string $finishedAt, int $nbAdult): int
+    public function makeWithData(DateTimeImmutable $startedAt, DateTimeImmutable $finishedAt, int $nbAdult): int
     {
         $baseSeason = [
             'price' => 80_00
         ];
 
         $period = new DatePeriod(
-            new DateTime($startedAt),
+            $startedAt,
             new DateInterval('P1D'),
-            new DateTime($finishedAt)
+            $finishedAt
         );
+
+        $hasBooking = Booking::query()->includePeriod($period)->exists();
+        if ($hasBooking) {
+            $message = 'Le créneau demandé est déjà réservé.';
+            throw ValidationException::withMessages(['started_at' => $message]);
+        }
 
         $finalPrice = 5_00 * ($nbAdult - 1);
 
@@ -96,9 +119,9 @@ class BookingController extends Controller
         $seasons = Season::query()->includePeriod($period)->get();
         foreach ($period as $current) {
             $selectedSeason = $seasons
-                ->where('started_at', '<=', $current->format('Y-m-d'))
-                ->where('finished_at', '>=', $current->format('Y-m-d'))
-                ->toArray()[0] ?? $baseSeason;
+                    ->where('started_at', '<=', $current->format('Y-m-d'))
+                    ->where('finished_at', '>=', $current->format('Y-m-d'))
+                    ->toArray()[0] ?? $baseSeason;
             $finalPrice += $selectedSeason['price'];
         }
 

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Models\Post;
 use App\Models\Category;
+use App\Optimizer\OptimizerChainFactory;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Redirector;
@@ -13,6 +14,9 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Contracts\View\Factory;
 use App\Http\Requests\PostStoreFormRequest;
+use MyLogger;
+use Spatie\ImageOptimizer\OptimizerChain;
+use Spatie\LaravelImageOptimizer\Facades\ImageOptimizer;
 
 class PostController extends Controller
 {
@@ -41,20 +45,25 @@ class PostController extends Controller
 
     public function edit(int $id): View|Factory
     {
-        $posts = Post::find($id);
+        $post = Post::find($id);
         $categories = Category::All();
-        return view('admin.post.edit', compact('posts', 'categories'));
+        return view('admin.post.edit', compact('post', 'categories'));
     }
 
     public function store(PostStoreFormRequest $request): Redirector|RedirectResponse
     {
         $post = $this->storePost($request->all());
-
         $file = $request->file('image_path');
-        $filename = Str::uuid() . '.' . $file->extension();
+        $filename = $request->get('image_name') . "." . $file->extension();
         $file->storeAs('img', $filename ,'public');
+        $path = 'C:\\DEV\\leClosMesnilLaravel\\storage\\app\\public\\img\\' . $filename;
+        $filenameOpti = $request->get('image_name') . "Opti" . "." . $file->extension();
+        $pathOpti = "C:\\DEV\\leClosMesnilLaravel\\storage\\app\\public\\img\\" .$filenameOpti;
+        $optimizerChain = OptimizerChainFactory::create();
+        $optimizerChain->useLogger(new MyLogger());
+        $optimizerChain->optimize($path, $pathOpti);
 
-        $post->image_path = $filename;
+        $post->image_path = $filenameOpti;
         $post->save();
 
         return redirect()
@@ -73,10 +82,16 @@ class PostController extends Controller
 
 
         $file = $request->file('image_path');
-        $filename = Str::uuid() . '.' . $file->extension();
+        $filename = $request->get('image_name') . "." . $file->extension();
         $file->storeAs('img', $filename ,'public');
+        $path = 'C:\\DEV\\leclosmesnil\\storage\\app\\public\\img\\' . $filename;
+        $filenameOpti = $request->get('image_name') . "Opti" . "." . $file->extension();
+        $pathOpti = "C:\\DEV\\leclosmesnil\\storage\\app\\public\\img\\" .$filenameOpti;
+        $optimizerChain = OptimizerChainFactory::create();
+        $optimizerChain->useLogger(new MyLogger());
+        $optimizerChain->optimize($path, $pathOpti);
 
-        $post->image_path = $filename;
+        $post->image_path = $filenameOpti;
         $post->save();
 
         return redirect()

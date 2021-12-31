@@ -1,5 +1,5 @@
 // Body
-$body-bg: #FFFFF4;
+$body-bg: #fbfbff;
 $body-color: #2F3640;
 
 // Typography
@@ -11,14 +11,16 @@ $font-size-nav-link: $font-size-base * 1.25;
 $font-size-blog-span: $font-size-base * 0.9;
 $font-size-blog-title: $font-size-base * 2;
 $line-height-base: 1.8;
-$letter-spacing: 2px;
+$letter-spacing: 0.5px;
 
 // Colors
 $dark: #2F3640;
 $warning: #FFA333;
 $primary: #327882;
+$danger: #ff7675;
 $secondary: #FFA333;
 $gray: #a4b0be;
+$white: #fbfbff;
 $navbar-light-color: rgba($primary, .55);
 
 
@@ -29,5 +31,8 @@ $spacer: 2rem;
 $progress-bar-bg: $gray;
 
 // Form validation
-
 $enable-validation-icons: false;
+
+// Z-Index
+$zindex-dropdown: 1100;
+

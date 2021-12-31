@@ -14,6 +14,7 @@ return [
     */
 
     'failed' => 'Impossible de trouver un compte correspondant à cette adresse e-mail.',
+    'full_phone' => 'Le numéro de téléphone est incorrecte',
     'password' => 'Le mot de passe saisi est incorecte',
     'throttle' => 'Trop de tentative de connections. Veuillez réessayer dans :seconds secondes.',
 

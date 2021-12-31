@@ -7,14 +7,26 @@
 // Bootstrap
 @import '../../node_modules/bootstrap/scss/bootstrap.scss';
 
-// Font Awesome
-$fa-font-path:        "../webfonts";
-@import "~@fortawesome/fontawesome-free/scss/fontawesome" ;
-@import "~@fortawesome/fontawesome-free/scss/solid" ;
-@import "~@fortawesome/fontawesome-free/scss/brands" ;
-@import "~@fortawesome/fontawesome-free/scss/regular" ;
+// DatePicker
+@import 'node_modules/vanillajs-datepicker/sass/datepicker';
+@import 'node_modules/vanillajs-datepicker/sass/mixins';
 
-*,*:after,*:before{
+// Intl-tel-input
+$flagsImagePath: "/img/";
+@import "../../node_modules/intl-tel-input/src/css/intlTelInput.scss";
+
+// Font Awesome
+$fa-font-path: "../webfonts";
+@import "~@fortawesome/fontawesome-free/scss/fontawesome";
+@import "~@fortawesome/fontawesome-free/scss/solid";
+@import "~@fortawesome/fontawesome-free/scss/brands";
+@import "~@fortawesome/fontawesome-free/scss/regular";
+
+:root {
+
+}
+
+*, *:after, *:before {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
@@ -23,6 +35,7 @@ $fa-font-path:        "../webfonts";
 body {
     background-color: $body-bg;
     color: $body-color;
+    letter-spacing: $letter-spacing;
     display: flex;
     flex-direction: column;
     width: 100%;
@@ -38,6 +51,7 @@ body {
             font-size: $font-size-base*2.5;
         }
     }
+
     .nav-link {
         font-size: $font-size-base;
         font-weight: bold;
@@ -49,6 +63,7 @@ body {
 
 .section-blog {
     padding: 25px 0 16px 0;
+
     .bg-badge {
         font-size: $font-size-blog-span;
         background-color: transparent;
@@ -57,33 +72,45 @@ body {
             font-size: $font-size-base;
         }
     }
+
     .created-at {
         font-size: $font-size-sm;
         @media (min-width: 576px) {
             font-size: $font-size-base;
         }
     }
-    p{
+
+    p {
         font-size: $font-size-base*1.15;
     }
+
     h2 {
         font-size: $font-size-base*1.5;
         font-weight: bold;
     }
-    img {
-        filter: drop-shadow(0px 0px 4px rgba(47, 54, 64, 0.5));
-        border-radius: 10px;
-    }
-    #visible {
-        font-weight: 300;
-        overflow: hidden;
-        max-width: 75ch;
-        display: none;
+
+    .postList {
+        border-radius: 8px 8px 0 0;
+        margin-bottom: 8px;
+        width: 100%;
+        height: 250px;
+        object-fit: cover;
         @media (min-width: 576px) {
-            font-size: $font-size-base*1.15;
-            display: block;
+            height: 300px;
         }
     }
+
+    .singlePost {
+        border-radius: 8px 8px 0 0;
+        margin-bottom: 8px;
+        width: 100%;
+        height: 300px;
+        object-fit: cover;
+        @media (min-width: 576px) {
+            height: 550px;
+        }
+    }
+
     a {
         font-size: $font-size-base;
         @media (min-width: 576px) {
@@ -91,51 +118,75 @@ body {
         }
     }
 }
-    footer {
-        background-color: $light;
-        i {
-            margin: 25px 8px 16px 0;
-            font-size: 24px;
-            color: $primary;
-        }
-        p {
-            margin: 25px 0 16px 0;
-        }
-        .nav {
-            margin-top: -5px;
-        }
+
+footer {
+    background-color: $light;
+
+    i {
+        margin: 25px 8px 16px 0;
+        font-size: 24px;
+        color: $primary;
     }
 
-    .btn-action {
-        border-radius: 5px;
-        border: 0;
-        padding: 4px 0 4px 0;
-        margin: 8px 0 16px 8px;
-        @media (min-width: 576px) {
-            padding: 8px 0 8px 0;
-            margin: 16px 0 32px 16px;
-            background-color: red;
-        }
+    p {
+        margin: 25px 0 16px 0;
     }
-    .btn-primary-action {
-        @extend .btn-action;
-        background-color: #0A505A;
-        color: #F7FEFF;
+
+    .nav {
+        margin-top: -5px;
     }
-    .btn-secondary-action {
-        @extend .btn-action;
-        background-color: transparent;
-        text-decoration: none;
-        a {
-            color: $dark 50;
-        }
+}
+
+.btn-action {
+    border-radius: 5px;
+    border: 0;
+    padding: 4px 0 4px 0;
+    margin: 8px 0 16px 8px;
+    @media (min-width: 576px) {
+        padding: 8px 0 8px 0;
+        font-size: $font-size-base*1.15;
+        margin: 16px 0 32px 16px;
     }
+}
+
+.btn-cta {
+    @extend .btn-primary-action;
+    padding: 20px;
+    border-radius: 50px;
+}
+
+.disabled-btn-cta {
+    @extend .btn-cta;
+    background-color: $grey-light !important;
+    color: $light !important;
+}
+
+.btn-primary-action {
+    @extend .btn-action;
+    background-color: #0A505A;
+    color: #F7FEFF;
+    transition: 0.175s ease-in-out;
+
+    &:hover {
+        background-color: #177482;
+    }
+}
+
+.btn-secondary-action {
+    @extend .btn-action;
+    background-color: transparent;
+    text-decoration: none;
+
+    a {
+        color: $dark 50;
+    }
+}
 
 .cancelUpdate {
     cursor: pointer;
 }
 
-.editLink:hover{
+.editLink:hover {
     color: $white;
 }
 
@@ -156,31 +207,30 @@ aside {
     }
 }
 
-    .input-block {
-        width: 100%;
-        margin-bottom: 20px;
-    }
+.input-block {
+    width: 100%;
+    margin-bottom: 20px;
+}
 
-    .input-password {
-        position: relative;
-    }
+.input-password {
+    position: relative;
+}
 
-    .password-show-button {
-        position: absolute;
-        right: 10px;
-        top: 5px;
-        width: 32px;
-        height: 32px;
-        color: #7f8c8d;
-        cursor: pointer;
-    }
+.password-show-button {
+    position: absolute;
+    right: 10px;
+    top: 5px;
+    width: 32px;
+    height: 32px;
+    color: #7f8c8d;
+    cursor: pointer;
+}
 
 
-
-    .password-info {
-        display: block;
-        padding: 10px 0 5px;
-    }
+.password-info {
+    display: block;
+    padding: 10px 0 5px;
+}
 
 .is-valid {
     border-color: $success;
@@ -198,6 +248,207 @@ aside {
     background-size: calc(0.75em + 0.375rem) calc(0.75em + 0.375rem);
 }
 
+.hoverTrash {
+    color: $dark;
+
+    &:hover {
+        transition: 0.25s;
+        color: $danger;
+        cursor: pointer;
+    }
+}
+
+.hoverEdit {
+    color: $dark;
+
+    &:hover {
+        transition: 0.25s;
+        color: $warning;
+        cursor: pointer;
+    }
+}
+
+.iti__flag {
+    background-image: url("../../node_modules/intl-tel-input/build/img/flags.png");
+}
+
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+    .iti__flag {
+        background-image: url("../../node_modules/intl-tel-input/build/img/flags@2x.png");
+    }
+}
+
+
+.big-image {
+    height: 450px;
+    width: 100%;
+}
+
+.small-image {
+    height: 217px;
+    width: 100%;
+}
+
+.big-image > img, .small-image > img {
+    object-fit: cover;
+    height: 100%;
+    width: 100%;
+}
+
+.imgRoundedBottomRight {
+    border-radius: 0 0 15px 0;
+}
+
+.imgRoundedTopBottomRight {
+    border-radius: 15px 0 0 15px;
+}
+
+.imgRoundedTopRight {
+    border-radius: 0 15px 0 0;
+}
+
+.iti {
+    display: block;
+}
+
+$dp-background-color: $white !default;
+$dp-border-color: $border-color !default;
+$dp-border-radius: $border-radius !default;
+$dp-border-radius-small: $border-radius-sm !default;
+$dp-line-height-base: 1.5 !default;
+$dp-font-size-normal: $font-size-base !default;
+$dp-font-size-small: $font-size-sm !default;
+$dp-font-weight-semibold: 600 !default;
+$dp-font-weight-bold: $font-weight-bold !default;
+$dp-dropdown-offset: 4px !default;
+$dp-dropdown-shadow: $dropdown-box-shadow !default;
+$dp-dropdown-z: $zindex-dropdown !default;
+
+$dp-title-background-color: $light !default;
+
+$dp-cell-size-base: 2.25rem !default;
+$dp-cell-focus-background-color: darken($dropdown-link-hover-bg, 2.5) !default;
+$dp-cell-prevnext-color: color('gray') !default;
+$dp-cell-disabled-color: $dropdown-link-disabled-color !default;
+$dp-cell-selected-background-color: $dropdown-link-active-bg !default;
+$dp-cell-selected-color: $dropdown-link-active-color !default;
+$dp-cell-selected-font-weight: 600 !default;
+$dp-cell-today-background-color: $teal !default;
+$dp-cell-today-color: $white !default;
+$dp-cell-highlighted-background-color: $gray-100 !default;
+$dp-range-start-end-background-color: $secondary !default;
+$dp-range-start-end-color: $dp-cell-selected-color !default;
+$dp-range-background-color: $gray-200 !default;
+$dp-range-today-background-color: $dp-cell-today-background-color !default;
+$dp-week-color: $gray-300 !default;
+
+$dp-footer-background-color: $light !default;
+
+$dp-input-in-edit-border-color: darken($input-focus-border-color, 5%) !default;
+$dp-input-in-edit-focus-box-shadow-size: 0 0 0.25em 0.25em !default;
+
+@mixin dp-button {
+    .btn {
+        // use custom version of .btn-light
+        $background: $light;
+        $border: $light;
+        $hover-background: darken($background, 7.5%);
+        $hover-border: darken($border, 10%);
+        $active-background: darken($background, 10%);
+        $active-border: darken($border, 12.5%);
+
+        border-color: $border;
+        background-color: $dp-background-color;
+
+        &:hover {
+            border-color: $hover-border;
+            background-color: $hover-background;
+            color: color-contrast($hover-background);
+        }
+
+        &:focus {
+            border-color: $hover-border;
+            box-shadow: 0 0 0 $btn-focus-width rgba(mix(color-contrast($background), $border, 15%), 0.5);
+            background-color: $hover-background;
+            color: color-contrast($hover-background);
+        }
+
+        &:disabled {
+            border-color: $border;
+            background-color: $background;
+            color: color-contrast($background);
+        }
+
+        &:not(:disabled):active {
+            border-color: $active-border;
+            background-color: $active-background;
+            color: color-contrast($active-background);
+
+            &:focus {
+                box-shadow: 0 0 0 $btn-focus-width rgba(mix(color-contrast($background), $border, 15%), 0.5);
+            }
+        }
+
+        .datepicker-header & {
+            @include dp-header-button-common;
+        }
+
+        .datepicker-footer & {
+            @include dp-footer-button-common;
+        }
+    }
+}
+
+.bookingForm {
+    border: 1px solid rgb(221, 221, 221);
+    border-radius: 12px;
+    padding: 24px;
+    box-shadow: rgba(0, 0, 0, 0.12) 0px 6px 16px;
+
+    .price {
+        font-size: $font-size-base*1.5;
+        font-weight: bold;
+    }
+
+    i {
+        font-size: $font-size-base*0.75;
+        color: #ff7675;
+    }
+
+    .rating {
+        font-weight: bold;
+    }
+
+    .nbComment {
+        color: $greyText;
+        padding-left: 4px;
+        font-weight: bold;
+        text-decoration: underline;
+        font-size: $font-size-blog-span;
+    }
+
+    button {
+        font-weight: bold;
+        font-size: $font-size-base;
+        letter-spacing: 0.2px;
+    }
+}
+
+.commentBtn {
+    a {
+        padding: 4px 12px 4px 8px;
+        border-radius: 5px;
+        text-decoration: none;
+        font-size: $font-size-base;
+        font-weight: bold;
+        transition: 0.3s ease-in-out;
+
+        &:hover {
+            --bs-bg-opacity: 0.15;
+            background-color: rgba($primary, var(--bs-bg-opacity));
+        }
+    }
+}
 
 
 

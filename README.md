@@ -23,6 +23,8 @@ folder.
 Starting Laravel development server: http://127.0.0.1:8000
 [Thu Apr 15 21:30:12 2021] PHP 8.0.0 Development Server (http://127.0.0.1:8000) started
 ```
+# installation binairy files (optimisation pictures)
+[spatie image-optimizer](https://github.com/spatie/image-optimizer)
 
 # Larastan
 Larastan is a static analysis command line tool built on top of PHPStan and focuses on finding errors in your Laravel code before running it.

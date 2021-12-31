@@ -39,7 +39,7 @@ class CommentController extends Controller
         $comment = CommentPost::find($id);
         $comment->content = $validated['content'];
         $comment->save();
-        return redirect()->route('RouteShowPost', $comment->posts->slug);
+        return redirect()->route('post.show', $comment->posts->slug);
     }
 
     public function destroy(int $comment): \Illuminate\Http\RedirectResponse

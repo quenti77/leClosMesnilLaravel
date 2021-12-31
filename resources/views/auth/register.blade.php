@@ -1,5 +1,8 @@
 @extends('layouts.app')
-
+@section('scripts')
+    <script type="text/javascript" src="{{ asset('js/intlTelInput.js') }}" defer></script>
+    <script type="text/javascript" src="{{ asset('js/passwordChecker.js') }}" defer></script>
+@endsection
 @section('content')
     <div class="container">
         <div class="row justify-content-center">
@@ -51,13 +54,10 @@
                                                class="form-control @error('phone') is-invalid @enderror"
                                                name="phone"
                                                placeholder="Numéro de téléphone"
-                                               value="{{ old('phone') }}" autocomplete="name" autofocus>
-                                        @error('phone')
-                                        <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                        </span>
-                                        @enderror
+                                               value="" autocomplete="phone" autofocus>
                                     </label>
+                                    <span id="valid-msg" class="iti__hide">✓ Valid</span>
+                                    <span id="error-msg" class="iti__hide"></span>
                                 </div>
                             </div>
                             <div class="row justify-content-center">

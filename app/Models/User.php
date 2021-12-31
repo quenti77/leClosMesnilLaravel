@@ -22,7 +22,7 @@ use Illuminate\Support\Str;
  * @property DateTime $created_at
  * @property DateTime $updated_at
  */
-class User extends Authenticatable
+class User extends Authenticatable implements MustVerifyEmail
 {
     use HasFactory, Notifiable;
 

@@ -7,11 +7,12 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Str;
 
 /**
- * @property int $id
+ * @property string $id
  * @property string $user_id
- * @property int $category_id
+ * @property string $category_id
  * @property string $title
  * @property string $slug
  * @property string $content
@@ -25,6 +26,27 @@ class Post extends Model
     use HasFactory;
 
     protected $table = 'posts';
+
+    /**
+     * The "type" of the primary key ID.
+     *
+     * @var string
+     */
+    protected $keyType = 'string';
+
+    /**
+     * Indicates if the IDs are auto-incrementing.
+     *
+     * @var bool
+     */
+    public $incrementing = false;
+
+    protected static function booted()
+    {
+        static::creating(function ($posts) {
+            $posts->id = (string) Str::uuid();
+        });
+    }
 
     public function category(): BelongsTo
     {

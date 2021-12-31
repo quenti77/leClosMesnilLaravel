@@ -12,7 +12,7 @@
                         <form method="POST" action="{{ route('admin.post.store') }}" enctype="multipart/form-data">
                             @csrf
                             <div class="row mb-4 me-0">
-                                <span class="text-danger">*Tous les champs sont obligatoires</span>
+                                <span class="text-danger fw-bold">*Tous les champs sont obligatoires</span>
                             </div>
                             <div class="form-group row mb-4">
                                 <div class="col-md-12">
@@ -40,6 +40,20 @@
                                            name="image_path"
                                            value="{{ old('image_path') }}" autofocus>
                                     @error('image_path')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                    @enderror
+                                </div>
+                            </div>
+                            <div class="form-group row my-4">
+                                <div class="col-md-12">
+                                    <input id="image_name" type="text"
+                                           placeholder="Entrez le nom de votre image..."
+                                           class="form-control @error('image_name') is-invalid @enderror"
+                                           name="image_name"
+                                           value="{{ old('image_name') }}" autofocus>
+                                    @error('image_name')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>

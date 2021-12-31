@@ -13,7 +13,9 @@
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" type="text/css" rel="stylesheet">
-    <script src="https://cdn.tiny.cloud/1/85260khgyt3z8u1tbp3820vnlqz4mcbhcz6xw0e5govencm7/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
+    <link href="{{ asset('css/main.css') }}" type="text/css" rel="stylesheet">
+    <script src="https://cdn.tiny.cloud/1/85260khgyt3z8u1tbp3820vnlqz4mcbhcz6xw0e5govencm7/tinymce/5/tinymce.min.js"
+            referrerpolicy="origin"></script>
     <script type="text/javascript">
         tinymce.init({
             selector: '#content',
@@ -33,8 +35,7 @@
             content_css: 'css/content.css'
         });
     </script>
-    <script type="text/javascript" src="{{ asset('js/updateEditComment.js') }}" defer></script>
-    <script type="text/javascript" src="{{ asset('js/passwordChecker.js') }}" defer></script>
+    @yield("scripts")
 </head>
 <body>
 <header class="container-fluid">
@@ -78,12 +79,20 @@
                                     {{ __('Déconnexion') }}
                                 </a>
                                 @if(auth()->user()->is_admin == 1)
-                                <a class="dropdown-item" href="{{ route('admin.post.index') }}">Liste des posts</a>
-                                <a class="dropdown-item" href="{{ route('admin.post.create') }}">Ecrire un article </a>
+                                    <a class="dropdown-item" href="{{ route('admin.post.index') }}">Liste des posts</a>
+                                    <a class="dropdown-item" href="{{ route('admin.post.create') }}">Ecrire un
+                                        article </a>
                                     <a class="dropdown-item"
                                        href="{{ route('admin.category.index') }}">Liste des catégories</a>
                                     <a class="dropdown-item"
                                        href="{{ route('admin.category.create') }}">Créer une catégorie</a>
+
+                                    <a class="dropdown-item" href="{{ route('admin.season.index') }}">
+                                        Liste des saisons
+                                    </a>
+                                    <a class="dropdown-item" href="{{ route('admin.season.create') }}">
+                                        Creation saison
+                                    </a>
                                 @endif
                                 <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
                                     @csrf
@@ -96,16 +105,16 @@
         </div>
     </nav>
 </header>
-<main class="container">
-        @include('partials.flashMessage')
-        @yield('content')
+<main class="container-fluid mb-3">
+    @include('partials.flashMessage')
+    @yield('content')
 </main>
 <footer class="mt-auto bg-primary text-white text-center text-lg-start">
     <div class="container p-4">
         <div class="row">
             <div class="col-lg-6 col-md-12 mb-4 mb-md-0">
-                <h5 class="text-uppercase">Le Clos Mesnil</h5>
-                <p>
+                <h3 class="fw-bold">Le Clos Mesnil</h3>
+                <p class="text-start">
                     Fatigué du stresse de la ville, vous avez besoin d'un endroit calme et clos où vous relaxer,
                     le Clos Mesnil est l'endroit idéal pour vous détendre, le calme de la campagne vous apaisera et
                     vous pourrez profiter de la plage du Tréport pour faire une petite baignade ou vous baladez dans la
@@ -114,11 +123,12 @@
                     pour un moment cocooning en famille. Le gîte se trouve à 2h de Paris.
                 </p>
             </div>
-            <div class="col-lg-3 col-md-6 mb-4 mb-md-0">
-                <h5 class="text-uppercase">catégories</h5>
+            <div class="col-lg-3 col-md-6 mb-4 mb-md-0 text-start">
+                <h3>Catégories</h3>
                 <ul class="navbar-nav">
                     @isset($category)
-                        <li class="nav-item"><a class="nav-link text-white" href="{{ route("post.index") }}">Tous les posts</a>
+                        <li class="nav-item"><a class="nav-link text-white" href="{{ route("post.index") }}">Tous les
+                                posts</a>
                         </li>
                     @endisset
                     @forelse ($categories as $c)
@@ -130,12 +140,12 @@
                     @endforelse
                 </ul>
             </div>
-            <div class="col-lg-3 col-md-6 mb-4 mb-md-0">
-                <h5 class="text-uppercase">contact</h5>
+            <div class="col-lg-3 col-md-6 mb-4 mb-md-0 mr-1 text-start">
+                <h3>Contact</h3>
                 <ul class="navbar-nav">
                     <li class="nav-item">
-                        <a href="tel:0608009545" class="nav-link text-white">
-                            <i class="fas fa-phone-alt text-white"></i>0608009545</a>
+                        <a href="#" class="nav-link text-white">
+                            <i class="fas fa-phone-alt text-white"></i>06000000</a>
                     </li>
                     <li class="nav-item">
                         <a href="mailto:corentinfarcy1@gmail.com" class="nav-link text-white">
