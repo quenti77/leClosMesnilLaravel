@@ -23,9 +23,9 @@ const getBookings = async () => {
 }
 
 
-const getPeriode = async (bookingDates) => {
+const getPeriode = async () => {
     const bookings = await getBookings();
-    bookingDates = bookings.data.reduce((dates, booking) => {
+    const bookingDates = bookings.data.reduce((dates, booking) => {
         const startedAt = sqlToDate(booking.started_at)
         const finishedAt = sqlToDate(booking.finished_at)
         let currentAt = startedAt
@@ -49,6 +49,7 @@ getPeriode().then(bookingDates => {
             orientation: "bottom",
             nextArrow: '<i class=\"fas fa-chevron-right\"></i>',
             prevArrow: '<i class=\"fas fa-chevron-left\"></i>',
+            minDate: new Date(),
             datesDisabled: [...bookingDates],
         });
     }

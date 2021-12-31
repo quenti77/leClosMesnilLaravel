@@ -24,9 +24,12 @@ class CommentPostFactory extends Factory
      */
     public function definition()
     {
+        $users = User::all('id');
+        $posts = Post::all('id');
+
         return [
-            'post_id' => Post::factory(),
-            'author' => User::all(),
+            'post_id' => $this->faker->randomElement($posts),
+            'author' => $this->faker->randomElement($users),
             'content' => $this->faker->paragraph(1)
         ];
     }
