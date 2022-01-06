@@ -3,11 +3,11 @@
 namespace App\Models;
 
 use App\Models\Traits\PeriodableScope;
+use App\Models\Traits\Uuid;
 use DateTime;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Support\Str;
 
 /**
  * @property string $id
@@ -24,30 +24,9 @@ use Illuminate\Support\Str;
  */
 class Booking extends Model
 {
-    use HasFactory, PeriodableScope;
+    use HasFactory, PeriodableScope, Uuid;
 
     protected $table = 'bookings';
-
-    /**
-     * The "type" of the primary key ID.
-     *
-     * @var string
-     */
-    protected $keyType = 'string';
-
-    /**
-     * Indicates if the IDs are auto-incrementing.
-     *
-     * @var bool
-     */
-    public $incrementing = false;
-
-    protected static function booted()
-    {
-        static::creating(function ($booking) {
-            $booking->id = (string) Str::uuid();
-        });
-    }
 
     public function user(): BelongsTo
     {

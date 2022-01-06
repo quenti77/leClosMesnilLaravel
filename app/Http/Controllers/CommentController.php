@@ -7,6 +7,7 @@ use App\Models\Post;
 
 use App\Models\CommentPost;
 use App\Http\Requests\TemplateForm;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 
 class CommentController extends Controller
@@ -16,7 +17,7 @@ class CommentController extends Controller
         $this->middleware('auth');
     }
 
-    public function store($post, Request $request): \Illuminate\Http\RedirectResponse
+    public function store($post, Request $request): RedirectResponse
     {
         $validated = $this->getValidatedData($request);
 
@@ -24,7 +25,7 @@ class CommentController extends Controller
         $comment = new CommentPost();
         $comment->post_id = $p->id;
         $comment->content = $validated['content'];
-        $comment->author = auth()->user()->id;
+        $comment->author_id = auth()->user()->id;
         $comment->save();
         $p->comment_count += 1;
         $p->save();
@@ -32,7 +33,7 @@ class CommentController extends Controller
         return redirect()->route('post.show', $p->slug);
     }
 
-    public function update(int $id, Request $request): \Illuminate\Http\RedirectResponse
+    public function update(int $id, Request $request): RedirectResponse
     {
         $validated = $this->getValidatedData($request);
 
@@ -42,14 +43,14 @@ class CommentController extends Controller
         return redirect()->route('post.show', $comment->posts->slug);
     }
 
-    public function destroy(int $comment): \Illuminate\Http\RedirectResponse
+    public function destroy(int $comment): RedirectResponse
     {
         $comment = CommentPost::find($comment);
         if ($comment === null) {
             return back()->with('error', 'comment not found');
         }
-        $comment->posts->comment_count -= 1;
-        $comment->posts->save();
+        $comment->post->comment_count -= 1;
+        $comment->post->save();
 
         $comment->delete();
         return back();
