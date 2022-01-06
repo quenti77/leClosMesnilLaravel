@@ -2,12 +2,12 @@
 
 namespace App\Models;
 
+use App\Models\Traits\Uuid;
+use DateTime;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Str;
 
 /**
  * @property string $id
@@ -23,30 +23,9 @@ use Illuminate\Support\Str;
  */
 class Post extends Model
 {
-    use HasFactory;
+    use HasFactory, Uuid;
 
     protected $table = 'posts';
-
-    /**
-     * The "type" of the primary key ID.
-     *
-     * @var string
-     */
-    protected $keyType = 'string';
-
-    /**
-     * Indicates if the IDs are auto-incrementing.
-     *
-     * @var bool
-     */
-    public $incrementing = false;
-
-    protected static function booted()
-    {
-        static::creating(function ($posts) {
-            $posts->id = (string) Str::uuid();
-        });
-    }
 
     public function category(): BelongsTo
     {
@@ -58,7 +37,7 @@ class Post extends Model
         return $this->hasMany(CommentPost::class, 'post_id');
     }
 
-    public function user()
+    public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
     }

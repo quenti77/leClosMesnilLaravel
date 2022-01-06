@@ -8,35 +8,26 @@ use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
 
-
 class PostFactory extends Factory
 {
-    /**
-     * The name of the factory's corresponding model.
-     *
-     * @var string
-     */
     protected $model = Post::class;
 
     /**
-     * Define the model's default state.
-     *
-     * @return array
+     * @inheritDoc
      */
-    public function definition()
+    public function definition(): array
     {
-        $users = User::all("id");
-        $categories = Category::all("id");
-        $title = $this->faker->sentences(1, true);
-        $slug = Str::slug($title);
+        $title = $this->faker->sentence();
+
+        /** @noinspection PhpPossiblePolymorphicInvocationInspection */
         return [
-            'user_id' => $this->faker->randomElement($users),
-            'category_id' => $this->faker->randomElement($categories),
+            'user_id' => User::factory()->active()->admin(),
+            'category_id' => Category::factory(),
             'title' => $title,
-            'slug' => $slug,
-            'content' => $this->faker->sentences(30, true),
+            'slug' => Str::slug($title),
+            'content' => $this->faker->paragraphs(asText: true),
             'image_path' => 'https://via.placeholder.com/325x217',
-            'comment_count' => 0,
+            'comment_count' => 0
         ];
     }
 }

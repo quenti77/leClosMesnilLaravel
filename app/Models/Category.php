@@ -2,10 +2,11 @@
 
 namespace App\Models;
 
+use App\Models\Traits\Uuid;
+use DateTime;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
-use Illuminate\Support\Str;
 
 /**
  * @property string $id
@@ -16,30 +17,9 @@ use Illuminate\Support\Str;
  */
 class Category extends Model
 {
-    use HasFactory;
+    use HasFactory, Uuid;
 
     protected $table = 'categories';
-
-    /**
-     * The "type" of the primary key ID.
-     *
-     * @var string
-     */
-    protected $keyType = 'string';
-
-    /**
-     * Indicates if the IDs are auto-incrementing.
-     *
-     * @var bool
-     */
-    public $incrementing = false;
-
-    protected static function booted()
-    {
-        static::creating(function ($category) {
-            $category->id = (string) Str::uuid();
-        });
-    }
 
     public function posts(): HasMany
     {

@@ -6,31 +6,21 @@ use App\Models\CommentPost;
 use App\Models\Post;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
-use Illuminate\Support\Facades\Auth;
 
 class CommentPostFactory extends Factory
 {
-    /**
-     * The name of the factory's corresponding model.
-     *
-     * @var string
-     */
     protected $model = CommentPost::class;
 
     /**
-     * Define the model's default state.
-     *
-     * @return array
+     * @inheritDoc
      */
-    public function definition()
+    public function definition(): array
     {
-        $users = User::all('id');
-        $posts = Post::all('id');
-
+        /** @noinspection PhpPossiblePolymorphicInvocationInspection */
         return [
-            'post_id' => $this->faker->randomElement($posts),
-            'author' => $this->faker->randomElement($users),
-            'content' => $this->faker->paragraph(1)
+            'post_id' => Post::factory(),
+            'author_id' => User::factory()->active(),
+            'content' => $this->faker->paragraph()
         ];
     }
 }
