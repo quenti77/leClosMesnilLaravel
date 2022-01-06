@@ -3,6 +3,8 @@
 namespace App\Transformer;
 
 use App\Models\Post;
+use DateTime;
+use Exception;
 use League\Fractal\TransformerAbstract;
 
 class PostTransformer extends TransformerAbstract
@@ -10,9 +12,14 @@ class PostTransformer extends TransformerAbstract
     protected $availableIncludes = ['category'];
     protected $defaultIncludes = ['category'];
 
+    /**
+     * @throws Exception
+     */
     public function transform(Post $post): array
     {
-        $createdAt = new \DateTime($post->created_at);
+        /** @var string $created */
+        $created = $post->created_at;
+        $createdAt = new DateTime($created);
 
         return [
             'id' => $post->id,

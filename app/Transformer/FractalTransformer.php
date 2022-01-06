@@ -23,7 +23,7 @@ trait FractalTransformer
     public function collection(
         mixed $resources,
         TransformerAbstract $transformer,
-        $paginator = null
+        mixed $paginator = null
     ): array {
         $collection = new Collection($resources, $transformer);
         if ($paginator) {

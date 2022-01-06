@@ -9,6 +9,7 @@ use App\Transformer\BookingTransformer;
 use App\Transformer\FractalTransformer;
 use DateInterval;
 use DatePeriod;
+use DateTime;
 use DateTimeImmutable;
 use Exception;
 use Illuminate\Contracts\View\Factory;
@@ -18,6 +19,7 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Routing\Redirector;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\ValidationException;
+use InvalidArgumentException;
 
 class BookingController extends Controller
 {
@@ -63,14 +65,16 @@ class BookingController extends Controller
         $format = 'd/m/Y';
         $startedAt = DateTimeImmutable::createFromFormat($format, $bookingData['started_at']);
         $finishedAt = DateTimeImmutable::createFromFormat($format, $bookingData['finished_at']);
-        $startedAt->format('Y-m-d');
-        $finishedAt->format('Y-m-d');
         $nbAdult = $bookingData['nb_adult'];
+
+        if ($startedAt === false || $finishedAt === false) {
+            throw new InvalidArgumentException('Started or Finished date are not a valid format');
+        }
 
         $booking ??= new booking();
 
-        $booking->started_at = $startedAt;
-        $booking->finished_at = $finishedAt;
+        $booking->started_at = DateTime::createFromImmutable($startedAt);
+        $booking->finished_at = DateTime::createFromImmutable($finishedAt);
         $booking->nb_adult = $bookingData['nb_adult'];
         $booking->nb_children = $bookingData['nb_children'];
         $booking->price = $this->makeWithData($startedAt, $finishedAt, $nbAdult);
@@ -125,6 +129,6 @@ class BookingController extends Controller
             $finalPrice += $selectedSeason['price'];
         }
 
-        return $finalPrice;
+        return (int) $finalPrice;
     }
 }

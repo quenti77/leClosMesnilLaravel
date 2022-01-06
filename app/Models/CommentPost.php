@@ -15,6 +15,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  * @property string $content
  * @property DateTime $created_at
  * @property DateTime $updated_at
+ * @property Post $post
  */
 class CommentPost extends Model
 {

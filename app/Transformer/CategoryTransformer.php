@@ -7,7 +7,7 @@ use League\Fractal\TransformerAbstract;
 
 class CategoryTransformer extends TransformerAbstract
 {
-    public function transform(Category $category)
+    public function transform(Category $category): array
     {
         return [
             'id' => $category->id,
