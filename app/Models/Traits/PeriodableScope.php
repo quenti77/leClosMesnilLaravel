@@ -6,7 +6,7 @@ use DatePeriod;
 
 trait PeriodableScope
 {
-    public function scopeIncludePeriod($query, DatePeriod $period)
+    public function scopeIncludePeriod(mixed $query, DatePeriod $period): mixed
     {
         return $query
             ->where(function ($query) use ($period) {

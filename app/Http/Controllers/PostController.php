@@ -22,7 +22,7 @@ class PostController extends Controller
         $nextAvailable = $posts->nextPageUrl() === null ? 0 : 1;
         $lastPosts = Post::OrderByDesc('created_at')->limit(5)->get();
         $categories = Category::all();
-        $currentPath = route(Route::currentRouteName());
+        $currentPath = route(Route::currentRouteName() ?? '');
 
         return view('post', compact('posts', 'categories', 'lastPosts', 'currentPath', 'nextAvailable'));
     }
@@ -53,6 +53,7 @@ class PostController extends Controller
 
     public function show(string $slug): View|Factory
     {
+        /** @var Post $post */
         $post = Post::with('comments.user')->where('slug', $slug)->first();
         $comments = $post->comments->sortByDesc('created_at');
         $categories = Category::all();

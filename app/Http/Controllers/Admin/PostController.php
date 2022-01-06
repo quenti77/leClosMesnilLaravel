@@ -2,20 +2,20 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Models\Post;
-use App\Models\Category;
-use App\Optimizer\OptimizerChainFactory;
-use Illuminate\Support\Str;
-use Illuminate\Http\Request;
-use Illuminate\Routing\Redirector;
-use Illuminate\Contracts\View\View;
 use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Http\RedirectResponse;
-use Illuminate\Contracts\View\Factory;
 use App\Http\Requests\PostStoreFormRequest;
+use App\Models\Category;
+use App\Models\Post;
+use App\Optimizer\OptimizerChainFactory;
+use Illuminate\Contracts\View\Factory;
+use Illuminate\Contracts\View\View;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\Request;
+use Illuminate\Http\UploadedFile;
+use Illuminate\Routing\Redirector;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Str;
 use MyLogger;
-use Spatie\ImageOptimizer\OptimizerChain;
 use Spatie\LaravelImageOptimizer\Facades\ImageOptimizer;
 
 class PostController extends Controller
@@ -53,7 +53,10 @@ class PostController extends Controller
     public function store(PostStoreFormRequest $request): Redirector|RedirectResponse
     {
         $post = $this->storePost($request->all());
+
+        /** @var UploadedFile $file */
         $file = $request->file('image_path');
+
         $filename = $request->get('image_name') . "." . $file->extension();
         $file->storeAs('img', $filename ,'public');
         $path = 'C:\\DEV\\leClosMesnilLaravel\\storage\\app\\public\\img\\' . $filename;
@@ -80,8 +83,9 @@ class PostController extends Controller
 
         $this->storePost($request->all(), $post);
 
-
+        /** @var UploadedFile $file */
         $file = $request->file('image_path');
+
         $filename = $request->get('image_name') . "." . $file->extension();
         $file->storeAs('img', $filename ,'public');
         $path = 'C:\\DEV\\leclosmesnil\\storage\\app\\public\\img\\' . $filename;

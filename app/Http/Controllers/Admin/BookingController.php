@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers\Admin;
 
-
+use App\Http\Requests\CategoryStoreRequest;
 use App\Models\Booking;
+use App\Models\Category;
+use App\Models\Post;
 use App\Models\Season;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;

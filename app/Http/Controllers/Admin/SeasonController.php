@@ -1,14 +1,19 @@
 <?php
 
 namespace App\Http\Controllers\Admin;
+
 use App\Http\Controllers\Controller;
 use App\Models\Season;
+use DateTime;
+use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Http\Request;
 use Illuminate\Contracts\View\View;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Routing\Redirector;
 use DateTimeImmutable;
+use InvalidArgumentException;
+
 class SeasonController extends Controller
 {
     public function __construct()
@@ -22,7 +27,7 @@ class SeasonController extends Controller
         return view('admin.season.index', compact('seasons'));
     }
 
-    public function create()
+    public function create(): Factory|View|Application
     {
         $seasons = Season::all();
         return view('admin.season.create', compact('seasons'));
@@ -37,20 +42,20 @@ class SeasonController extends Controller
             ->with(['success' => 'Création de la Saison']);
     }
 
-    public function show()
+    public function show(): void
     {
     }
 
-    public function edit()
+    public function edit(): void
     {
     }
 
 
-    public function update()
+    public function update(): void
     {
     }
 
-    public function destroy()
+    public function destroy(): void
     {
     }
 
@@ -59,11 +64,14 @@ class SeasonController extends Controller
         $format = 'd/m/Y';
         $startedAt = DateTimeImmutable::createFromFormat($format, $seasonData['started_at']);
         $finishedAt = DateTimeImmutable::createFromFormat($format,$seasonData['finished_at']);
-        $startedAt->format('Y-m-d');
-        $finishedAt->format('Y-m-d');
+
+        if ($startedAt === false || $finishedAt === false) {
+            throw new InvalidArgumentException('Started or Finished date are not a valid format');
+        }
+
         $season ??= new Season();
-        $season->started_at = $startedAt;
-        $season->finished_at = $finishedAt;
+        $season->started_at = DateTime::createFromImmutable($startedAt);
+        $season->finished_at = DateTime::createFromImmutable($finishedAt);
         $season->price = (int) $seasonData['price'] * 100;
         $season->save();
         return $season;
