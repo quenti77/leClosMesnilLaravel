@@ -5,9 +5,11 @@ use App\Http\Controllers\Admin\PostController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\SeasonController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Admin\BookingController;
 
 Route::resource('post', PostController::class);
 Route::resource('season', SeasonController::class);
+Route::resource('booking', BookingController::class);
 Route::middleware('optimizeImages')->group(function () {
     // all images will be optimized automatically
     Route::post('post.store', 'PostController@store');

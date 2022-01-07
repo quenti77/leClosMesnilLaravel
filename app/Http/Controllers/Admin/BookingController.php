@@ -7,15 +7,21 @@ use App\Models\Booking;
 use App\Models\Category;
 use App\Models\Post;
 use App\Models\Season;
+use App\Transformer\Admin\BookingTransformer;
+use App\Transformer\FractalTransformer;
+use Exception;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Support\Str;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Routing\Redirector;
+use DateTime;
 
 class BookingController extends Controller
 {
+
+    use FractalTransformer;
 
     public function __construct()
     {
@@ -26,66 +32,68 @@ class BookingController extends Controller
     {
         $seasons = Season::all();
         $bookings = Booking::all();
-        return view('admin.category.index', compact('seasons','bookings'));
+        return view('admin.booking.index', compact('seasons','bookings'));
     }
 
     public function create(): View|Factory
     {
-        return view('admin.category.create');
+        return view('admin.booking.create');
     }
 
-    public function store(CategoryStoreRequest $request): Redirector|RedirectResponse
+    public function store(BookingStoreRequest $request): Redirector|RedirectResponse
     {
-        $category = $this->storeCategory($request->all());
+        $booking = $this->Booking($request->all());
 
-        $category->save();
+        $booking->save();
 
         return redirect()
-            ->route('admin.category.show', $category->slug)
-            ->with(['success' => 'Création de la catégorie']);
+            ->route('admin.booking.show', $booking->slug)
+            ->with(['success' => 'Création de la booking']);
     }
 
-    public function show(string $slug): View|Factory
+    /**
+     * @throws Exception
+     */
+    public function show(string $id): View|Factory
     {
-        $category = Category::where("slug","=", $slug)->first();
-        $posts = Post::all();
-        return view("admin.category.show", compact('category',"posts"));
+        $booking = Booking::with('user')->where("id","=", $id)->first();
+        $booking = $this->parseIncludes('user')->item($booking, new BookingTransformer());
+        return view("admin.booking.show", compact('booking'));
     }
-
 
     public function edit(int $id): View|Factory
     {
-        $category = Category::find($id);
+        $booking = Booking::find($id);
 
-        return view("admin.category.edit", compact('category'));
+        return view("admin.booking.edit", compact('booking'));
     }
 
-    public function update(CategoryStoreRequest $request, Category $category): Redirector|RedirectResponse
+    public function update(BookingStoreRequest $request, Booking $booking): Redirector|RedirectResponse
     {
-        $this->storeCategory($request->all(), $category);
+        $this->Booking($request->all(), $booking);
 
-        $category->save();
+        $booking->save();
 
         return redirect()
-            ->route('admin.category.show', $category->id)
-            ->with(['success' => 'Modification de la catégorie']);
+            ->route('admin.booking.show', $booking->id)
+            ->with(['success' => 'Modification de la réservatin']);
     }
 
-    public function destroy(Category $category): RedirectResponse
+    public function destroy(Booking $booking): RedirectResponse
     {
-        $category->delete();
+        $booking->delete();
         return redirect()
-            ->route('admin.category.index')
-            ->with(['success' => 'La catégorie a bien été supprimé']);
+            ->route('admin.booking.index')
+            ->with(['success' => 'La réservation a bien été supprimé']);
     }
 
-    private function storeCategory(array $categoryData, Category|null $category = null): Category
+    private function Booking(array $bookingData, Booking|null $booking = null): Booking
     {
-        $category ??= new Category();
-        $category->name = $categoryData['name'];
-        $category->slug = Str::slug($category->name);
-        $category->save();
+        $booking ??= new Booking();
+        $booking->name = $bookingData['name'];
+        $booking->slug = Str::slug($booking->name);
+        $booking->save();
 
-        return $category;
+        return $booking;
     }
 }

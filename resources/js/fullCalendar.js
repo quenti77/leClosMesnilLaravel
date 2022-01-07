@@ -33,6 +33,7 @@ const getEvents = async () => {
             title: 'res-' + booking.user.name,
             start : startedAt,
             end : finishedAt,
+            url : '/admin/booking/' + booking.id
         }
 })
     return events

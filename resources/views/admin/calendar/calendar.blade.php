@@ -3,5 +3,5 @@
     <script type="text/javascript" src="{{ asset('js/fullCalendar.js') }}" defer></script>
 @endsection
 @section('content')
-    <div id='calendar'></div>
+    <div id='calendar' class='calendar'></div>
 @endsection

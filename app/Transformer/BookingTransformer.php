@@ -8,6 +8,7 @@ use League\Fractal\TransformerAbstract;
 
 class BookingTransformer extends TransformerAbstract
 {
+
     protected $availableIncludes = ['user'];
     protected $defaultIncludes = ['user'];
 
