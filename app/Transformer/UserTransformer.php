@@ -13,7 +13,6 @@ class UserTransformer extends TransformerAbstract
     {
         $name = ucwords("{$user->name} {$user->last_name}");
         $name = ucwords($name, "-");
-
         return [
             'id' => $user->id,
             'name' => $name

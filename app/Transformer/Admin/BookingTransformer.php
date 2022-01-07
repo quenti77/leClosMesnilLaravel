@@ -1,6 +1,5 @@
 <?php
 
-
 namespace App\Transformer\Admin;
 
 use App\Models\Booking;

@@ -2,23 +2,20 @@
 
 namespace App\Http\Controllers;
 
+use App\DTO\BookingRequestData;
 use App\Http\Requests\BookingStoreRequest;
+use App\Jobs\Query\CalculateBookingPrice;
 use App\Models\Booking;
-use App\Models\Season;
 use App\Transformer\BookingTransformer;
 use App\Transformer\FractalTransformer;
-use DateInterval;
-use DatePeriod;
 use DateTime;
 use DateTimeImmutable;
 use Exception;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
-use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Routing\Redirector;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Validation\ValidationException;
 use InvalidArgumentException;
 
 class BookingController extends Controller
@@ -71,13 +68,35 @@ class BookingController extends Controller
             throw new InvalidArgumentException('Started or Finished date are not a valid format');
         }
 
+        /**
+         * options
+         * 
+         * - id (uuid)
+         * - name (varchar(20))
+         * - description (text)
+         * - prices (json)
+         * 
+         * UUID, linge de lit, desc, '{ items: [
+         *  { price: 13_00, label: '1 chambre' }, { price: 20_00, label: '2 chambres' }
+         * ] }'::json
+         * UUID, ménage, desc, '{ items: [{ price: 50_00 }] }'::json
+         */
+
+        $bookingRequest = new BookingRequestData(
+            $startedAt,
+            $finishedAt,
+            $nbAdult,
+            [13_00, 50_00] // TODO: Get options price (new job)
+        );
+        $bookingPrice = CalculateBookingPrice::dispatchSync($bookingRequest);
+
         $booking ??= new booking();
 
         $booking->started_at = DateTime::createFromImmutable($startedAt);
         $booking->finished_at = DateTime::createFromImmutable($finishedAt);
         $booking->nb_adult = $bookingData['nb_adult'];
         $booking->nb_children = $bookingData['nb_children'];
-        $booking->price = $this->makeWithData($startedAt, $finishedAt, $nbAdult);
+        $booking->price = $bookingPrice;
         $booking->user_id = (string)Auth::id();
         $booking->save();
 
@@ -90,45 +109,5 @@ class BookingController extends Controller
         return redirect()
             ->route('booking')
             ->with(['success' => 'La réservation a bien était annulée']);
-    }
-
-    /**
-     * @param DateTimeImmutable $startedAt
-     * @param DateTimeImmutable $finishedAt
-     * @param int $nbAdult
-     * @return int
-     * @throws Exception
-     */
-    public function makeWithData(DateTimeImmutable $startedAt, DateTimeImmutable $finishedAt, int $nbAdult): int
-    {
-        $baseSeason = [
-            'price' => 80_00
-        ];
-
-        $period = new DatePeriod(
-            $startedAt,
-            new DateInterval('P1D'),
-            $finishedAt
-        );
-
-        $hasBooking = Booking::query()->includePeriod($period)->exists();
-        if ($hasBooking) {
-            $message = 'Le créneau demandé est déjà réservé.';
-            throw ValidationException::withMessages(['started_at' => $message]);
-        }
-
-        $finalPrice = 5_00 * ($nbAdult - 1);
-
-        /** @var Collection $seasons */
-        $seasons = Season::query()->includePeriod($period)->get();
-        foreach ($period as $current) {
-            $selectedSeason = $seasons
-                    ->where('started_at', '<=', $current->format('Y-m-d'))
-                    ->where('finished_at', '>=', $current->format('Y-m-d'))
-                    ->toArray()[0] ?? $baseSeason;
-            $finalPrice += $selectedSeason['price'];
-        }
-
-        return (int) $finalPrice;
     }
 }

@@ -2,21 +2,17 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Requests\CategoryStoreRequest;
 use App\Models\Booking;
-use App\Models\Category;
-use App\Models\Post;
 use App\Models\Season;
 use App\Transformer\Admin\BookingTransformer;
 use App\Transformer\FractalTransformer;
 use Exception;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
-use Illuminate\Support\Str;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\BookingStoreRequest;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Routing\Redirector;
-use DateTime;
 
 class BookingController extends Controller
 {
@@ -47,8 +43,8 @@ class BookingController extends Controller
         $booking->save();
 
         return redirect()
-            ->route('admin.booking.show', $booking->slug)
-            ->with(['success' => 'Création de la booking']);
+            ->route('admin.booking.show', $booking->id)
+            ->with(['success' => 'Création du booking']);
     }
 
     /**
@@ -76,7 +72,7 @@ class BookingController extends Controller
 
         return redirect()
             ->route('admin.booking.show', $booking->id)
-            ->with(['success' => 'Modification de la réservatin']);
+            ->with(['success' => 'Modification du booking']);
     }
 
     public function destroy(Booking $booking): RedirectResponse
@@ -90,8 +86,6 @@ class BookingController extends Controller
     private function Booking(array $bookingData, Booking|null $booking = null): Booking
     {
         $booking ??= new Booking();
-        $booking->name = $bookingData['name'];
-        $booking->slug = Str::slug($booking->name);
         $booking->save();
 
         return $booking;
