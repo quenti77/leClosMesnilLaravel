@@ -7,7 +7,6 @@ use App\Models\CommentPost;
 use App\Models\Post;
 use App\Models\User;
 use Exception;
-use Illuminate\Database\Eloquent\Factories\Sequence;
 use Illuminate\Database\Seeder;
 
 class PersonaSeeder extends Seeder
