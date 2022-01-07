@@ -11,11 +11,12 @@ class UserTransformer extends TransformerAbstract
 
     public function transform(User $user): array
     {
-        $name = $user->name . $user->last_name;
+        $name = ucwords("{$user->name} {$user->last_name}");
+        $name = ucwords($name, "-");
+        
         return [
             'id' => $user->id,
-            'name' => $user->name,
-            'phone' => $user->phone,
+            'name' => $name
         ];
     }
 }
