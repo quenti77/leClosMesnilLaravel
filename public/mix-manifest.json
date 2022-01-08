@@ -3,10 +3,14 @@
     "/js/intlTelInput.js": "/js/intlTelInput.js",
     "/js/datePicker.js": "/js/datePicker.js",
     "/js/fullCalendar.js": "/js/fullCalendar.js",
+    "/js/infiniteScroll.js": "/js/infiniteScroll.js",
     "/js/counterButton.js": "/js/counterButton.js",
     "/js/clearTextarea.js": "/js/clearTextarea.js",
     "/js/passwordChecker.js": "/js/passwordChecker.js",
     "/js/updateEditComment.js": "/js/updateEditComment.js",
+    "/js/codebase.app.js": "/js/codebase.app.js",
+    "/js/admin.js": "/js/admin.js",
     "/css/app.css": "/css/app.css",
-    "/css/main.css": "/css/main.css"
+    "/css/main.css": "/css/main.css",
+    "/css/codebase.css": "/css/codebase.css"
 }
