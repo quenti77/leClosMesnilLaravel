@@ -6,13 +6,13 @@ mix.js('resources/js/app.js', 'public/js')
     .js('resources/js/intlTelInput.js', 'public/js')
     .js('resources/js/datePicker', 'public/js')
     .js('resources/js/fullCalendar', 'public/js')
-    .js('resources/js/infiniteScroll', 'public/js')
     .js('resources/js/counterButton', 'public/js')
     .js('resources/js/clearTextarea', 'public/js')
     .js('resources/js/passwordChecker', 'public/js')
     .js('resources/js/updateEditComment', 'public/js')
     .vue()
     .sass('resources/sass/app.scss', 'public/css')
+    
 module.exports = {
     plugins: [
         require('postcss-custom-properties')({
@@ -24,5 +24,5 @@ module.exports = {
         require('postcss-calc')
     ]
 }
-    mix.postCss('resources/css/main.css', 'public/css')
+mix.postCss('resources/css/main.css', 'public/css')
 

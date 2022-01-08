@@ -79,20 +79,7 @@
                                     {{ __('Déconnexion') }}
                                 </a>
                                 @if(auth()->user()->is_admin == 1)
-                                    <a class="dropdown-item" href="{{ route('admin.post.index') }}">Liste des posts</a>
-                                    <a class="dropdown-item" href="{{ route('admin.post.create') }}">Ecrire un
-                                        article </a>
-                                    <a class="dropdown-item"
-                                       href="{{ route('admin.category.index') }}">Liste des catégories</a>
-                                    <a class="dropdown-item"
-                                       href="{{ route('admin.category.create') }}">Créer une catégorie</a>
-
-                                    <a class="dropdown-item" href="{{ route('admin.season.index') }}">
-                                        Liste des saisons
-                                    </a>
-                                    <a class="dropdown-item" href="{{ route('admin.season.create') }}">
-                                        Creation saison
-                                    </a>
+                                    <a class="dropdown-item" href="{{ route('admin.index') }}">Admin</a>
                                 @endif
                                 <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
                                     @csrf

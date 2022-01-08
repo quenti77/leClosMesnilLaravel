@@ -2,7 +2,6 @@
 
 
 use App\Http\Controllers\CategoryController;
-use App\Optimizer\OptimizerChainFactory;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PostController;
