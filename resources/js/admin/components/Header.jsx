@@ -1,6 +1,6 @@
 import { Component } from 'react'
 
-import Dropdown from '@adminComponent/Dropdown.jsx'
+import Dropdown from '@adminComponent/UI/Dropdown.jsx'
 
 export default class Header extends Component {
 
@@ -27,9 +27,13 @@ export default class Header extends Component {
     }
 
     headerRight () {
+        const { name: firstname, last_name: lastname } = window.Laravel.user
+        const shortName = `${firstname.ucwords()} ${lastname[0].toUpperCase()}.`
+        const longName = `${firstname.ucwords()} ${lastname.ucwords()}`
+
         return (
             <div className="space-x-1">
-                {this.userDropdown('J. Smith', 'John Smith')}
+                {this.userDropdown(shortName, longName)}
             </div>
         )
     }

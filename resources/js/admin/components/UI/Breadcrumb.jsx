@@ -1,6 +1,6 @@
 import { useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
-import { breadcrumbSelector } from '../stores/Breadcrumb'
+import { breadcrumbSelector } from '../../stores/Breadcrumb'
 
 function createExternalLink(link, index) {
     return (

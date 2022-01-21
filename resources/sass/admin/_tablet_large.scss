@@ -1,0 +1,13 @@
+
+@media all and (min-width: 992px) {
+    .posts-table {
+        [data-col=category] {
+            width: 30%;
+        }
+
+        [data-col=publish] {
+            width: 15%;
+            text-align: center;
+        }
+    }
+}

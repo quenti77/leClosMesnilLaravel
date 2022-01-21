@@ -1,5 +1,5 @@
 import { Component } from 'react'
-import { withUpdateBreadcrumb } from '../stores/Breadcrumb'
+import { withUpdateBreadcrumb } from '../stores/Breadcrumb.js'
 
 class Dashboard extends Component {
 

@@ -26,7 +26,7 @@ export default class Sidebar extends Component {
 
                 <div>
                     <button type="button"
-                            className="btn btn-sm btn-alt-danger d-lg-none"
+                            className="btn btn-sm btn-outline-info d-lg-none"
                             onClick={this.closeSidebar}>
                         <i className="fa fa-fw fa-times"></i>
                     </button>

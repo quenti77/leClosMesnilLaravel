@@ -79,6 +79,7 @@ class PersonaSeeder extends Seeder
                 ->has($commentPostFactory, 'comments')
                 ->state($postState)
                 ->count($postsPerCategory)
+                ->published()
                 ->create([ 'comment_count' => $commentsPerPost ]);
         }
     }

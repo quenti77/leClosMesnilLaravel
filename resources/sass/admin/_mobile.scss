@@ -1,0 +1,13 @@
+
+/** BLOG **/
+.posts-table {
+    [data-col=title] .category {
+        font-size: 0.75rem;
+        opacity: 0.5;
+    }
+
+    [data-col=action] {
+        width: 20%;
+        text-align: center;
+    }
+}

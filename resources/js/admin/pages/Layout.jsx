@@ -3,7 +3,7 @@ import { Outlet } from 'react-router-dom'
 
 import Sidebar from '@adminComponent/Sidebar.jsx'
 import Header from '@adminComponent/Header.jsx'
-import { Breadcrumb } from '@adminComponent/Breadcrumb.jsx'
+import { Breadcrumb } from '@adminComponent/UI/Breadcrumb.jsx'
 
 export default class Layout extends Component {
 

@@ -1,0 +1,17 @@
+
+@media all and (min-width: 768px) {
+    .posts-table {
+        [data-col=action] {
+            width: 15%;
+        }
+
+        [data-col=category] {
+            width: 25%;
+        }
+
+        [data-col=publish] {
+            width: 15%;
+            text-align: center;
+        }
+    }
+}

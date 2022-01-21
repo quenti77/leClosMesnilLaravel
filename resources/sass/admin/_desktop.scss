@@ -1,0 +1,17 @@
+
+@media all and (min-width: 1200px) {
+    .posts-table {
+        [data-col=action] {
+            width: 10%;
+        }
+
+        [data-col=updated] {
+            width: 15%;
+        }
+
+        [data-col=publish] {
+            width: 12%;
+            text-align: center;
+        }
+    }
+}
