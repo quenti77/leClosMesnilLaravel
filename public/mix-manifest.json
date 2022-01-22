@@ -8,6 +8,10 @@
     "/js/clearTextarea.js": "/js/clearTextarea.js",
     "/js/passwordChecker.js": "/js/passwordChecker.js",
     "/js/updateEditComment.js": "/js/updateEditComment.js",
+    "/js/codebase.app.js": "/js/codebase.app.js",
+    "/js/admin.js": "/js/admin.js",
     "/css/app.css": "/css/app.css",
-    "/css/main.css": "/css/main.css"
+    "/css/main.css": "/css/main.css",
+    "/css/codebase.css": "/css/codebase.css",
+    "/css/admin.css": "/css/admin.css"
 }

@@ -22,6 +22,7 @@ use Illuminate\Support\Collection;
  * @property Collection<CommentPost> $comments
  * @property DateTime $created_at
  * @property DateTime $updated_at
+ * @property DateTime $published_at
  */
 class Post extends Model
 {
@@ -42,5 +43,17 @@ class Post extends Model
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
+    }
+
+    public function scopeSortCategory(mixed $query, string $sortDirection): mixed
+    {
+        $method = $sortDirection === 'asc' ? 'orderBy' : 'orderByDesc';
+
+        $categoryQuery = Category::select('name')
+            ->whereColumn('categories.id', 'posts.category_id')
+            ->orderBy('name', $sortDirection)
+            ->limit(1);
+
+        return $query->{$method}($categoryQuery);
     }
 }

@@ -23,6 +23,7 @@ class CreatePostsTable extends Migration
             $table->string('image_path');
             $table->unsignedBigInteger('comment_count')->default(0);
             $table->timestamps();
+            $table->timestamp('published_at')->nullable();
         });
     }
 

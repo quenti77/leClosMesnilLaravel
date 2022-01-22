@@ -11,14 +11,22 @@
         "cache": "php artisan cache:clear && php artisan config:clear && php artisan cache:clear"
     },
     "devDependencies": {
+        "@babel/preset-react": "^7.16.7",
         "@popperjs/core": "^2.9.3",
+        "autoprefixer": "^10.4.2",
         "axios": "^0.21",
         "laravel-mix": "^6.0.6",
         "lodash": "^4.17.19",
         "postcss": "^8.2.2",
+        "react": "^17.0.2",
+        "react-dom": "^17.0.2",
+        "react-redux": "^7.2.6",
+        "react-router-dom": "^6.2.1",
+        "redux": "^4.1.2",
         "resolve-url-loader": "^3.1.2",
         "sass": "^1.32.11",
         "sass-loader": "^11.0.1",
+        "simplebar": "^5.3.6",
         "vanillajs-datepicker": "^1.1.4",
         "vue-loader": "^15.9.7",
         "vue-template-compiler": "^2.6.14"

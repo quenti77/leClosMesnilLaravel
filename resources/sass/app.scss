@@ -16,15 +16,11 @@ $flagsImagePath: "/img/";
 @import "../../node_modules/intl-tel-input/src/css/intlTelInput.scss";
 
 // Font Awesome
-$fa-font-path: "../webfonts";
+$fa-font-path: "../fonts/fontawesome";
 @import "~@fortawesome/fontawesome-free/scss/fontawesome";
 @import "~@fortawesome/fontawesome-free/scss/solid";
 @import "~@fortawesome/fontawesome-free/scss/brands";
 @import "~@fortawesome/fontawesome-free/scss/regular";
-
-:root {
-
-}
 
 *, *:after, *:before {
     margin: 0;
@@ -466,6 +462,3 @@ $dp-input-in-edit-focus-box-shadow-size: 0 0 0.25em 0.25em !default;
         font-size: $font-size-blog-span;
     }
 }
-
-
-

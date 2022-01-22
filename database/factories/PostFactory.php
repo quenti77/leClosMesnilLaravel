@@ -5,6 +5,7 @@ namespace Database\Factories;
 use App\Models\Category;
 use App\Models\Post;
 use App\Models\User;
+use DateTimeImmutable;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
 
@@ -29,5 +30,12 @@ class PostFactory extends Factory
             'image_path' => 'https://via.placeholder.com/325x217',
             'comment_count' => 0
         ];
+    }
+
+    public function published(): Factory
+    {
+        return $this->state(fn (array $attributes) => [
+            'published_at' => new DateTimeImmutable()
+        ]);
     }
 }
