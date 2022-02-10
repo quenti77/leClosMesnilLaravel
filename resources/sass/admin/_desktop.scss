@@ -14,4 +14,10 @@
             text-align: center;
         }
     }
+
+    .categories-table {
+        [data-col=action] {
+            width: 10%;
+        }
+    }
 }

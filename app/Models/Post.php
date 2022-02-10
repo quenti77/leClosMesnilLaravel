@@ -56,4 +56,9 @@ class Post extends Model
 
         return $query->{$method}($categoryQuery);
     }
+
+    public function isPublished(): bool
+    {
+        return !empty($this->published_at);
+    }
 }

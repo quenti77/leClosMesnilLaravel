@@ -1,3 +1,5 @@
+import { EMPTY_UUID } from './Base'
+
 export const datatables = {
     columns: [
         { key: 'title', label: 'Titre', classes: '' },
@@ -38,4 +40,13 @@ export function renderCategory(item, key) {
             {item.category.name}
         </td>
     )
+}
+
+export const basePost = {
+    id: EMPTY_UUID,
+    title: '',
+    slug: '',
+    content: '',
+    publish: false,
+    category: null
 }

@@ -21,6 +21,8 @@ class PostTransformer extends TransformerAbstract
         return [
             'id' => $post->id,
             'title' => $post->title,
+            'content' => $post->content,
+            'slug' => $post->slug,
             'publish' => !empty($post->published_at),
             'updated' => $updatedAt->format('d/m/Y')
         ];

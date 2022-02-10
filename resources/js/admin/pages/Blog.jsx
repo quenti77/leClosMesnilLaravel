@@ -27,7 +27,8 @@ class Blog extends Component {
         const settingsCategories = {
             currentPage: 1,
             maxPage: 1,
-            perPage: 10
+            perPage: 10,
+            sorters: ['-updated']
         }
 
         this.state = {
@@ -42,7 +43,7 @@ class Blog extends Component {
                               updateSettings={(s) => this.updatePostsSettings(s)} />
                 ), label: 'Articles' },
                 categories: { component: (
-                    <CategoriesTab posts={categories}
+                    <CategoriesTab categories={categories}
                                    settings={settingsCategories}
                                    updateSettings={(s) => this.updateCategoriesSettings(s)} />
                 ), label: 'Catégories' }
@@ -61,23 +62,35 @@ class Blog extends Component {
     async fetchData () {
         const { settingsPosts, settingsCategories } = this.state
 
-        let params = {
+        const postParams = {
             page: settingsPosts.currentPage,
             perPage: settingsPosts.perPage,
             sorters: settingsPosts.sorters.join(',')
         }
-        const postsResponse = await axios.get('/admin/api/posts', { params })
+        const postsResponse = await axios.get('/admin/api/posts', { params: postParams })
 
-        const categories = []
+        const categoriesParams = {
+            page: settingsCategories.currentPage,
+            perPage: settingsCategories.perPage,
+            sorters: settingsCategories.sorters.join(',')
+        }
+        const categoriesResponse = await axios.get('/admin/api/categories', { params: categoriesParams })
 
         this.setState(() => {
             const { data: posts, meta: { pagination: postsPagination } } = postsResponse.data
+            const { data: categories, meta: { pagination: categoriesPagination } } = categoriesResponse.data
             return {
                 posts,
                 settingsPosts: {
                     ...settingsPosts,
                     currentPage: postsPagination.current_page,
                     maxPage: postsPagination.total_pages
+                },
+                categories,
+                settingsCategories: {
+                    ...settingsCategories,
+                    currentPage: categoriesPagination.current_page,
+                    maxPage: categoriesPagination.total_pages
                 }
             }
         })

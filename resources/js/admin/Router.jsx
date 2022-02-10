@@ -11,7 +11,7 @@ export default function Router() {
                 <Route index element={<Dashboard />} />
                 <Route path="blog" element={<Blog />} />
             </Route>
-            <Route path="*" element={<Navigate to="/admin" />}></Route>
+            <Route path="*" element={<Navigate to="/admin" />} />
         </Routes>
     )
 }

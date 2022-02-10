@@ -22,7 +22,6 @@ class Datatable extends Component {
             ]
         })
         this.currentSorters = Object.fromEntries(sorters)
-        console.log(this.currentSorters)
     }
 
     rowClickHandler (item) {

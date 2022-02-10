@@ -1,18 +1,61 @@
+import axios from 'axios'
 import { Component } from 'react'
 
-import Paginator from '@adminComponent/UI/Paginator.jsx'
+import PostsModal from '@adminComponent/Blog/PostsModal.jsx'
+
 import Datatable from '@adminComponent/UI/Datatable.jsx'
+import Paginator from '@adminComponent/UI/Paginator.jsx'
 
 import * as config from '../../configs/Blog/Posts'
+import { EMPTY_UUID, slugify } from '../../configs/Blog/Base'
+
+function initPostForm (values = {}) {
+    return {
+        ...config.basePost,
+        ...values
+    }
+}
+
+async function createPost(post) {
+    return await axios.post('/admin/api/posts', post)
+}
+
+async function updatePost(post) {
+    return await axios.patch(`/admin/api/posts/${post.id}`, post)
+}
+
+async function deletePost(postId) {
+    return await axios.delete(`/admin/api/posts/${postId}`)
+}
 
 class PostsTab extends Component
 {
     constructor (props) {
         super(props)
+
+        this.state = {
+            modal: false,
+            modalForm: initPostForm()
+        }
     }
 
     rowClickHandler (el) {
-        console.log(el)
+        this.setState(() => {
+            return {
+                ...this.state,
+                modal: true,
+                modalForm: initPostForm(el)
+            }
+        })
+    }
+
+    rowDeleteHandler (el) {
+        if (!window.confirm('Voulez-vous supprimez l\'article ?')) {
+            return undefined
+        }
+        deletePost(el.id).then(() => {
+            this.updateCurrentPage(this.props.settings.currentPage)
+        })
     }
 
     updateCurrentPage (currentPage) {
@@ -36,14 +79,53 @@ class PostsTab extends Component
         })
     }
 
+    createPost () {
+        this.setState(() => {
+            return {
+                ...this.state,
+                modal: true,
+                modalForm: initPostForm()
+            }
+        })
+    }
+
+    closeModal () {
+        this.setState(() => {
+            return {
+                ...this.state,
+                modal: false
+            }
+        })
+    }
+
+    updatePost (post) {
+        delete post.categories
+
+        if (post.slug === '') {
+            post.slug = slugify(post.title)
+        }
+
+        const promise = (post.id === EMPTY_UUID)
+            ? createPost(post)
+            : updatePost(post)
+        
+        promise.then(() => {
+            this.updateCurrentPage(this.props.settings.currentPage)
+            this.closeModal()
+        })
+    }
+
     renderAction (item, key) {
         return (
             <td data-col="action" key={key}>
                 <div className="btn-group">
-                    <button type="button" className="btn btn-sm btn-secondary js-bs-tooltip-enabled"
-                            data-bs-toggle="tooltip" title="" data-bs-original-title="Edit"
+                    <button type="button" className="btn btn-sm btn-secondary"
                             onClick={() => this.rowClickHandler(item)}>
                         <i className="fa fa-pencil-alt"></i>
+                    </button>
+                    <button type="button" className="btn btn-sm btn-secondary"
+                            onClick={() => this.rowDeleteHandler(item)}>
+                        <i className="fa fa-trash"></i>
                     </button>
                 </div>
             </td>
@@ -96,7 +178,22 @@ class PostsTab extends Component
     render () {
         return (
             <div className="tab-pane active">
-                <h3 className="fw-normal">Liste des articles</h3>
+                <PostsModal post={this.state.modalForm}
+                            visible={this.state.modal}
+                            closeModal={this.closeModal.bind(this)}
+                            update={this.updatePost.bind(this)} />
+
+                <h3 className="fw-normal d-flex justify-content-between align-items-center">
+                    <span>Liste des articles</span>
+                    <button type="button" className="btn btn-success js-bs-tooltip-enabled"
+                            data-bs-toggle="tooltip" title="" data-bs-original-title="Edit"
+                            onClick={this.createPost.bind(this)}>
+                        <i className="fa fa-plus-circle"></i>
+                        <div className="d-inline-block ms-2">
+                            Ajouter un article
+                        </div>
+                    </button>
+                </h3>
                 {this.renderPaginateTable()}
             </div>
         )

@@ -17,7 +17,9 @@ class CategoryTransformer extends TransformerAbstract
         return [
             'id' => $category->id,
             'name' => $category->name,
-            'updated' => $updatedAt->format('d/m/Y')
+            'slug' => $category->slug,
+            'updated' => $updatedAt->format('d/m/Y'),
+            'count' => $category->posts_count
         ];
     }
 }
