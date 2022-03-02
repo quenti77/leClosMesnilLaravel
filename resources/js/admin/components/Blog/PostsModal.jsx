@@ -39,9 +39,7 @@ function contentCheckbox(published) {
         return (
             <span className="d-flex align-items-center">
                 <span>
-                    <span className="fw-bold fs-lg">
-                        Masquer l'article
-                    </span>
+                    <span className="fw-bold fs-lg">Masquer l'article</span>
                     <span className="d-block fs-xs text-muted mt-2">
                         Si l'article n'a plus lieu d'être vous pouvez le dépublier et
                         il ne sera plus visible pour vos visiteurs
@@ -53,9 +51,7 @@ function contentCheckbox(published) {
     return (
         <span className="d-flex align-items-center">
             <span>
-                <span className="fw-bold fs-lg">
-                    Publier l'article
-                </span>
+                <span className="fw-bold fs-lg">Publier l'article</span>
                 <span className="d-block fs-xs text-muted mt-2">
                     Activer l'option permet de rendre l'article visible par tous les visiteurs du site.<br />
                     Vous pourrez toujours modifier l'article mais attention car

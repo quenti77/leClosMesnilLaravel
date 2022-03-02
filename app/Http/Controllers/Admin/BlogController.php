@@ -161,7 +161,6 @@ class BlogController extends Controller
         $post->category_id = $validated['category'];
         $post->user_id = auth()->id();
         $post->image_path = '';
-        $post->comment_count = 0;
 
         if ($post->isPublished() !== $validated['publish']) {
             $post->published_at = $validated['publish'] ? new DateTime() : null;
